@@ -1,3 +1,24 @@
 body{
-    background-color: #002e44;
+    background-color: #001f35;
+}
+
+.bgcolor{
+    background-color: #9c9b99;
+}
+.bgcolor1{
+    background-color: #001f35 ;
+}
+.bgcolor2{
+    background-color: #6c757d ;
+}
+.brad{
+    border-radius: 3px;
+}
+.logo{
+    width: 130px;
+    height: 45px;
+}
+a:hover{
+    color: blue;
+    text-decoration: none;
 }
