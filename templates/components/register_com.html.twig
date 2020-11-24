@@ -1,0 +1,35 @@
+<div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+    <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>
+    / Zarejestruj się
+</div>
+<div class="mr-2 bg-dark mt-1 brad ">
+    <div class="p-2 pl-3 border-bottom border-primary">
+        <h4 class=""><i class="icon-edit mr-1"></i>Rejestracja</h4>
+    </div>
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+    <div class="p-3 pl-5 mr-5 text-center text-primary">
+        Musisz wprowadzić poprawny adres e-mail, ponieważ na podany adres otrzymasz wiadomość
+        zawierającą link aktywujący konto.
+    </div>
+    <div class="w-50 mr-auto ml-auto p-3">
+
+{#        {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}#}
+        {{ form_start(registrationForm) }}
+        <div class="mb-2 ">
+            <h6 class="font-weight-normal ">Nazwa użytkownika</h6>
+            {{ form_row(registrationForm.username) }}
+        </div>
+        <div class="mb-2 form-group" ><h6>Adres e-mail</h6> {{ form_row(registrationForm.email) }} </div>
+        {% for message in app.flashes('error') %}
+            <div class="text-danger text-center"> {{ message }}</div>
+        {% endfor %}
+        <div class="mb-2"><h6>Hasło</h6>{{ form_row(registrationForm.plainPassword) }}</div>
+        <div class="mb-2"><h6>Powtórz hasło</h6>{{ form_row(registrationForm.second_password) }}</div>
+        {#                {{ form_row(registrationForm.agreeTerms) }}#}
+
+        <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Załóż konto</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>

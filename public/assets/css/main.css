@@ -1,24 +1,63 @@
 body{
-    background-color: #001f35;
+    background-color: #21252b;
 }
 
 .bgcolor{
-    background-color: #9c9b99;
-}
-.bgcolor1{
-    background-color: #001f35 ;
+    background-color: #21252b ;
 }
 .bgcolor2{
-    background-color: #6c757d ;
+    background-color: #1c7430 ;
+}
+.bgcolor3{
+    background-color: #4e555b;
 }
 .brad{
-    border-radius: 3px;
+    border-radius: 3px!important;
 }
 .logo{
     width: 130px;
     height: 45px;
 }
 a:hover{
-    color: blue;
+    text-decoration-color: #1c7430;
     text-decoration: none;
+}
+.font-color{
+    color: #005dbc;
+}
+.border-color{
+    border-color: #9c9b99;
+}
+.text-color{
+    color: #1ea200;
+}
+.text-color-1{
+    color: #c69500;
+}
+.text-color-2{
+    color: #0057ff;
+}
+.text-color-3{
+    color: #00a5ff;
+}
+.w-85{
+    width: 85%;
+}
+.font-10{
+    font-size: 13px;
+}
+.font-15{
+    font-size: 14px;
+}
+.font-25{
+    font-size: 25px;
+}
+.font-40{
+    font-size: 40px;
+}
+.font-18{
+    font-size: 18px;
+}
+.border-color-1{
+    border-bottom-color: #4e555b!important;
 }

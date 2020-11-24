@@ -1,0 +1,28 @@
+<div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+    <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>/ Zaloguj się
+</div>
+<div class="mr-2 bg-dark mt-1 brad ">
+    <div class="p-2 pl-3 border-bottom border-primary mb-3">
+        <h4><i class="icon-edit mr-1"></i>Zaloguj się</h4>
+    </div>
+    <form method="post" class="w-50 ml-auto mr-auto pb-5" action="{{ path('app_login') }}">
+        <label for="inputUsername">E-mail lub nazwa użytkownika</label>
+        <input type="text" value="" name="username" id="inputUsername" class="mb-3 text-white bg-dark border-primary form-control" required autofocus>
+        <label for="inputPassword">Hasło</label>
+        <input type="password" name="password" id="inputPassword" class="form-control bg-dark text-white border-primary" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <div class="checkbox mb-1 mt-2">
+            <label>
+                <input class="mr-2" type="checkbox" name="_remember_me">Pamiętaj mnie na tym komputerze
+            </label>
+        </div>
+
+
+        <button class="btn btn-lg btn-outline-primary mt-2" type="submit">
+            Zaloguj się
+        </button>
+    </form>
+</div>

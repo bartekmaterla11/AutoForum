@@ -1,0 +1,74 @@
+<div class="container" >
+    <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>
+        </div>
+        <div class="mr-2 bg-dark mt-1 brad ">
+
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4>Forum motoryzacyjne</h4>
+            </div>
+            <div class="p-3 mt-2 pb-1">
+                {{ include('index/post-index/post_index.html.twig', {posts:posts}) }}
+            </div>
+
+        </div>
+    </div>
+    <div class="color mt-3 w-25 float-left">
+        <div class="card-body brad bgcolor3 text-white text-center pt-2">
+            <div class="font-weight-bold ">
+                <h4><i class=" icon-ok"></i> Dzisiaj mamy</h4>
+                <h5><i class=" icon-calendar"></i> 12-12-2020</h5>
+                <h5 class="mb-0"><i class="icon-clock"></i> 12:54</h5>
+            </div>
+        </div>
+
+        <div class="bg-dark p-3 mt-1 brad">
+            <h5 class="text-danger text-center">Masz jakieś pytania?</h5>
+            <p class="text-center text-white">Możesz dodać je tutaj</p>
+
+            <button id="add_post" class="btn btn-outline-primary my-2 my-sm-0 w-100 "
+                    {% if app.user %}{% else%}  data-toggle="modal" data-target="#confirm-delete" {% endif %}
+                    type="submit">Dodaj</button>
+            {{ include('components/add_post_com.html.twig') }}
+        </div>
+        <div class="bg-dark p-3 mt-1 brad">
+            <h5 class="text-danger text-center">Chcesz coś ogłosić?</h5>
+            <p class="text-center text-white">Kliknij tutaj</p>
+            <button class="btn btn-outline-primary my-2 my-sm-0 w-100 " type="submit">Dodaj</button>
+        </div>
+
+        <div class="brad mt-1 brad text-white text-center">
+            <div class="float-left w-50 bgcolor3 pt-2 pb-2">
+                <h4>245</h4>
+                Zapytań
+            </div>
+            <div class="float-left w-50 bg-dark pt-2 pb-2">
+                <h4>245</h4>
+                Odpowiedzi
+            </div>
+            <div style="clear: both"></div>
+            <div class="float-left w-50 bg-dark pt-2 pb-2">
+                <h4>245</h4>
+                Użytkowników
+            </div>
+            <div class="float-left w-50 bgcolor3 pt-2 pb-2">
+                <h4>245</h4>
+                kogos
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="bg-dark mt-1 brad text-white" >
+            <div class="border-bottom border-primary p-1 pl-3 pt-2">
+                <h5>Znajdziesz nas</h5>
+            </div>
+            <div class="p-3">
+                <div class="float-left font-40"><a href="" class="text-white"><i class="icon-facebook-circled"></i></a></div>
+                <div class="float-left font-40"><a href="" class="text-white"><i class="icon-twitter-circled"></i></a></div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div style="clear: both"></div>

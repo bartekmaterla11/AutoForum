@@ -1,0 +1,36 @@
+{% if posts is defined %}
+    {% for item in posts %}
+    <div class= "border-bottom border-color p-1 pb-4 mb-4 ">
+            <div class="float-left w-25">
+                <div class="float-left bgcolor2 p-1 font-10 pl-2 pr-2 ">
+                    <h5 class="text-center">25</h5> Odpowiedzi
+                </div>
+                <div class="float-left p-1 bgcolor3 ml-2 pl-2 pr-2 border-bottom border-color-1">
+                    <div class="float-left">
+                        <h6 class="text-color-1"><i class=" icon-thumbs-up-alt"></i> </h6>
+                        <h6 class="mb-1 text-center" >25</h6>
+                    </div>
+                    <div class="float-left ml-2">
+                        <h6 class="text-center text-color-1"><i class=" icon-thumbs-down-alt"></i></h6>
+                        <h6 class="text-center mb-1">2</h6>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="float-left w-75 pl-2 border-primary border-left">
+                <h4 > <a href="{{ path('view_post', {'title':item.title}) }}" class="text-white pl-2 ">{{ item.title }}</a></h4>
+                <div class="pl-2">
+                    <h6  class="font-weight-light" >Pytanie zadane przez
+                        <a href="#" class="font-weight-normal text-primary">{{ item.user.username }}</a>
+                        dnia {{ item.uploadedAt|date('d.m.Y')}} </h6>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="">
+        <h5>Nie udało się nic znaleźć</h5>
+    </div>
+{% endif %}

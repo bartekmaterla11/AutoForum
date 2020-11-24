@@ -6,11 +6,12 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" >
             <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" >
+            <link rel="stylesheet" href="{{ asset('assets/css/fontello.css') }}" >
         {% endblock %}
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark pt-3 pb-3">
         <div class="container">
             <a class="mr-5 " href="{{ path('index') }}"><img class="logo" src="{{ asset('assets/img/logo.jpg') }}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,24 +20,29 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav mr-5 mt-2 mt-lg-0 ">
                     <li class="nav-item" {% if app.request.get('_route')=='index'%} class="active text-white" {% endif%} >
-                        <a class="nav-link" href="{{ path('index') }}">Forum</a>
+                        <a  class="nav-link text-white" href="{{ path('index') }}">Forum</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Ogłoszenia</a>
+                        <a  class="nav-link text-white" href="">Ogłoszenia</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0 mr-5 w-50">
+                <form class="form-inline my-2 my-lg-0 mr-4 w-50">
                     <input class="form-control mr-sm-2 w-75" type="search" placeholder="Szukaj na forum..." aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Icon</button>
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class=" icon-search"></i></button>
                 </form>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('app_logout') }}">Wyloguj</a>
+                        </li>
+                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Zaloguj się</a>
+                        <a  class="nav-link text-white" href="{{ path('app_login') }}"><i class="icon-off"></i> Zaloguj się</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Rejestracja</a>
+                        <a  class="nav-link text-white" href="{{ path('app_register') }}"><i class=" icon-clipboard"></i>Rejestracja</a>
                     </li>
-
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -55,11 +61,18 @@
             Copyright 2020 | www.autoforum.pl
         </div>
     </footer>
+
+
+
         {% block javascripts %}
+            <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}" ></script>
             <script src="{{ asset('assets/js/bootstrap.min.js') }}" ></script>
-            <script src="{{ asset('assets/js/jquery-3.5.1.slim.min.js') }}" ></script>
-            <script src="{{ asset('assets/js/popper.min.js') }}" ></script>
-            <script src="{{ asset('asset/js/sticky.js') }}"></script>
+{#            <script src="{{ asset('assets/js/popper.min.js') }}" ></script>#}
+            <script src="{{ asset('assets/js/sticky.js') }}"></script>
+            <script src="{{ asset('assets/js/login_page.js') }}"></script>
+            <script src="{{ asset('assets/js/register_page.js') }}"></script>
+            <script src="{{ asset('assets/js/add_post.js') }}"></script>
+
         {% endblock %}
     </body>
 </html>

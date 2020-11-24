@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+ 
+.icon-plus:before { content: '\2b'; } /* '+' */
+.icon-youtube:before { content: '\55'; } /* 'U' */
+.icon-home:before { content: '\2302'; } /* '⌂' */
+.icon-th-list:before { content: '\2630'; } /* '☰' */
+.icon-heart-empty:before { content: '\2661'; } /* '♡' */
+.icon-cog:before { content: '\2699'; } /* '⚙' */
+.icon-attention:before { content: '\26a0'; } /* '⚠' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-star:before { content: '\e031'; } /* '' */
+.icon-edit:before { content: '\e062'; } /* '' */
+.icon-home-1:before { content: '\e081'; } /* '' */
+.icon-info-circled:before { content: '\e705'; } /* '' */
+.icon-tags:before { content: '\e70d'; } /* '' */
+.icon-comment:before { content: '\e718'; } /* '' */
+.icon-off:before { content: '\e78e'; } /* '' */
+.icon-user:before { content: '\e811'; } /* '' */
+.icon-ok:before { content: '\e816'; } /* '' */
+.icon-mail-alt:before { content: '\f0e0'; } /* '' */
+.icon-comment-empty:before { content: '\f0e5'; } /* '' */
+.icon-thumbs-up-alt:before { content: '\f164'; } /* '' */
+.icon-thumbs-down-alt:before { content: '\f165'; } /* '' */
+.icon-trash:before { content: '\f1f8'; } /* '' */
+.icon-commenting-o:before { content: '\f27b'; } /* '' */
+.icon-handshake-o:before { content: '\f2b5'; } /* '' */
+.icon-user-o:before { content: '\f2c0'; } /* '' */
+.icon-id-card-o:before { content: '\f2c3'; } /* '' */
+.icon-facebook-squared:before { content: '\f308'; } /* '' */
+.icon-twitter-circled:before { content: '\f30a'; } /* '' */
+.icon-facebook-circled:before { content: '\f30d'; } /* '' */
+.icon-user-1:before { content: '👤'; } /* '\1f464' */
+.icon-calendar:before { content: '📅'; } /* '\1f4c5' */
+.icon-clipboard:before { content: '📋'; } /* '\1f4cb' */
+.icon-search:before { content: '🔍'; } /* '\1f50d' */
+.icon-clock:before { content: '🕔'; } /* '\1f554' */

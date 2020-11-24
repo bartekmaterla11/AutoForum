@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="container bg-dark text-white mt-5 mb-5 brad">
+
+        <div class="w-50 mr-auto ml-auto p-3">
+            <h1 class="text-center mb-4">Dodawanie posta</h1>
+{#            {% form_theme postForm 'bootstrap_4_layout.html.twig' %}#}
+            {{ form_start(postForm) }}
+            <div class="mb-2 "><h6>Pytanie</h6> {{ form_row(postForm.title) }} </div>
+            <div class="mb-2"><h6>Treść</h6> {{ form_row(postForm.content) }} </div>
+            <div class="mb-2 w-50"><h6>Zdjęcia</h6> {{ form_row(postForm.filename) }} </div>
+
+            <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Dodaj</button>
+            {{ form_end(postForm) }}
+        </div>
+    </div>
+{% endblock %}

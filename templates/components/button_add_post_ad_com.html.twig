@@ -1,0 +1,22 @@
+<div class="bg-dark p-3 mt-1 brad">
+    <h5 class="text-danger text-center">Masz jakieś pytania?</h5>
+    <p class="text-center text-white">Możesz dodać je tutaj</p>
+    <a href="{{ path('add_post') }}" >
+        <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 "
+                {% if app.user %}{% else%}  data-toggle="modal" data-target="#confirm-delete" {% endif %}
+                type="submit">Dodaj
+        </button>
+    </a>
+    {{ include('components/add_post_com.html.twig') }}
+</div>
+<div class="bg-dark p-3 mt-1 brad">
+    <h5 class="text-danger text-center">Chcesz coś ogłosić?</h5>
+    <p class="text-center text-white">Kliknij tutaj</p>
+    <a href="{{ path('add_post') }}" >
+        <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 "
+                {% if app.user %}{% else%}  data-toggle="modal" data-target="#confirm-delete" {% endif %}
+                 type="submit">Dodaj
+        </button>
+    </a>
+    {{ include('components/add_post_com.html.twig') }}
+</div>
