@@ -23,7 +23,7 @@ a:hover{
     text-decoration: none;
 }
 .font-color{
-    color: #005dbc;
+    color: #006cff;
 }
 .border-color{
     border-color: #9c9b99;
@@ -32,7 +32,7 @@ a:hover{
     color: #1ea200;
 }
 .text-color-1{
-    color: #c69500;
+    color: #ffe000f2!important;
 }
 .text-color-2{
     color: #0057ff;
@@ -40,8 +40,8 @@ a:hover{
 .text-color-3{
     color: #00a5ff;
 }
-.w-85{
-    width: 85%;
+.w-80{
+    width: 80%!important;
 }
 .font-10{
     font-size: 13px;
@@ -60,4 +60,10 @@ a:hover{
 }
 .border-color-1{
     border-bottom-color: #4e555b!important;
+}
+.max-width{
+    max-width: 80%!important;
+}
+.h-59{
+    height: 59px;
 }

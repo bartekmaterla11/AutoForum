@@ -1,0 +1,19 @@
+{% if app.user %}
+<div id="answer" class="bgcolor p-2 mt-3 ">
+
+    <div class="p-1 pl-3 border-bottom border-primary">
+        <h5>Twoja odpowiedź</h5>
+    </div>
+    <div class="">
+        {{ form_start(answerForm) }}
+            {{ form_row(answerForm.content) }}
+            {{ form_row(answerForm.file) }}
+        <div class="text-left" >
+            <a class=""><button class="btn btn-outline-danger mt-3 " type="submit" id="">Anuluj</button></a>
+            <a class=""><button class="btn btn-outline-primary mt-3 " type="submit" id="">Wyślij</button></a>
+        </div>
+        {{ form_end(answerForm) }}
+    </div>
+
+</div>
+{% endif %}

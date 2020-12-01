@@ -4,53 +4,15 @@
 
 {% block body %}
         <div class="container" >
-                <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-
-                        {{ include('/components/login_com.html.twig') }}
-                </div>
-                <div class="color mt-3 w-25 float-left">
-                        <div class="card-body brad bgcolor3 text-white text-center pt-2">
-                                <div class="font-weight-bold ">
-                                        <h4><i class=" icon-ok"></i> Dzisiaj mamy</h4>
-                                        <h5><i class=" icon-calendar"></i> 12-12-2020</h5>
-                                        <h5 class="mb-0"><i class="icon-clock"></i> 12:54</h5>
-                                </div>
-                        </div>
-
-                        {{ include('components/button_add_post_ad_com.html.twig') }}
-
-                        <div class="brad mt-1 brad text-white text-center">
-                                <div class="float-left w-50 bgcolor3 pt-2 pb-2">
-                                        <h4>245</h4>
-                                        Zapytań
-                                </div>
-                                <div class="float-left w-50 bg-dark pt-2 pb-2">
-                                        <h4>245</h4>
-                                        Odpowiedzi
-                                </div>
-                                <div style="clear: both"></div>
-                                <div class="float-left w-50 bg-dark pt-2 pb-2">
-                                        <h4>245</h4>
-                                        Użytkowników
-                                </div>
-                                <div class="float-left w-50 bgcolor3 pt-2 pb-2">
-                                        <h4>245</h4>
-                                        kogos
-                                </div>
-                                <div style="clear: both"></div>
-                        </div>
-                        <div class="bg-dark mt-1 brad text-white" >
-                                <div class="border-bottom border-primary p-1 pl-3 pt-2">
-                                        <h5>Znajdziesz nas</h5>
-                                </div>
-                                <div class="p-3">
-                                        <div class="float-left font-40"><a href="" class="text-white"><i class="icon-facebook-circled"></i></a></div>
-                                        <div class="float-left font-40"><a href="" class="text-white"><i class="icon-twitter-circled"></i></a></div>
-                                        <div style="clear: both"></div>
-                                </div>
-                        </div>
-                </div>
-
+            <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+                {{ include('/components/login_com.html.twig') }}
+            </div>
+            <div class="color mt-3 w-25 float-left">
+                {{ include('components/info_datetime_com.html.twig') }}
+                {{ include('components/button_add_post_ad_com.html.twig') }}
+                {{ include('components/info_data_com.html.twig') }}
+                {{ include('components/social_media_com.html.twig') }}
+            </div>
         </div>
         <div style="clear: both"></div>
 

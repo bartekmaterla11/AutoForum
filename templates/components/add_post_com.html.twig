@@ -1,29 +1,11 @@
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div class="w-75 mr-auto ml-auto p-3 mb-2">
+    <h1 class="text-center  mb-4">Zadaj pytanie</h1>
+    {#            {% form_theme postForm 'bootstrap_4_layout.html.twig' %}#}
+    {{ form_start(postForm) }}
+    <div class="mb-2 "><h6>Tytuł</h6> {{ form_row(postForm.title) }} </div>
+    <div class="mb-2"><h6>Treść</h6> {{ form_row(postForm.content) }} </div>
+    <div class="mb-2 w-50"><h6>Zdjęcia</h6> {{ form_row(postForm.filename) }} </div>
 
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Upsik, nie da rady :(</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <p>Aby zadać pytanie lub ogłoszenie<span class="text-primary font-weight-bold"> Zaloguj się </span>
-                    lub <span class="text-primary font-weight-bold">Zarejestruj</span> </p>
-            </div>
-
-            <div class="modal-footer">
-                <a class="text-white" href="{{ path('app_login') }}">
-                <button type="button"  class="btn btn-primary btn-ok" data-dismiss="modal">
-                    Zaloguj się
-                </button>
-                </a>
-                <a href="{{ path('app_register') }}" class="text-white" >
-                    <button type="button" class="btn btn-primary btn-ok" data-dismiss="modal">
-                        Zarejestruj
-                    </button>
-                </a>
-            </div>
-        </div>
-    </div>
+    <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Dodaj</button>
+    {{ form_end(postForm) }}
 </div>

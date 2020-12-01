@@ -49,9 +49,6 @@ class RegistrationController extends AbstractController
                 $this->addFlash('error','Hasła muszą się zgadzać !');
                 $this->redirectToRoute('app_register');
             }
-
-
-
             // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(

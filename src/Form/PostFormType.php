@@ -24,7 +24,8 @@ class PostFormType extends AbstractType
                 'label'=>' '
             ])
             ->add('filename', FileType::class,[
-                'label'=>' '
+                'label'=>' ',
+                'required'=>false
             ])
         ;
     }

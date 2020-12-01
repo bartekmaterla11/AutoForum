@@ -17,9 +17,6 @@ class CommetPostFormType extends AbstractType
             ->add('content', TextType::class,[
                 'label'=>' '
             ])
-            ->add('filename', FileType::class,[
-                'label'=>' '
-            ])
         ;
     }
 

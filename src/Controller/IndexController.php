@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\AnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,4 +25,6 @@ class IndexController extends AbstractController
             'posts' => $posts]
         );
     }
+
+
 }

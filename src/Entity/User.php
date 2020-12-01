@@ -54,14 +54,13 @@ class User implements UserInterface
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="user")
      */
-    private $comments;
+    private $answers;
 
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,29 +190,29 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|Answer[]
      */
-    public function getComments(): Collection
+    public function getAnswers(): Collection
     {
-        return $this->comments;
+        return $this->answers;
     }
 
-    public function addComment(Comment $comment): self
+    public function addAnswer(Answer $answer): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setUser($this);
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeAnswer(Answer $answer): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->answers->removeElement($answer)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getUser() === $this) {
-                $comment->setUser(null);
+            if ($answer->getUser() === $this) {
+                $answer->setUser(null);
             }
         }
 

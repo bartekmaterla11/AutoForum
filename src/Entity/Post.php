@@ -45,21 +45,37 @@ class Post
      */
     private $categories;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
-     */
-    private $comments;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $filename;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="post")
+     */
+    private $answers;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $likeUp;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $likeDown;
+
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -144,35 +160,6 @@ class Post
         return $this;
     }
 
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setPost($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getFilename(): ?string
     {
@@ -182,6 +169,72 @@ class Post
     public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getPost() === $this) {
+                $answer->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getLikeUp(): ?int
+    {
+        return $this->likeUp;
+    }
+
+    public function setLikeUp(int $likeUp): self
+    {
+        $this->likeUp = $likeUp;
+
+        return $this;
+    }
+
+    public function getLikeDown(): ?int
+    {
+        return $this->likeDown;
+    }
+
+    public function setLikeDown(int $likeDown): self
+    {
+        $this->likeDown = $likeDown;
 
         return $this;
     }

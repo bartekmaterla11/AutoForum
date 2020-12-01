@@ -1,0 +1,29 @@
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Upsik, nie da rady :(</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <p>Aby zadać pytanie lub ogłoszenie<span class="text-primary font-weight-bold"> Zaloguj się </span>
+                    lub <span class="text-primary font-weight-bold">Zarejestruj</span> </p>
+            </div>
+
+            <div class="modal-footer">
+                <a class="text-white" href="{{ path('app_login') }}">
+                <button type="button"  class="btn btn-primary btn-ok" data-dismiss="modal">
+                    Zaloguj się
+                </button>
+                </a>
+                <a href="{{ path('app_register') }}" class="text-white" >
+                    <button type="button" class="btn btn-primary btn-ok" data-dismiss="modal">
+                        Zarejestruj
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

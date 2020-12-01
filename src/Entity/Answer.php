@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
+use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\Entity(repositoryClass=AnswerRepository::class)
  */
-class Comment
+class Answer
 {
     /**
      * @ORM\Id
@@ -18,29 +18,29 @@ class Comment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="answers")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="answers")
      */
     private $post;
 
     /**
-     * @ORM\Column(type="string", length=300)
+     * @ORM\Column(type="string", length=255)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $uploaded_at;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $filename;
+    private $file;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $uploadedAt;
 
     public function getId(): ?int
     {
@@ -83,26 +83,26 @@ class Comment
         return $this;
     }
 
-    public function getUploadedAt(): ?\DateTimeInterface
+    public function getFile(): ?string
     {
-        return $this->uploaded_at;
+        return $this->file;
     }
 
-    public function setUploadedAt(\DateTimeInterface $uploaded_at): self
+    public function setFile(?string $file): self
     {
-        $this->uploaded_at = $uploaded_at;
+        $this->file = $file;
 
         return $this;
     }
 
-    public function getFilename(): ?string
+    public function getUploadedAt(): ?\DateTimeInterface
     {
-        return $this->filename;
+        return $this->uploadedAt;
     }
 
-    public function setFilename(?string $filename): self
+    public function setUploadedAt(\DateTimeInterface $uploadedAt): self
     {
-        $this->filename = $filename;
+        $this->uploadedAt = $uploadedAt;
 
         return $this;
     }
