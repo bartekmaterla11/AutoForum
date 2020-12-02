@@ -6,10 +6,10 @@ use App\Entity\Post;
 use App\Entity\Answer;
 use App\Form\AnswerPostFormType;
 use App\Form\PostFormType;
+use App\Service\AnswerAddInterface;
 use App\Service\PostInterface;
 use App\Service\PostMarkService;
 use App\Service\PostService;
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,20 +22,20 @@ class PostController extends AbstractController
      */
     private $postMarkService;
     /**
-     * @var PostService
-     */
-    private $postService;
-    /**
      * @var PostInterface
      */
     private $addPost;
+    /**
+     * @var AnswerAddInterface
+     */
+    private $answerAdd;
 
 
-    public function __construct(PostMarkService $postMarkService, PostInterface $postService, PostInterface $addPost)
+    public function __construct(PostMarkService $postMarkService, PostInterface $addPost, AnswerAddInterface $answerAdd)
     {
         $this->postMarkService = $postMarkService;
-        $this->postService = $postService;
         $this->addPost = $addPost;
+        $this->answerAdd = $answerAdd;
     }
 
     /**
@@ -55,7 +55,7 @@ class PostController extends AbstractController
 
                 return $this->redirectToRoute('index');
             }
-            $this->addFlash('error1', 'Ups, Wystąpił błąd');
+            $this->addFlash('error1', 'Ups, Wystąpił błąd. Nie udało się dodać posta, spróbuj jeszcze raz.');
         }
 
         return $this->render('post/addPost/add.html.twig', [
@@ -71,51 +71,39 @@ class PostController extends AbstractController
     public function viewPost($slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        /**
-         * @var $post Post
-         */
         $post = $em->getRepository(Post::class)->findBy(['slug' => $slug]);
-        // $answers = $em->getRepository(Answer::class)->findBy();
+
         if ($this->getUser()) {
             $add_answer = new Answer();
             $form = $this->createForm(AnswerPostFormType::class, $add_answer);
             $form->handleRequest($request);
-            $em = $this->getDoctrine()->getManager();
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                try {
-                    $add_answer->setUser($this->getUser());
-                    $add_answer->setPost();
-                    $add_answer->setContent($form->get('content')->getData());
-                    $add_answer->setUploadedAt(new \DateTime());
-                    $pictureFileName = $form->get('file')->getData();
-                    if ($pictureFileName) {
-                        $newFileName = $this->postService->PhotoPostToString($pictureFileName);
-                        $pictureFileName->move('images/post/answer', $newFileName);
-                        $add_answer->setFile($newFileName);
-                    }
-                    $em->persist($add_answer);
-                    $em->flush();
+            if($this->answerAdd->addAnswerPost($form, $add_answer, $this->getUser())){
 
-                } catch (\Exception $exception) {
-                    $this->addFlash('error2', 'Wystąpił bład przy dodawaniu komentarza');
-                }
+                $this->addFlash('error2', 'Wystąpił bład przy dodawaniu komentarza');
             }
-            if ($post && $add_answer) {
+            $this->addFlash('error2', 'Wystąpił bład przy dodawaniu komentarza');
+
+            if ($post) {
                 return $this->render('post/viewPost/view_post.html.twig', [
                     'posts' => $post,
                     'answerForm' => $form->createView(),
                 ]);
             }
         }
-        if ($this->getUser() == 0) {
+        if (!$this->getUser()) {
             return $this->render('post/viewPost/view_post.html.twig', [
                 'posts' => $post,
-                //'answers' => $answers
-//                'iscommeted' => $wyunik,
-//                'annonymus'=>
             ]);
         }
+    }
+}
+
+
+        //'answers' => $answers
+//                'iscommeted' => $wyunik,
+//                'annonymus'=>
+
 //        $wynik = $this->postMarkService->checkAddMarkPost();
         //zapytanie  do bazy po rekordy z nowej tabeli , wehere userid  and postid
 //
@@ -130,5 +118,4 @@ class PostController extends AbstractController
 //        }
 
 
-    }
-}
+

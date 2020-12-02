@@ -40,6 +40,9 @@ a:hover{
 .text-color-3{
     color: #00a5ff;
 }
+.text-color-4{
+    color: #9c9b99;
+}
 .w-80{
     width: 80%!important;
 }
@@ -61,8 +64,11 @@ a:hover{
 .border-color-1{
     border-bottom-color: #4e555b!important;
 }
-.max-width{
-    max-width: 80%!important;
+.max-width-1{
+    max-width: 20%!important;
+}
+.w-78{
+    max-width: 78%!important;
 }
 .h-59{
     height: 59px;
