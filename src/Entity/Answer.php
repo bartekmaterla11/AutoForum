@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnswerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,21 @@ class Answer
      * @ORM\Column(type="datetime")
      */
     private $uploadedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=CommentAnswer::class, mappedBy="answer")
+     */
+    private $commentAnswers;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $likeUp;
+
+    public function __construct()
+    {
+        $this->commentAnswers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,4 +123,47 @@ class Answer
 
         return $this;
     }
+
+    /**
+     * @return Collection|CommentAnswer[]
+     */
+    public function getCommentAnswers(): Collection
+    {
+        return $this->commentAnswers;
+    }
+
+    public function addCommentAnswer(CommentAnswer $commentAnswer): self
+    {
+        if (!$this->commentAnswers->contains($commentAnswer)) {
+            $this->commentAnswers[] = $commentAnswer;
+            $commentAnswer->setAnswer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentAnswer(CommentAnswer $commentAnswer): self
+    {
+        if ($this->commentAnswers->removeElement($commentAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($commentAnswer->getAnswer() === $this) {
+                $commentAnswer->setAnswer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLikeUp(): ?int
+    {
+        return $this->likeUp;
+    }
+
+    public function setLikeUp(int $likeUp): self
+    {
+        $this->likeUp = $likeUp;
+
+        return $this;
+    }
+
 }

@@ -1,6 +1,5 @@
 <div class="w-75 mr-auto ml-auto p-3 mb-2">
     <h1 class="text-center  mb-4">Zadaj pytanie</h1>
-    {#            {% form_theme postForm 'bootstrap_4_layout.html.twig' %}#}
     {{ form_start(postForm) }}
     <div class="mb-2 "><h6>Tytuł</h6> {{ form_row(postForm.title) }} </div>
     <div class="mb-2"><h6>Treść</h6> {{ form_row(postForm.content) }} </div>

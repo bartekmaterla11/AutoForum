@@ -58,9 +58,15 @@ class User implements UserInterface
      */
     private $answers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=CommentAnswer::class, mappedBy="user")
+     */
+    private $commentAnswers;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->commentAnswers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,4 +224,35 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|CommentAnswer[]
+     */
+    public function getCommentAnswers(): Collection
+    {
+        return $this->commentAnswers;
+    }
+
+    public function addCommentAnswer(CommentAnswer $commentAnswer): self
+    {
+        if (!$this->commentAnswers->contains($commentAnswer)) {
+            $this->commentAnswers[] = $commentAnswer;
+            $commentAnswer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentAnswer(CommentAnswer $commentAnswer): self
+    {
+        if ($this->commentAnswers->removeElement($commentAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($commentAnswer->getUser() === $this) {
+                $commentAnswer->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

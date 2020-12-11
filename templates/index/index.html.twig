@@ -15,7 +15,22 @@
             {% endfor %}
             <div class="mr-2 bg-dark mt-1 brad ">
                 <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4>Forum motoryzacyjne</h4>
+                    <h4 class="float-left w-50">Forum motoryzacyjne</h4>
+                    <div class="float-left w-50 text-right">
+
+                        <select id="select_post" class="text-white">
+                            <optgroup label="Data">
+                                <option type="submit" id="latest_new">Najnowsze</option>
+                                <option id="latest_alt">Najstarsze</option>
+                            </optgroup>
+                            <optgroup label="Polubione">
+                                <option id="like_up_more">Najwięcej</option>
+                                <option id="like_up_little">Najmniej</option>
+                            </optgroup>
+                        </select>
+
+                    </div>
+                    <div style="clear: both"></div>
                 </div>
                 <div class="p-3 mt-2 pb-1">
                     {{ include('index/post-index/post_index.html.twig', {posts:posts}) }}
@@ -32,88 +47,4 @@
     </div>
     <div style="clear: both"></div>
 
-
-    <div class="container">
-        <div class="row mt-5 mb-5 text-white"  style="padding-top: 80px; padding-bottom: 80px;">
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/1.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Dodawaj pytania oraz ogłoszenia</div>
-                    <p class="mt-3 text-center">Gdy tylko czegoś nie wiesz, pytaj o to na forum, a gdy
-                        znasz odpowiedż na pytanie, udziel jej i pomóz innym. Możesz także ogłosić swoje przedmioty </p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/2.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Darmowe konto użytkownika</div>
-                    <p class="mt-3 text-center">Załóż darmowe konto i korzystaj z niego bez limitu.
-                        Pomagaj sobie i wielu innym użytkownikom.</p>
-                </div></div>
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/3.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Wpływ na rozwój serwisu</div>
-                    <p class="mt-3 text-center">Miej duży wpływ na rozwój serwisu przez dodawanie
-                        wpisów. Każda twoja aktywność ma znaczenie.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <section class="bg-dark" style="height: 100%">
-        <div class="container text-white">
-            <h3 class="text-center text-white h1 font-weight-lighter" style="padding-top: 120px;">Dane w chmurze</h3>
-            <p class="pt-5 pb-5 font-weight-lighter text-center">Twoje zdjęcia będą dostępne w chmurze dopóki ich nie usuniesz. Pamiętaj, że masz do nich dostęp z każdego miejsca na ziemi. Po zalogowaniu się masz pełny dostęp do swoich danych oraz zdjęć.</p>
-            <div class="row pt-5" style="padding-bottom: 120px;">
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>1. Zarejestruj się</h4>
-                                <span>Najpierw załóż konto w serwisie</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>2. Zaloguj się</h4>
-                                <span>Nastepnie zaloguj się podanymi danymi podczas rejestracji</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>3. Dodaj zdjęcie</h4>
-                                <span>Dodaj prywatne lub publiczne</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>4. Oglądaj zdjęcia</h4>
-                                <span>Oglądaj wszystkie publiczne zdjęcia lub swoje prywatne</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
 {% endblock %}

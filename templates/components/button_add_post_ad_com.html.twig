@@ -1,22 +1,32 @@
+{{ include('components/ajax_add_post_com.html.twig') }}
 <div class="bg-dark p-3 mt-1 brad">
-    <h5 class="text-danger text-center">Masz jakieś pytania?</h5>
+    <h5 class="text-color-5 text-center">Masz jakieś pytania?</h5>
     <p class="text-center text-white">Możesz dodać je tutaj</p>
-    <a href="{{ path('add_post') }}" >
+    {% if app.user %}
+        <a class="text-primary" href="{{ path('add_post') }}">
+            <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 ">
+                Dodaj
+            </button>
+        </a>
+    {% else %}
         <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 "
-                {% if app.user %}{% else%}  data-toggle="modal" data-target="#confirm-delete" {% endif %}
-                type="submit">Dodaj
+                 data-toggle="modal" data-target="#confirm-delete">Dodaj
         </button>
-    </a>
-    {{ include('components/ajax_add_post_com.html.twig') }}
+    {% endif %}
 </div>
+{{ include('components/ajax_add_announcement_com.html.twig') }}
 <div class="bg-dark p-3 mt-1 brad">
-    <h5 class="text-danger text-center">Chcesz coś ogłosić?</h5>
+    <h5 class="text-color-5 text-center">Chcesz coś ogłosić?</h5>
     <p class="text-center text-white">Kliknij tutaj</p>
-    <a href="{{ path('add_post') }}" >
-{#        <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 "#}
-{#                {% if app.user %}{% else%}  data-toggle="modal" data-target="#confirm-delete" {% endif %}#}
-{#                 type="submit">Dodaj#}
-{#        </button>#}
-    </a>
-    {{ include('components/ajax_add_post_com.html.twig') }}
+    {% if app.user %}
+        <a class="text-primary" href="{{ path('add_post') }}">
+            <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 ">
+                Dodaj
+            </button>
+        </a>
+    {% else %}
+        <button  class="btn btn-outline-primary my-2 my-sm-0 w-100 "
+                 data-toggle="modal" data-target="#confirm-delete-1">Dodaj
+        </button>
+    {% endif %}
 </div>

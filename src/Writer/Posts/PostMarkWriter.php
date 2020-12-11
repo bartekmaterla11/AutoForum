@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Writer;
-
+namespace App\Writer\Posts;
 
 use Doctrine\DBAL\Driver\Connection;
 
@@ -20,15 +19,14 @@ class PostMarkWriter
     }
 
 
-    public function setLikeUp(): void
+    public function setLikeUpPost(int $postId): void
     {
-        $sql='UPDATE post SET like_up = like_up + :mark WHERE id = 1';
+        $sql='UPDATE post SET like_up = like_up + :mark WHERE id = :postId';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['mark'=> 1]);
+        $stmt->execute(['mark'=> 1,'postId'=>$postId]);
 
-
-        $this->decreaseLikeDown();
+//        $this->decreaseLikeDown();
     }
 
     public function setLikeDown(): void
@@ -55,6 +53,15 @@ class PostMarkWriter
 
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['mark'=> 1]);
+    }
+
+    public function setLikeUpAnswer($answerId): void
+    {
+        $sql='UPDATE answer SET like_up = like_up + :mark WHERE id = :answerId';
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(['mark'=> 1,'answerId'=>$answerId]);
+
     }
 
 }

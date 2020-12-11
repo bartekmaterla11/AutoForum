@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\Posts;
 
 use App\Entity\Post;
-use App\Writer\PostWriter;
+use App\Writer\Posts\PostWriter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

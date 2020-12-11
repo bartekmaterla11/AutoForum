@@ -17,26 +17,19 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(Request $request,AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function login(AuthenticationUtils $authenticationUtils ): Response
     {
+        if ($this->getUser()) {
+             return $this->redirectToRoute('index');
+         }
 
-        //$user = new User();
-
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-//        return $guardHandler->authenticateUserAndHandleSuccess(
-//            $user,
-//            $request,
-//            $authenticator,
-//            'main' // firewall name in security.yaml
-//        );
         // get the login error if there is one
+//        $this->addFlash('error_login','Podany login i/lub hasło są nieprawidłowe');
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error'=>$error]);
     }
 
     /**

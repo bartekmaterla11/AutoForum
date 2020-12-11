@@ -2,30 +2,32 @@
 
 namespace App\Controller;
 
-use App\Entity\Answer;
-use App\Entity\Post;
-use App\Entity\User;
+use App\Service\AppInfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 class InfoAppController extends AbstractController
 {
-    public function infoApp()
+    /**
+     * @var AppInfoInterface
+     */
+    private $appInfo;
+
+    public function __construct(AppInfoInterface $appInfo)
     {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->find;
-        $posts = $em->getRepository(Post::class)->find();
-        $answer = $em->getRepository(Answer::class)->find();
+        $this->appInfo = $appInfo;
+    }
 
-        $data = new \DateTime();
-        $data->modify();
-        foreach ($users as $user){
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/infos/ajax")
+     */
+    public function appInfo()
+    {
+        $appInfos = $this->appInfo->getAppInfo();
 
-        }
-
-       return $this->render('components/info_data_com.html.twig',[
-            'users'=>$users,
-           'posts'=>$posts,
-           'answers'=>$answer
-           ]);
+       return $this->render('components/info_data_items_com.html.twig',[
+           'info' => $appInfos,
+       ]);
     }
 }

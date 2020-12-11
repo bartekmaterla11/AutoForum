@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Writer;
+namespace App\Writer\Posts;
 
 use App\Entity\Post;
 use App\Service\ConvertStringToSlug;
@@ -39,7 +39,7 @@ class PostWriter
         /** @var UploadedFile $pictureFileName */
         $pictureFileName = $form->get('filename')->getData();
         if ($form->get('filename')->getData()) {
-            $newFileName = $this->photoToString->PhotoPostToString($pictureFileName);
+            $newFileName = $this->photoToString->PhotoPostToString($pictureFileName, 'fghfghfg');
             $pictureFileName->move('images/post', $newFileName);
             $post->setFilename($newFileName);
         }

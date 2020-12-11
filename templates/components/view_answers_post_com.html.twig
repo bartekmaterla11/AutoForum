@@ -1,0 +1,40 @@
+{% for item in post.answers %}
+    <div class="bg-dark brad p-3 mb-1 mr-2">
+        <div class="float-left p-2 pl-3 pr-3 bgcolor3 brad mr-2">
+            <div class="">
+                <i id="like_up_answer" data-id="1" data-answerid="{{ item.id }}" class=" text-color-1 icon-thumbs-up-alt"></i> {{ item.likeUp }}
+            </div>
+        </div>
+        <div class="float-left ml-3 w-80 ">
+            <div class="border-bottom border-color font-color font-15 font-weight-bold">
+                <span class="text-white font-weight-normal">odpowiedź</span> dodana przez
+                <a href="" class="font-weight-normal text-white">{{ item.user.username }}</a>
+                w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+            </div>
+            <div class="mt-3 pb-4 border-bottom border-primary ">
+                {{ item.content }}
+                {% if item.file %}
+                    <img class="ml-4 mt-4 max-width" src="/images/post/answer/{{ item.file }} " alt="Zdjęcie">
+                {% endif %}
+            </div>
+            <div class="mt-2 ">
+                {% if app.user %}
+                    <button id="{{ item.id}}" onclick="myFunction(this.id)" class="comment btn font-13 font-weight-bold text-white bg-secondary"
+                            data-toggle="modal" data-target="#confirm-delete-3">
+                        <i class="font-18 icon-comment-empty"></i>Skomentuj
+                    </button>
+                {% else %}
+                    {{ include('components/ajax_add_comment_answer_com.html.twig') }}
+                    <button class="btn font-13 font-weight-bold text-white bg-secondary"
+                            data-toggle="modal" data-target="#confirm-delete-3">
+                        <i class="mr-1 font-18 icon-comment-empty"></i>Skomentuj
+                    </button>
+                {% endif %}
+            </div>
+            {% if app.user %}
+                {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id}) }}
+            {% endif %}
+        </div>
+        <div style="clear: both"></div>
+    </div>
+{% endfor %}

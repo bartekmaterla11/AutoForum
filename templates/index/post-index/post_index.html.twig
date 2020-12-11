@@ -2,19 +2,12 @@
     {% for item in posts %}
     <div class= "border-bottom border-secondary p-1 pb-4 mb-4 ">
             <div class="float-left w-20">
-                <div class="float-left bgcolor2 p-1 font-10 pl-2 pr-2 ">
-                    <h5 class="text-center">0</h5> Odpowiedzi
+                <div class="float-left bgcolor4 p-1 font-11 pl-2 pr-2 pb-2">
+                    <h5 class="text-center">{{ item.answers.count }}</h5> Odpowiedzi
                 </div>
-                <div class="float-left p-1 h-59 bgcolor3 ml-2 pl-2 pr-2 border-bottom border-color-1">
-                    <div class="float-left">
-                        <h6 class="text-color-1"><i class=" icon-thumbs-up-alt"></i> </h6>
-                        <h6 class="mb-1 text-center" >{{ item.likeUp }}</h6>
-                    </div>
-                    <div class="float-left ml-2">
-                        <h6 class="text-center text-color-1"><i class=" icon-thumbs-down-alt"></i></h6>
-                        <h6 class="text-center mb-1">{{ item.likeDown }}</h6>
-                    </div>
-                    <div style="clear: both"></div>
+                <div class="float-left pt-2 h-60 bgcolor3 ml-2 pl-3 pr-3 ">
+                    <h6 class="mb-2 text-color-1"><i class=" icon-thumbs-up-alt"></i></h6>
+                    <h6 class="font-15 text-center" >{{ item.likeUp }}</h6>
                 </div>
                 <div style="clear: both"></div>
             </div>

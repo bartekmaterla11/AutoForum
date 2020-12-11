@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-
-namespace App\Service;
+namespace App\Service\Posts;
 
 use App\Enum\PostMarkEnum;
-use App\Writer\PostMarkWriter;
+use App\Writer\Posts\PostMarkWriter;
 
 class PostMarkService implements PostMarkInterface
 {
@@ -20,18 +19,24 @@ class PostMarkService implements PostMarkInterface
         $this->postMarkWriter = $postMarkWriter;
     }
 
-    public function addMarkForPost(int $mark): void
+    public function addMarkForPost(int $mark, int $postId): void
     {
         if ($mark === PostMarkEnum::MARK_UP) {
-            $this->postMarkWriter->setLikeUp();
+            $this->postMarkWriter->setLikeUpPost($postId);
             return;
         }
-//        return true//false;
-        $this->postMarkWriter->setLikeDown();
+        $this->postMarkWriter->setLikeDown($postId);
     }
 
-    public function checkAddMarkPost()
+    public function addMarkForAnswer(int $mark, int $answerId): void
     {
-
+        if($mark === PostMarkEnum::MARK_UP){
+            $this->postMarkWriter->setLikeUpAnswer($answerId);
+            return;
+        }
     }
+//    public function checkAddMarkPost()
+//    {
+//
+//    }
 }

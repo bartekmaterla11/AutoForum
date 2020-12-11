@@ -8,12 +8,11 @@ class ConvertStringToSlug
 {
     public function ConversionToSlug(string $slug): string
     {
-        $lowerSlug = strtolower($slug);
-        $aa = [" ", "?", "!","ś","ń","ć","ą","ó","ź","ż","ł","ę"];
-        $bb = ["-", " ", " ","s","n","c","a","o","z","z","l","e"];
-        $newSlug = str_replace($aa, $bb, $lowerSlug);
+        $aa = [" ", "?", "!","ś","ń","ć","ą","ó","ź","ż","ł","ę","Ó"];
+        $bb = ["-", " ", " ","s","n","c","a","o","z","z","l","e","O"];
+        $newSlug = str_replace($aa, $bb, $slug);
 
-        return $newSlug;
+
+        return strtolower($newSlug);
     }
-
 }

@@ -1,0 +1,7 @@
+function search()
+{
+    if (document.getElementById('mainSearch').value) {
+        document.getElementById('mainSearchForm').action = document.getElementById('mainSearch').value + ","
+            + document.getElementById('mainSearch').value + ".html";
+    }
+}

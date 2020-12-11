@@ -1,12 +1,8 @@
 <?php
 
-
 namespace App\Controller;
 
-
-use App\Entity\Post;
-use App\Service\PostMarkInterface;
-use App\Service\PostMarkService;
+use App\Service\Posts\PostMarkInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +24,17 @@ class JavaScriptController extends AbstractController
      */
     public function setLikeUpAction(Request $request)
     {
-        $this->postMarkService->addMarkForPost((int)$request->get('mark'));
+        $this->postMarkService->addMarkForPost((int)$request->get('mark'),(int)$request->get('postid'));
+
+        return $this->json(['message' => 'OK']);
+    }
+
+    /**
+     * @Route("/like/ajax/answer", name="like_ajax_answer")
+     */
+    public function setLikeUpAnswerAction(Request $request)
+    {
+        $this->postMarkService->addMarkForAnswer((int)$request->get('mark1'),(int)$request->get('answerid'));
 
         return $this->json(['message' => 'OK']);
     }
