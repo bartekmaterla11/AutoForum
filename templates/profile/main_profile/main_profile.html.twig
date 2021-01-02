@@ -4,89 +4,61 @@
 
 {% block body %}
     <div class="container" >
+        {% for item in users %}
         <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
             <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na / użytkownicy / Bartek123
+                <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('users') }}" >użytkownicy</a> / {{ item.username }}
             </div>
             <div class="mr-2 bg-dark mt-1 brad ">
                 <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4><i class="icon-user-1 mr-1"></i>Użytkownik Bartek123</h4>
+                    <h4><i class="icon-user-1 mr-1"></i>Użytkownik {{ item.username }}</h4>
                 </div>
                 <div class="p-3 mt-2 pb-1">
                     <div class="text-center">
-                        <a href="" class="text-secondary float-left p-2 ml-2 mr-2">Moje dane</a>
-                        <a href="" class="text-secondary  float-left p-2 ml-2 mr-2">Pytania</a>
-                        <a href="" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
-                        <a href="" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
-                        <a href="" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
-                        <a href="" class="text-secondary float-left p-2 ml-2 mr-2">Ulubione</a>
+                        {% if app.user %}
+                            {% if app.user.username == item.username %}
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                            <a href="{{ path('edit_profile',{'userId': item.id ,'userTab':'my-data' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Moje dane</a>
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'questions' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'answers' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'comments' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'announcements' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'polubione' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ulubione</a>
+                            {% else %}
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                        {% endif %}
                         <div style="clear: both"></div>
                     </div>
-                    <div class="p-1 mt-4">
-                        <div class="float-left w-50">
-{#                            <form action="" method="post">#}
-                            <div class="text-center pb-3 border-bottom border-color-1">
-                                <img class="max-width-2 max-height" alt="zdjęcie profilowe" src="{{ asset('assets/img/ja.JPG') }}">
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
-                                <div class="float-left w-50">Nazwa użytkownika:</div>
-                                <div class="float-left w-50">Bartek123</div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
-                                <div class="float-left w-50">Email:</div>
-                                <div class="float-left w-50">bartekmaterla@gmail.com
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
-                                <div class="float-left w-50">Zarejestrowany od:</div>
-                                <div class="float-left w-50">21-09-2020
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <button type="submit" href="" class="btn btn-outline-primary mt-3">Edytuj profil</button>
-{#                            </form>#}
-                        </div>
-                        <div class="float-left w-50" >
-                            <div class="pb-2 border-bottom border-color-1 ml-2">
-                                <h5 class="text-center text-color-3">Aktywność użytkownika</h5>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
-                                <div class="float-left w-40 pt-1">Pytania/Wątki:</div>
-                                <div class="float-left w-60 font-23 text-color-3 font-weight-bold">5
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
-                                <div class="float-left w-40 pt-1">Odpowiedzi:</div>
-                                <div class="float-left w-60 font-23 text-color-3  font-weight-bold">0
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
-                                <div class="float-left w-40 pt-1">Komentarze:</div>
-                                <div class="float-left w-60 font-23 text-color-3  font-weight-bold">2
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                            <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
-                                <div class="float-left w-40 pt-1">Ogłoszenia:</div>
-                                <div class="float-left w-60 font-23 text-color-3  font-weight-bold">7
-                                </div>
-                                <div style="clear: both"></div>
-                            </div>
-                        </div>
-                        <div style="clear: both"></div>
-                    </div>
+                    {% if userTab == 'profile' %}
+                        {{ include('profile/user_profile/user_data_prof.html.twig',{item:item}) }}
+                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_DATA')  %}
+                        {{ include('profile/user_data/user_datas.html.twig',{item:item,}) }}
+                    {% elseif userTab == constant('App\\Enum\\ProfileEnum::USER_QUESTIONS')%}
+                        {{ include('profile/user_post/user_posts_prof.html.twig',{item:item}) }}
+                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANSWERS')%}
+                        {{ include('profile/user_answers/user_answers.html.twig',{item:item}) }}
+                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_COMMENTS')%}
+                        {{ include('profile/user_comments/user_comments.html.twig',{item:item}) }}
+                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANNOUNCEMENTS')%}
+                        {{ include('profile/user_announcements/user_announcements.html.twig',{item:item}) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
+        {% endfor %}
         <div class="color mt-3 w-25 float-left">
-            {{ include('components/info_datetime_com.html.twig') }}
-            {{ include('components/button_add_post_ad_com.html.twig') }}
-            {{ include('components/info_data_com.html.twig') }}
-            {{ include('components/social_media_com.html.twig') }}
+            {{ include('side_menu/side_menu.html.twig') }}
         </div>
     </div>
     <div style="clear: both"></div>

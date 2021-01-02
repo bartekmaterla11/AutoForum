@@ -26,6 +26,7 @@ class Answer
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="answers")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
 

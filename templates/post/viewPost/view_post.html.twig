@@ -32,8 +32,24 @@
 
                     <div class="float-left pl-3 w-80">
                         <div class="border-bottom border-color font-weight-bold font-color font-15 font-weight-light">
-                           <span class="text-white font-weight-normal">pytanie</span> zadane przez <a href="" class="font-weight-normal text-white">{{ post.user.username }}</a>
+                            {% if app.user %}
+                                {% if app.user.username == post.user.username %}
+                                <span class="text-white font-weight-normal">Zadałeś</span>
+                                pytanie w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
+                                {% else %}
+                                    <span class="text-white font-weight-normal">pytanie</span> zadane przez
+                                    <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+                                        {{ post.user.username }}
+                                    </a>
+                                    w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
+                                {% endif %}
+                            {% else %}
+                           <span class="text-white font-weight-normal">pytanie</span> zadane przez
+                            <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+                                {{ post.user.username }}
+                            </a>
                             w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
+                            {% endif%}
                         </div>
                         <div class="mt-3 pb-4 border-bottom border-primary">
                             {{ post.content }}
@@ -68,10 +84,7 @@
             {{ include('components/view_answers_post_com.html.twig',{post:post}) }}
         </div>
         <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('components/info_datetime_com.html.twig') }}
-            {{ include('components/button_add_post_ad_com.html.twig') }}
-            {{ include('components/info_data_com.html.twig') }}
-            {{ include('components/social_media_com.html.twig') }}
+            {{ include('side_menu/side_menu.html.twig') }}
         </div>
     </div>
     <div style="clear: both"></div>

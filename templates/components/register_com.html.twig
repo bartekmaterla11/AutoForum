@@ -10,11 +10,10 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
     <div class="p-3 pl-5 mr-5 text-center text-color-3">
-        Musisz wprowadzić poprawny adres e-mail, ponieważ na podany adres otrzymasz wiadomość
-        zawierającą link aktywujący konto.
+        <p>Musisz wprowadzić poprawny adres e-mail, ponieważ na podany adres otrzymasz wiadomość
+            zawierającą link aktywujący konto.</p>
     </div>
-    <div class="w-50 mr-auto ml-auto p-3">
-
+    <div class="w-75 ml-auto mr-auto p-3">
         {{ form_start(registrationForm) }}
         <div class="mb-4">
             <h6 class="font-weight-normal ">Nazwa użytkownika</h6>{{ form_row(registrationForm.username) }}
@@ -28,12 +27,17 @@
         <div class="mb-4">
             <h6>Hasło</h6>{{ form_row(registrationForm.plainPassword) }}
         </div>
-        <div class="mb-5">
+        <div class="mb-4">
             <h6>Powtórz hasło</h6>{{ form_row(registrationForm.second_password) }}
         </div>
+        <div class="mb-3">
+            <h6>zdjęcie *</h6>{{ form_widget(registrationForm.filename) }}
+        </div>
+        <p class="font-15">* Jeśli nie wybierzesz pliku, algorytm automatycznie
+            przypisze Tobie domyślne zdjęcie profilowe</p>
         {#                {{ form_row(registrationForm.agreeTerms) }}#}
 
-        <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Załóż konto</button>
+        <button type="submit" class=" btn btn-lg mt-3 btn-outline-success mb-3">Załóż konto</button>
         {{ form_end(registrationForm) }}
     </div>
 </div>

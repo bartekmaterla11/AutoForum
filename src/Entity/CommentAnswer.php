@@ -24,6 +24,7 @@ class CommentAnswer
 
     /**
      * @ORM\ManyToOne(targetEntity=Answer::class, inversedBy="commentAnswers")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $answer;
 

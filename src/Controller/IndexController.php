@@ -3,23 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Repository\AnswerRepository;
-use App\Service\AppInfoInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    /**
-     * @var AppInfoInterface
-     */
-    private $appInfo;
-
-    public function __construct(AppInfoInterface $appInfo)
-    {
-        $this->appInfo = $appInfo;
-    }
-
     /**
      * @Route("/", name="index")
      *
@@ -36,6 +24,4 @@ class IndexController extends AbstractController
             'posts' => $posts]
         );
     }
-
-
 }

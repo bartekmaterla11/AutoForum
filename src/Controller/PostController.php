@@ -57,20 +57,18 @@ class PostController extends AbstractController
      */
     public function post(Request $request): Response
     {
-
         $post = new Post();
         $form = $this->createForm(PostFormType::class, $post);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ($this->addPost->addPost($post, $form, $this->getUser())) {
-                $this->addFlash('success', 'Pytanie zostało dodane poprawnie');
+                $this->addFlash('success_post', 'Pytanie zostało dodane poprawnie');
 
                 return $this->redirectToRoute('index');
             }
-            $this->addFlash('error1', 'Ups, Wystąpił błąd. Nie udało się dodać posta, spróbuj jeszcze raz.');
+            $this->addFlash('error_post', 'Ups, Wystąpił błąd. Nie udało się dodać posta, spróbuj jeszcze raz.');
         }
 
         return $this->render('post/addPost/add.html.twig', [
@@ -98,7 +96,7 @@ class PostController extends AbstractController
                 $this->addFlash('success-answer', 'Poprawnie dodano odpowiedź');
                 $this->redirectToRoute('view_post');
             }
-            $this->addFlash('error2', 'Wystąpił bład przy dodawaniu odpowiedzi');
+            $this->addFlash('error_answer', 'Wystąpił bład przy dodawaniu odpowiedzi');
 
             $answer = $em->getRepository(Answer::class)->findBy(['post'=>$post->getId()]);
 
@@ -132,6 +130,26 @@ class PostController extends AbstractController
             'post' => $post,
             'numbers' => $numbers
         ]);
+    }
+
+    /**
+     * @Route("/uzytkownicy/{userId}/moj-profil/{userTab}/{postId}/usuwanie-posta", name="remove_post")
+     * @param int $postId
+     * @param int $userId
+     * @param string $userTab
+     */
+    public function removePost(int $postId, int $userId, string $userTab)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository(Post::class)->findOneBy(['id'=>$postId]);
+
+        if($this->addPost->removePost($post, $userId)){
+            $this->addFlash('success_remove_post','Post został usunięty');
+        }else{
+            $this->addFlash('error_remove_post','Post nie został usunięty');
+        }
+      
+        return $this->redirectToRoute('profile',['userId'=>$userId, 'userTab'=>$userTab]);
     }
 }
 

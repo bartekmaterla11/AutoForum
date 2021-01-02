@@ -26,15 +26,14 @@
                         <a  class="nav-link text-white" href="{{ path('announcement') }}">Ogłoszenia</a>
                     </li>
                 </ul>
-                <form id="mainSearchForm" onsubmit="search()" class="form-inline my-2 my-lg-0 mr-4 w-50">
+                <form id="mainSearchForm" class="form-inline my-2 my-lg-0 mr-4 w-50">
                     <input id="mainSearch" class="form-control mr-sm-2 w-75" type="search" placeholder="Szukaj na forum..." aria-label="Search">
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class=" icon-search"></i></button>
                 </form>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
                     {% if app.user is not null %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ path('profile') }}" >Profil</a>
+                            <a class="nav-link text-white" href="{{ path('profile',{'userId': app.user.id ,'userTab': 'profile'}) }}" >Profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ path('app_logout') }}">Wyloguj</a>
@@ -171,6 +170,7 @@
         <script src="{{ asset('assets/js/post/view_form_comment_answer.js') }}"></script>
         <script src="{{ asset('assets/js/post/hide_comment_answer.js') }}"></script>
         <script src="{{ asset('assets/js/search_post') }}"></script>
+        <script src="{{ asset('assets/js/post/remove_post.js') }}"></script>
     {% endblock %}
     </body>
 </html>

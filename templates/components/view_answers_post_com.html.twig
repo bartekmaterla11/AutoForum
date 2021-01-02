@@ -5,11 +5,26 @@
                 <i id="like_up_answer" data-id="1" data-answerid="{{ item.id }}" class=" text-color-1 icon-thumbs-up-alt"></i> {{ item.likeUp }}
             </div>
         </div>
-        <div class="float-left ml-3 w-80 ">
+        <div class="float-left ml-3 w-80">
             <div class="border-bottom border-color font-color font-15 font-weight-bold">
-                <span class="text-white font-weight-normal">odpowiedź</span> dodana przez
-                <a href="" class="font-weight-normal text-white">{{ item.user.username }}</a>
+                {% if app.user %}
+                    {% if app.user.username == item.user.username %}
+                    <span class="text-white font-weight-normal">Dodałeś</span>
+                    odpowiedź w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+                    {% else %}
+                        <span class="text-white font-weight-normal">Odpowiedź</span> dodana przez
+                        <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
+                            {{ item.user.username }}
+                        </a>
+                        w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+                    {% endif %}
+                {% else %}
+                <span class="text-white font-weight-normal">Odpowiedź</span> dodana przez
+                <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
+                    {{ item.user.username }}
+                </a>
                 w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+                {% endif %}
             </div>
             <div class="mt-3 pb-4 border-bottom border-primary ">
                 {{ item.content }}

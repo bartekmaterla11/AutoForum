@@ -45,7 +45,6 @@ class Post
      */
     private $categories;
 
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

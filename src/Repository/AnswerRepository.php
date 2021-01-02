@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Answer;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,22 +21,22 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
+
     // /**
     //  * @return Answer[] Returns an array of Answer objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByUserComments($answers): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('a.id IN (:answers)')
+            ->setParameter('answers', $answers, Connection::PARAM_INT_ARRAY)
+            ->orderBy('a.uploadedAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Answer

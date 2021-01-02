@@ -63,6 +63,16 @@ class User implements UserInterface
      */
     private $commentAnswers;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $uploaded_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
@@ -251,6 +261,30 @@ class User implements UserInterface
                 $commentAnswer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUploadedAt(): ?\DateTimeInterface
+    {
+        return $this->uploaded_at;
+    }
+
+    public function setUploadedAt(\DateTimeInterface $uploaded_at): self
+    {
+        $this->uploaded_at = $uploaded_at;
+
+        return $this;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        $this->filename = $filename;
 
         return $this;
     }

@@ -1,0 +1,71 @@
+<div class="p-1 mt-4">
+    <div class="float-left w-50">
+        <div class="text-center pb-3 border-bottom border-color-1">
+            <img class="max-width-3 max-height" alt="zdjęcie profilowe" src="/images/user/{{ item.filename }}">
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
+            <div class="float-left w-50">Nazwa użytkownika:</div>
+            <div class="float-left w-50">{{ item.username }}</div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
+            <div class="float-left w-50">Email:</div>
+            <div class="float-left w-50">{{ item.email }}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1">
+            <div class="float-left w-50">Zarejestrowany od:</div>
+            <div class="float-left w-50">{{ item.uploadedAt|date('d-m-Y') }}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        {% if app.user == item %}
+        <a href="{{ path('edit_profile',{'userId': app.user.id ,'userTab':'my-data' }) }}" >
+            <button class="btn btn-outline-primary mt-3">Edytuj profil</button>
+        </a>
+        {% endif %}
+    </div>
+    <div class="float-left w-50 pl-2" >
+        <div class="pb-2 border-bottom border-color-1 ml-2">
+            <h5 class="pl-1 text-color-3">Aktywność użytkownika</h5>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Pytania/Wątki:</div>
+            <div class="float-left w-60 font-23 text-color-3 font-weight-bold">{{ item.posts.count }}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Odpowiedzi:</div>
+            <div class="float-left w-60 font-23 text-color-3  font-weight-bold">{{ item.answers.count }}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Komentarze:</div>
+            <div class="float-left w-60 font-23 text-color-3  font-weight-bold">{{ item.commentAnswers.count }}
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Ogłoszenia:</div>
+            <div class="float-left w-60 font-23 text-color-3  font-weight-bold">0
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Polubione Posty:</div>
+            <div class="float-left w-60 font-23 text-color-3  font-weight-bold">0
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="pt-2 pb-2 pl-1 font-17 border-bottom border-color-1 ml-2">
+            <div class="float-left w-40 pt-1">Polubione Ogłoszenia:</div>
+            <div class="pt-2 float-left w-60 font-23 text-color-3 font-weight-bold">0
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>

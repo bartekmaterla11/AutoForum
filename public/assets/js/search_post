@@ -1,7 +1,12 @@
-function search()
-{
-    if (document.getElementById('mainSearch').value) {
-        document.getElementById('mainSearchForm').action = document.getElementById('mainSearch').value + ","
-            + document.getElementById('mainSearch').value + ".html";
+const searchInput = document.querySelector('input');
+
+console.log(searchInput);
+var all = '';
+const searchWord = e =>{
+    console.log(e);
+    const currentWord = e.target.value;
+    if (currentWord.length >= 3) {
+        console.log(currentWord);
     }
 }
+searchInput.addEventListener('input', searchWord);

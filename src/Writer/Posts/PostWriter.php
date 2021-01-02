@@ -39,7 +39,7 @@ class PostWriter
         /** @var UploadedFile $pictureFileName */
         $pictureFileName = $form->get('filename')->getData();
         if ($form->get('filename')->getData()) {
-            $newFileName = $this->photoToString->PhotoPostToString($pictureFileName, 'fghfghfg');
+            $newFileName = $this->photoToString->PhotoPostToString($pictureFileName);
             $pictureFileName->move('images/post', $newFileName);
             $post->setFilename($newFileName);
         }

@@ -1,10 +1,17 @@
+<div class="p-4 ml-2">
+    <h6 class="text-color-3">Przed zadaniem pytania przeczytaj uważnie poniższe wskazówki.
+        Jest to ważne, abyśmy mogli Ci pomóc :)</h6>
+    <p class="pl-5 mt-3">Upewnij się, że Twój problem nie został już rozwiązany lub podobne pytanie nie zostało już
+        zadane - użyj wyszukiwarki</p>
+</div>
 <div class="w-75 mr-auto ml-auto p-3 mb-2">
     <h1 class="text-center  mb-4">Zadaj pytanie</h1>
     {{ form_start(postForm) }}
     <div class="mb-2 "><h6>Tytuł</h6> {{ form_row(postForm.title) }} </div>
     <div class="mb-2"><h6>Treść</h6> {{ form_row(postForm.content) }} </div>
     <div class="mb-2 w-50"><h6>Zdjęcia</h6> {{ form_row(postForm.filename) }} </div>
-
-    <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Dodaj</button>
+    <div class="text-right">
+        <button type="submit" class="btn btn-lg mt-3 btn-outline-primary mb-3">Dodaj</button>
+    </div>
     {{ form_end(postForm) }}
 </div>

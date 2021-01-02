@@ -1,0 +1,22 @@
+<div class="modal fade" id="confirm-delete-4" tabindex="-1" role="dialog ">
+    <div class="modal-dialog">
+        <div class="modal-content text-dark">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Czy chcesz usunąć tego posta?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+
+            <div class="modal-body text-left">
+                <p>Spowoduje to trwałe usunięcie posta na zawsze !</p>
+            </div>
+
+            <div class="modal-footer">
+                {{ dump(item.id) }}
+                <a href="{{ path('remove_post',{'postId': item.id, 'userTab':'questions', 'userId': item.id }) }}" class="text-white btn btn-danger btn-ok2" >
+                    Usuń
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

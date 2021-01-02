@@ -8,11 +8,18 @@
             <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
                 <i class="icon-home"></i> Jesteś na / Forum
             </div>
-            {% for message in app.flashes('success') %}
-                <div class="mr-2 bg-success brad text-center p-1">
+            {% for message in app.flashes('success_post') %}
+                <div class="mr-2 mt-1 bg-success brad text-center p-1">
                     {{ message }}
                 </div>
             {% endfor %}
+            {% if app.user %}
+                {% for message in app.flashes('success_login') %}
+                    <div class="mr-2 mt-1 bg-success brad text-center p-1">
+                        {{ message }}{{ app.user.username }} !
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="mr-2 bg-dark mt-1 brad ">
                 <div class="p-2 pl-3 border-bottom border-primary">
                     <h4 class="float-left w-50">Forum motoryzacyjne</h4>
@@ -35,14 +42,10 @@
                 <div class="p-3 mt-2 pb-1">
                     {{ include('index/post-index/post_index.html.twig', {posts:posts}) }}
                 </div>
-
             </div>
         </div>
         <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('components/info_datetime_com.html.twig') }}
-            {{ include('components/button_add_post_ad_com.html.twig') }}
-            {{ include('components/info_data_com.html.twig') }}
-            {{ include('components/social_media_com.html.twig') }}
+            {{ include('side_menu/side_menu.html.twig') }}
         </div>
     </div>
     <div style="clear: both"></div>

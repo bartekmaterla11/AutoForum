@@ -38,4 +38,13 @@ class JavaScriptController extends AbstractController
 
         return $this->json(['message' => 'OK']);
     }
+
+    /**
+     * @Route()
+     * @param Request $request
+     */
+    public function searchPost(Request $request)
+    {
+        
+    }
 }
