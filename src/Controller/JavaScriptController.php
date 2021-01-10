@@ -24,9 +24,13 @@ class JavaScriptController extends AbstractController
      */
     public function setLikeUpAction(Request $request)
     {
-        $this->postMarkService->addMarkForPost((int)$request->get('mark'),(int)$request->get('postid'));
-
-        return $this->json(['message' => 'OK']);
+        if($this->postMarkService->addMarkForPost(
+            (int)$request->get('mark'), (int)$request->get('postid'), $this->getUser()->getId()
+        )){
+            return $this->json(['message' => 'OK']);
+        }else{
+            return $this->json(['Error' => 'true']);
+        }
     }
 
     /**
@@ -34,9 +38,13 @@ class JavaScriptController extends AbstractController
      */
     public function setLikeUpAnswerAction(Request $request)
     {
-        $this->postMarkService->addMarkForAnswer((int)$request->get('mark1'),(int)$request->get('answerid'));
-
-        return $this->json(['message' => 'OK']);
+        if($this->postMarkService->addMarkForAnswer(
+            (int)$request->get('mark1'),(int)$request->get('answerid'), $this->getUser()->getId()
+        )){
+            return $this->json(['message' => 'OK']);
+        }else{
+            return $this->json(['Error' => 'true']);
+        }
     }
 
     /**

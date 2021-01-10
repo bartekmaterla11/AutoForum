@@ -26,6 +26,6 @@ class NumberOfAnswersOnePostQuery
         $answer->bindValue(':postId', $postId);
         $answer->execute();
 
-        return (int)$answer->fetchOne();
+        return (int) $answer->fetchOne();
     }
 }

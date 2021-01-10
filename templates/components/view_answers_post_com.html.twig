@@ -1,12 +1,32 @@
 {% for item in post.answers %}
+    {% for message in app.flashes('error_add_comment') %}
+        <div class="mr-2 bg-danger brad text-center p-1">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="bg-dark brad p-3 mb-1 mr-2">
-        <div class="float-left p-2 pl-3 pr-3 bgcolor3 brad mr-2">
-            <div class="">
-                <i id="like_up_answer" data-id="1" data-answerid="{{ item.id }}" class=" text-color-1 icon-thumbs-up-alt"></i> {{ item.likeUp }}
+        <div class="float-left">
+            <div class="p-2 bgcolor3 brad mr-1">
+                {% if app.user %}
+                    <div class="popup Comment_like" data-id="1" data-answerid="{{ item.id }}" >
+                        <i class="text-color-1 icon-thumbs-up-alt">
+                            <span class="popuptext myPopup1">Polubiłeś już tą odpowiedź</span>
+                        </i>
+                        {% if item.likeUp > 0 %}+{% endif %}<span class="like_answer_int" >{{ item.likeUp }}</span>
+                    </div>
+                {% else %}
+                    <div class="popup">
+                        <i class="text-color-1 icon-thumbs-up-alt like_answer">
+                            <span class="popuptext myPopup1">Aby polubić odpowiedź zaloguj się</span>
+                        </i>
+                        {% if item.likeUp > 0 %}+{% endif %}{{ item.likeUp }}
+                    </div>
+                {% endif %}
             </div>
+            <p class="{% if item.likeUp > 0 %}ml-3{% else %}ml-2{% endif%} mt-2 font-13">Polub</p>
         </div>
         <div class="float-left ml-3 w-80">
-            <div class="border-bottom border-color font-color font-15 font-weight-bold">
+            <div class="border-bottom border-primary font-color font-15 font-weight-bold">
                 {% if app.user %}
                     {% if app.user.username == item.user.username %}
                     <span class="text-white font-weight-normal">Dodałeś</span>
@@ -27,17 +47,21 @@
                 {% endif %}
             </div>
             <div class="mt-3 pb-4 border-bottom border-primary ">
-                {{ item.content }}
-                {% if item.file %}
-                    <img class="ml-4 mt-4 max-width" src="/images/post/answer/{{ item.file }} " alt="Zdjęcie">
-                {% endif %}
+                <div class="">
+                    {{ item.content }}
+                </div>
+                <div class="">
+                    {% if item.file %}
+                        <img class="mt-4 max-height-1 max-width" src="/images/post/answer/{{ item.file }} " alt="Zdjęcie">
+                    {% endif %}
+                </div>
             </div>
-            <div class="mt-2 ">
+            <div class="mt-2">
                 {% if app.user %}
-                    <button id="{{ item.id}}" onclick="myFunction(this.id)" class="comment btn font-13 font-weight-bold text-white bg-secondary"
-                            data-toggle="modal" data-target="#confirm-delete-3">
+                    <button class="comment btn font-13 font-weight-bold text-white bg-secondary">
                         <i class="font-18 icon-comment-empty"></i>Skomentuj
                     </button>
+                    {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id }) }}
                 {% else %}
                     {{ include('components/ajax_add_comment_answer_com.html.twig') }}
                     <button class="btn font-13 font-weight-bold text-white bg-secondary"
@@ -46,9 +70,9 @@
                     </button>
                 {% endif %}
             </div>
-            {% if app.user %}
-                {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id}) }}
-            {% endif %}
+            <div class="all_comments">
+                {{ include('components/view_comments_answer_com.html.twig',{comments: item.commentanswers }) }}
+            </div>
         </div>
         <div style="clear: both"></div>
     </div>

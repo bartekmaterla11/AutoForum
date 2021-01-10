@@ -1,4 +1,3 @@
-{% if app.user %}
 <div id="answer" style="display: none" class="bgcolor p-2 mt-3 brad">
     <div class="p-1 pl-2 border-bottom border-primary">
         <h5>Twoja odpowiedź</h5>
@@ -6,15 +5,15 @@
     <div class="p-2 mt-1">
         {{ form_start(answerForm) }}
         <div class="mb-3"> {{ form_row(answerForm.content) }} </div>
-        <button type="submit" id="add_file" class="float-left btn btn-outline-secondary mb-2">Dodaj zdjęcie</button>
-        <div  class=" float-left ml-3 mt-1 mb-3">{{ form_row(answerForm.file) }}</div>
+        <button type="button" id="add_file_answer" class="float-left btn btn-outline-secondary mb-2">Dodaj zdjęcie</button>
+        <div id="file_form"  class=" float-left ml-3 mt-1 mb-3 " style="display: none">{{ form_row(answerForm.file) }}</div>
         <div style="clear: both"></div>
         <input type="hidden" name="postId" value="{{ postId }}"/>
         <div class="text-right mt-1 ">
             <button class="btn btn-outline-primary" type="submit" >Wyślij</button>
         </div>
         {{ form_end(answerForm) }}
+        {{ dump(form_end(answerForm) ) }}
         <button class="btn btn-outline-danger" type="submit" id="close" >Anuluj</button>
     </div>
 </div>
-{% endif %}

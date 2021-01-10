@@ -6,6 +6,6 @@ namespace App\Service\Posts;
 
 interface PostMarkInterface
 {
-    public function addMarkForPost(int $mark, int $postId);
-    public function addMarkForAnswer(int $mark, int $answerId);
+    public function addMarkForPost(int $mark, int $postId, int $userId);
+    public function addMarkForAnswer(int $mark, int $answerId, int $userId);
 }

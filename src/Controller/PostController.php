@@ -93,22 +93,24 @@ class PostController extends AbstractController
 
             if ($this->answerAdd->addAnswerPost($form, $add_answer, $this->getUser(), $post)) {
 
-                $this->addFlash('success-answer', 'Poprawnie dodano odpowiedź');
+                $this->addFlash('success_add_answer', 'Poprawnie dodano odpowiedź');
                 $this->redirectToRoute('view_post');
             }
-            $this->addFlash('error_answer', 'Wystąpił bład przy dodawaniu odpowiedzi');
+            $this->addFlash('error_add_answer', 'Wystąpił bład przy dodawaniu odpowiedzi');
 
-            $answer = $em->getRepository(Answer::class)->findBy(['post'=>$post->getId()]);
+            $answer = $em->getRepository(Answer::class)->findBy(['post' => $post->getId()]);
 
-            if($answer){
+            if ($answer) {
                 $add_comment = new CommentAnswer();
                 $commentForm = $this->createForm(CommentAnswerFormType::class, $add_comment);
+                $commentForm->handleRequest($request);
 
                 foreach ($answer as $item) {
-                    if ($this->commentAnswer->addCommentForAnswer($commentForm, $this->getUser(), $item->getId(), $add_comment)) {
-                        $this->addFlash('success-comment', 'Poprawnie dodano komentarz');
+                    if ($this->commentAnswer->addCommentForAnswer($commentForm, $this->getUser(), $item, $add_comment)) {
+                        $this->addFlash('success_add_comment', 'Poprawnie dodano komentarz');
+                    } else {
+//                        $this->addFlash('error_add_comment', 'Wystąpił bład przy dodawaniu komentarza');
                     }
-                    $this->addFlash('error_comment', 'Wystąpił bład przy dodawaniu komentarza');
                 }
 
                 return $this->render('post/viewPost/view_post.html.twig', [
@@ -141,35 +143,14 @@ class PostController extends AbstractController
     public function removePost(int $postId, int $userId, string $userTab)
     {
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->findOneBy(['id'=>$postId]);
+        $post = $em->getRepository(Post::class)->findOneBy(['id' => $postId]);
 
-        if($this->addPost->removePost($post, $userId)){
-            $this->addFlash('success_remove_post','Post został usunięty');
-        }else{
-            $this->addFlash('error_remove_post','Post nie został usunięty');
+        if ($this->addPost->removePost($post, $userId)) {
+            $this->addFlash('success_remove_post', 'Post został usunięty');
+        } else {
+            $this->addFlash('error_remove_post', 'Post nie został usunięty');
         }
-      
-        return $this->redirectToRoute('profile',['userId'=>$userId, 'userTab'=>$userTab]);
+
+        return $this->redirectToRoute('profile', ['userId' => $userId, 'userTab' => $userTab]);
     }
 }
-
-
-//'answers' => $answers
-//                'iscommeted' => $wyunik,
-//                'annonymus'=>
-
-//        $wynik = $this->postMarkService->checkAddMarkPost();
-//zapytanie  do bazy po rekordy z nowej tabeli , wehere userid  and postid
-//
-//        $wyunik = 1 => true
-//        $wyunik = 0 => false
-//
-//        foreach (wyniki as wynik)
-//        {
-//            [
-//                'post' => $post
-//            ]
-//        }
-
-
-

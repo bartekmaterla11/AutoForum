@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Writer\Posts;
 
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\ParameterType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PostMarkWriter
 {
@@ -12,10 +14,15 @@ class PostMarkWriter
      * @var Connection
      */
     private $connection;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, EntityManagerInterface $entityManager)
     {
         $this->connection = $connection;
+        $this->entityManager = $entityManager;
     }
 
 
@@ -25,34 +32,16 @@ class PostMarkWriter
 
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['mark'=> 1,'postId'=>$postId]);
-
-//        $this->decreaseLikeDown();
     }
 
-    public function setLikeDown(): void
+    public function setCheckMarkPost(int $userId, int $postId): void
     {
-        $sql='UPDATE post SET like_down = like_down + :mark WHERE id = 1';
+        $sql = 'INSERT INTO check_mark_post SET `user`= :userId, post = :postId';
+        $em = $this->connection->prepare($sql);
+        $em->bindValue(':userId', $userId, ParameterType::INTEGER);
+        $em->bindValue(':postId', $postId, ParameterType::INTEGER);
+        $em->execute();
 
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['mark'=> 1]);
-
-        $this->decreaseLikeUp();
-    }
-
-    private function decreaseLikeUp(): void
-    {
-        $sql='UPDATE post SET like_up = like_up - :mark WHERE id = 1';
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['mark'=> 1]);
-    }
-
-    private function decreaseLikeDown(): void
-    {
-        $sql='UPDATE post SET like_down = like_down - :mark WHERE id = 1';
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute(['mark'=> 1]);
     }
 
     public function setLikeUpAnswer($answerId): void
@@ -61,6 +50,16 @@ class PostMarkWriter
 
         $stmt = $this->connection->prepare($sql);
         $stmt->execute(['mark'=> 1,'answerId'=>$answerId]);
+
+    }
+
+    public function setCheckMarkAnswer(int $userId, int $answerId): void
+    {
+        $sql = 'INSERT INTO check_mark_answer SET `user`= :userId, answer = :answerId';
+        $em = $this->connection->prepare($sql);
+        $em->bindValue(':userId', $userId, ParameterType::INTEGER);
+        $em->bindValue(':answerId', $answerId, ParameterType::INTEGER);
+        $em->execute();
 
     }
 

@@ -70,9 +70,15 @@ class Post
      */
     private $likeDown;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PhotoFilesForPosts::class, mappedBy="post")
+     */
+    private $photoFilesForPosts;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->photoFilesForPosts = new ArrayCollection();
     }
 
 
@@ -234,6 +240,36 @@ class Post
     public function setLikeDown(int $likeDown): self
     {
         $this->likeDown = $likeDown;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhotoFilesForPosts[]
+     */
+    public function getPhotoFilesForPosts(): Collection
+    {
+        return $this->photoFilesForPosts;
+    }
+
+    public function addPhotoFilesForPost(PhotoFilesForPosts $photoFilesForPost): self
+    {
+        if (!$this->photoFilesForPosts->contains($photoFilesForPost)) {
+            $this->photoFilesForPosts[] = $photoFilesForPost;
+            $photoFilesForPost->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotoFilesForPost(PhotoFilesForPosts $photoFilesForPost): self
+    {
+        if ($this->photoFilesForPosts->removeElement($photoFilesForPost)) {
+            // set the owning side to null (unless already changed)
+            if ($photoFilesForPost->getPost() === $this) {
+                $photoFilesForPost->setPost(null);
+            }
+        }
 
         return $this;
     }

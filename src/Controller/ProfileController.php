@@ -38,18 +38,18 @@ class ProfileController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser()->getUsername();
-        $users = $em->getRepository(User::class)->findBy(['username'=>$user]);
+        $users = $em->getRepository(User::class)->findBy(['username' => $user]);
 
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
 
-        return $this->render('profile/main_profile/main_profile.html.twig',[
-            'users'=>$users,
+        return $this->render('profile/main_profile/main_profile.html.twig', [
+            'users' => $users,
             'user' => $user,
-            'userTab'=>$userTab,
+            'userTab' => $userTab,
             'editProfile' => null,
-            'userAnswers'=>$userAnswers,
-            'userComments'=>$userComments
+            'userAnswers' => $userAnswers,
+            'userComments' => $userComments
         ]);
     }
 
@@ -62,27 +62,27 @@ class ProfileController extends AbstractController
     public function othersProfiles(int $userId, string $username, string $userTab)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->findBy(['username'=>$username]);
+        $users = $em->getRepository(User::class)->findBy(['username' => $username]);
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
 
-        if($this->getUser()){
+        if ($this->getUser()) {
             $user = $this->getUser()->getUsername();
-            return $this->render('profile/main_profile/main_profile.html.twig',[
-                'users'=>$users,
-                'user'=>$user,
-                'userTab'=>$userTab,
-                'userAnswers'=>$userAnswers,
-                'userComments'=>$userComments
+            return $this->render('profile/main_profile/main_profile.html.twig', [
+                'users' => $users,
+                'user' => $user,
+                'userTab' => $userTab,
+                'userAnswers' => $userAnswers,
+                'userComments' => $userComments
+            ]);
+        } else {
+            return $this->render('profile/main_profile/main_profile.html.twig', [
+                'users' => $users,
+                'userTab' => $userTab,
+                'userAnswers' => $userAnswers,
+                'userComments' => $userComments
             ]);
         }
-        return $this->render('profile/main_profile/main_profile.html.twig',[
-            'users'=>$users,
-            'userTab'=>$userTab,
-            'userAnswers'=>$userAnswers,
-            'userComments'=>$userComments
-        ]);
-
     }
 
     /**
@@ -94,8 +94,8 @@ class ProfileController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user_db = $em->getRepository(User::class);
-        $user = $user_db->findBy(['id'=>$userId]);
-        $my_user = $user_db->findOneBy(['id'=>$userId]);
+        $user = $user_db->findBy(['id' => $userId]);
+        $my_user = $user_db->findOneBy(['id' => $userId]);
         $photo = $my_user->getFilename();
 
         $form = $this->createForm(EditDataUserForm::class, $my_user);
@@ -104,8 +104,8 @@ class ProfileController extends AbstractController
         $user1 = new User();
         $form1 = $this->createForm(EditPasswordUserForm::class, $user1);
         $form1->handleRequest($request);
-        
-        if($this->getUser()) {
+
+        if ($this->getUser()) {
             if ($form->isSubmitted()) {
                 if ($this->profile->editProfile($form, $my_user, $photo)) {
                     $this->addFlash('success_edit_datas', 'Pomyślnie zaktualizowano dane');
@@ -122,7 +122,7 @@ class ProfileController extends AbstractController
             }
         }
 
-        return $this->render('profile/main_profile/main_profile.html.twig',[
+        return $this->render('profile/main_profile/main_profile.html.twig', [
             'users' => $user,
             'userTab' => $userTab,
             'editProfile' => $form->createView(),

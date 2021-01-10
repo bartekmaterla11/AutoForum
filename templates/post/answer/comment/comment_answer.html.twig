@@ -1,17 +1,18 @@
-{% if app.user %}
-    <div data-answerid="{{ answer_id }}" id="comment" style="display: none"  class=" bgcolor p-2 mt-3 brad">
-        <div class="p-1 pl-2 border-bottom border-primary">
-            <h5>Twój komentarz do tej odpowiedzi</h5>
-        </div>
-        <div class="p-2 mt-1">
-            {{form_start(commentForm) }}
-{#                <div class="mb-3"> {{ form_widget(commentForm.contentCom) }} </div>#}
-                <input type="hidden" name="answerId" value="{{ answer_id }}"/>
-                <div class="text-right mt-1 ">
-                    <button class="btn btn-outline-primary" type="submit" >Dodaj</button>
-                </div>
-            {{ form_end(commentForm) }}
-            <button class="btn btn-outline-danger" type="submit" id="close1" >Anuluj</button>
-        </div>
+<div data-answerid="{{ answer_id }}" id="comment" style="display: none" class="comment2 bgcolor p-2 mt-3 brad">
+    <div class="p-1 pl-2 border-bottom border-primary">
+        <h5>Twój komentarz do tej odpowiedzi</h5>
     </div>
-{% endif %}
+    <div class="p-2 mt-1">
+        {{ dump(form_start(commentForm)) }}
+        {{ form_start(commentForm) }}
+
+{#         <div class="mb-3"> {{ form_row(commentForm.contentCom) }} </div>#}
+{#        <input type="hidden" name="answerId" value="{{ answer_id }}"/>#}
+        <div class="text-right mt-1 ">
+            <button class="btn btn-outline-primary" type="submit">Dodaj</button>
+        </div>
+        {{ dump(form_end(commentForm)) }}
+        {{ form_end(commentForm,{'render_rest' : false}) }}
+        <button class="btn btn-outline-danger close1" type="button" >Anuluj</button>
+    </div>
+</div>

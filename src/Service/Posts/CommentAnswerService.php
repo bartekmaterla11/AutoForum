@@ -22,7 +22,7 @@ class CommentAnswerService implements CommentAnswerInterface
         $this->commentAnswerWriter = $commentAnswerWriter;
     }
 
-    public function addCommentForAnswer(FormInterface $commentForm,UserInterface $user, $answerId,CommentAnswer $add_comment): bool
+    public function addCommentForAnswer(FormInterface $commentForm,UserInterface $user, Answer $answerId,CommentAnswer $add_comment): bool
     {
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             try {
