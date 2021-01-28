@@ -1,65 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Profil{% endblock %}
+{% block title %}{{ parent() }} - Mój Profil{% endblock %}
 
 {% block body %}
-    <div class="container" >
-        {% for item in users %}
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('users') }}" >użytkownicy</a> / {{ item.username }}
-            </div>
-            <div class="mr-2 bg-dark mt-1 brad ">
-                <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4><i class="icon-user-1 mr-1"></i>Użytkownik {{ item.username }}</h4>
-                </div>
-                <div class="p-3 mt-2 pb-1">
-                    <div class="text-center">
-                        {% if app.user %}
-                            {% if app.user.username == item.username %}
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
-                            <a href="{{ path('edit_profile',{'userId': item.id ,'userTab':'my-data' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Moje dane</a>
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'questions' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'answers' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'comments' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'announcements' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
-                            <a href="{{ path('profile',{'userId': item.id ,'userTab':'polubione' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ulubione</a>
-                            {% else %}
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
-                            {% endif %}
-                        {% else %}
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
-                        {% endif %}
-                        <div style="clear: both"></div>
-                    </div>
-                    {% if userTab == 'profile' %}
-                        {{ include('profile/user_profile/user_data_prof.html.twig',{item:item}) }}
-                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_DATA')  %}
-                        {{ include('profile/user_data/user_datas.html.twig',{item:item,}) }}
-                    {% elseif userTab == constant('App\\Enum\\ProfileEnum::USER_QUESTIONS')%}
-                        {{ include('profile/user_post/user_posts_prof.html.twig',{item:item}) }}
-                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANSWERS')%}
-                        {{ include('profile/user_answers/user_answers.html.twig',{item:item}) }}
-                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_COMMENTS')%}
-                        {{ include('profile/user_comments/user_comments.html.twig',{item:item}) }}
-                    {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANNOUNCEMENTS')%}
-                        {{ include('profile/user_announcements/user_announcements.html.twig',{item:item}) }}
-                    {% endif %}
-                </div>
-            </div>
+    {% for item in users %}
+    <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na /
+            <a class="text-white" href="{{ path('index') }}">Strona główna</a> /
+            <a class="text-white" href="{{ path('users') }}" >Użytkownicy</a> / {{ item.username }}
         </div>
-        {% endfor %}
-        <div class="color mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3"><i class="icon-user-1 mr-1"></i>Użytkownik {{ item.username }}</h4>
+            </div>
+            <div class="p-3 mt-2 pb-1">
+                <div class="text-center">
+                    {% if app.user %}
+                        {% if app.user.username == item.username %}
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                        <a href="{{ path('edit_profile',{'userId': item.id ,'userTab':'my-data' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Moje dane</a>
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'questions' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'answers' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'comments' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'announcements' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                        <a href="{{ path('profile',{'userId': item.id ,'userTab':'polubione' }) }}" class="text-secondary float-left p-2 ml-2 mr-2">Ulubione</a>
+                        {% else %}
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'profile'}) }}" class="text-secondary  float-left p-2 ml-2 mr-2">Profil</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'questions'})  }}" class="text-secondary float-left p-2 ml-2 mr-2">Pytania</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'answers'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Odpowiedzi</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'comments'}) }}" class="text-secondary float-left p-2 ml-2 mr-2">Komentarze</a>
+                        <a href="{{ path('other_profile',{'userId': item.id ,'username': item.username ,'userTab':'announcements'})}}" class="text-secondary float-left p-2 ml-2 mr-2">Ogłoszenia</a>
+                    {% endif %}
+                    <div style="clear: both"></div>
+                </div>
+                {% if userTab == 'profile' %}
+                    {{ include('profile/user_profile/user_data_prof.html.twig',{item:item}) }}
+                {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_DATA')  %}
+                    {{ include('profile/user_data/user_datas.html.twig',{item:item,}) }}
+                {% elseif userTab == constant('App\\Enum\\ProfileEnum::USER_QUESTIONS')%}
+                    {{ include('profile/user_post/user_posts_prof.html.twig',{item:item}) }}
+                {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANSWERS')%}
+                    {{ include('profile/user_answers/user_answers.html.twig',{item:item}) }}
+                {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_COMMENTS')%}
+                    {{ include('profile/user_comments/user_comments.html.twig',{item:item}) }}
+                {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANNOUNCEMENTS')%}
+                    {{ include('profile/user_announcements/user_announcements.html.twig',{item:item}) }}
+                {% endif %}
+            </div>
         </div>
     </div>
-    <div style="clear: both"></div>
+    {% endfor %}
 {% endblock %}

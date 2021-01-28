@@ -13,19 +13,19 @@ class CommentAnswerFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('contentCom', TextareaType::class,[
-                'label'=>' ',
-                'attr'=>[
-                    'class'=>'textarea',
+            ->add('contentCom', TextareaType::class, [
+                'label' => ' ',
+                'attr' => [
+                    'class' => 'textarea',
                 ]
-            ])
-        ;
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'=>CommentAnswer::class
+            'data_class' => CommentAnswer::class
         ]);
     }
 }

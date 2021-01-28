@@ -2,17 +2,20 @@
     <div class="p-1 pl-2 border-bottom border-primary">
         <h5>Twój komentarz do tej odpowiedzi</h5>
     </div>
-    <div class="p-2 mt-1">
-        {{ dump(form_start(commentForm)) }}
-        {{ form_start(commentForm) }}
 
-{#         <div class="mb-3"> {{ form_row(commentForm.contentCom) }} </div>#}
+    <div class="p-2 mt-1">
+{#        {{ dump(form_start(commentForm)) }}#}
+        {{ form_start(commentFormForAnswer) }}
+
+{#         <div class="mb-3"> {{ form_row(commentFormForAnswer.contentCom) }} </div>#}
 {#        <input type="hidden" name="answerId" value="{{ answer_id }}"/>#}
         <div class="text-right mt-1 ">
             <button class="btn btn-outline-primary" type="submit">Dodaj</button>
         </div>
-        {{ dump(form_end(commentForm)) }}
-        {{ form_end(commentForm,{'render_rest' : false}) }}
-        <button class="btn btn-outline-danger close1" type="button" >Anuluj</button>
+        {{ dump(form_end(commentFormForAnswer)) }}
+        {{ form_end(commentFormForAnswer,{'render_rest' : false}) }}
+        <button class="btn btn-outline-danger close1" type="button" data-username1="{{ app.user.username }}" data-username2="{{ item.user.username }}">
+            Anuluj
+        </button>
     </div>
 </div>

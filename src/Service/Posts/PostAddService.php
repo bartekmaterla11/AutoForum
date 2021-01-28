@@ -30,7 +30,7 @@ class PostAddService implements PostInterface
     public function addPost(Post $post, FormInterface $form, UserInterface $user): bool
     {
         try {
-            if($this->postWriter->addToDataBase($post, $form, $user)){
+            if ($this->postWriter->addToDataBase($post, $form, $user)){
                 return true;
             }
         } catch (\Exception $exception) {
@@ -38,9 +38,9 @@ class PostAddService implements PostInterface
         }
     }
 
-    public function removePost(Post $post, $userId): bool
+    public function removePost(Post $post): bool
     {
-        if($this->postQuery->removePostInDataBase($post, $userId)){
+        if ($this->postQuery->removePostInDataBase($post)){
             return true;
         }
         return false;

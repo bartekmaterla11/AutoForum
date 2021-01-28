@@ -1,124 +1,105 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}{{ parent() }} - {{ post.title }}{% endblock %}
+
 {% block body %}
-    <div class="container">
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na /<a class="text-white" href="{{ path('index') }}"> Forum </a>
-                / <span class="text-white"> {{ post.title }} </span>
+    <div  class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na /
+            <a class="text-white" href="{{ path('index') }}">Strona główna</a> /
+            <a class="text-white" href="{{ path('forum') }}"> Forum </a>
+            / <span class="text-white"> {{ post.title }} </span>
+        </div>
+        {% for message1 in app.flashes('success_add_answer') %}
+            <div class="mr-2 bg-success brad text-center p-1">
+                {{ message1 }}
             </div>
-            {% for message1 in app.flashes('success_add_answer') %}
-                <div class="mr-2 bg-success brad text-center p-1">
-                    {{ message1 }}
-                </div>
-            {% endfor %}
-            {% for message2 in app.flashes('success_add_comment') %}
-                <div class="mr-2 bg-success brad text-center p-1">
-                    {{ message2 }}
-                </div>
-            {% endfor %}
-            <div class="mr-2 bg-dark mt-1 brad ">
-                <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4 class="text-color-3">{{ post.title }}</h4>
-                </div>
-                <div class="p-3 pb-4 mt-2 pb-1">
-                    <div class="float-left font-25 mr-2 ">
-                        {% if app.user %}
-                        <div  id="like_up" data-id="1" data-postid = "{{ post.id }}"
-                              class="pb-1 brad text-center bgcolor3">
-                            <i id="like_post" class="popup text-color-1 icon-thumbs-up-alt">
-                                <span class="popuptext" id="PopupStopLikePost">Polubiłeś już tego posta</span>
-                            </i><br>
-                            {% if post.likeUp > 0 %}+{% endif %}<span class="like_post_int" >{{ post.likeUp }}</span>
-                        </div>
-                        {% else %}
-                            <div  class="pb-1 brad text-center bgcolor3">
-                                <i id="like" class="popup text-color-1 icon-thumbs-up-alt">
-                                    <span class="popuptext" id="myPopup">Aby polubić tego posta zaloguj się</span>
-                                </i>
-                                <br>
-                                {% if post.likeUp > 0 %}+{% endif %}{{ post.likeUp }}
-                            </div>
-                        {% endif %}
-                        <span class="mt-0 font-13">Polub post</span>
+        {% endfor %}
+        {% for message2 in app.flashes('success_add_comment') %}
+            <div class="mr-2 bg-success brad text-center p-1">
+                {{ message2 }}
+            </div>
+        {% endfor %}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3">{{ post.title }}</h4>
+            </div>
+            <div class="p-3 pb-4 mt-2 pb-1 ">
+                <div class="float-left font-25 mr-2 ">
+                    {% if app.user %}
+                    <div  id="like_up" data-id="1" data-postid = "{{ post.id }}"
+                          class="pb-1 brad text-center bgcolor3">
+                        <i id="like_post" class="popup text-color-1 icon-thumbs-up-alt">
+                            <span class="popuptext" id="PopupStopLikePost">Polubiłeś już tego posta</span>
+                        </i><br>
+                        {% if post.likeUp > 0 %}+{% endif %}<span class="like_post_int" >{{ post.likeUp }}</span>
                     </div>
-                    <div class="float-left pl-2 w-83">
-                        <div class="border-bottom border-primary font-weight-bold font-color font-15 font-weight-light">
-                            {% if app.user %}
-                                {% if app.user.username == post.user.username %}
-                                <span class="text-white font-weight-normal">Zadałeś</span>
-                                pytanie w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
-                                {% else %}
-                                    <span class="text-white font-weight-normal">pytanie</span> zadane przez
-                                    <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
-                                        {{ post.user.username }}
+                    {% else %}
+                        <div  class="pb-1 brad text-center bgcolor3">
+                            <i id="like" class="popup text-color-1 icon-thumbs-up-alt">
+                                <span class="popuptext" id="myPopup">Aby polubić tego posta zaloguj się</span>
+                            </i>
+                            <br>
+                            {% if post.likeUp > 0 %}+{% endif %}{{ post.likeUp }}
+                        </div>
+                    {% endif %}
+                    <span class="mt-0 font-13">Polub post</span>
+                </div>
+                <div class="float-left pl-2 w-83 ">
+                    <div class="border-bottom border-primary text-color-3 font-15 ">
+                        {{ include('components/verification_user_with_item_posts.html.twig',{post:post}) }}
+                    </div>
+                    <div class="mt-3 pb-4 border-bottom border-primary">
+                        <div class="">
+                            {{ post.content }}
+                        </div>
+                        <div class="imageGallery1">
+                            {% if post.photoFilesForPosts %}
+                                {% for item in post.photoFilesForPosts %}
+                                    <a href="/images/post/{{ item.filename }}">
+                                        <img class="mt-4 max-height-1 max-width" src="/images/post/{{ item.filename }}" alt="Zdjęcie posta">
                                     </a>
-                                    w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
-                                {% endif %}
-                            {% else %}
-                           <span class="text-white font-weight-normal">pytanie</span> zadane przez
-                            <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
-                                {{ post.user.username }}
-                            </a>
-                            w dniu <span class="text-white font-weight-normal">{{ post.uploadedAt|date('d.m.Y') }}</span>
-                            {% endif%}
-                        </div>
-                        <div class="mt-3 pb-4 border-bottom border-primary">
-                            <div class="">
-                                {{ post.content }}
-                            </div>
-                            <div class="">
-                                {% if post.filename %}
-                                    <img class="mt-4 max-height-1 max-width" src="/images/post/{{ post.filename }}" alt="Zdjęcie posta">
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            {% if app.user %}
-                                <button id="bt" class="btn font-13 font-weight-bold text-white bg-secondary"
-                                        data-toggle="modal" data-target="#confirm-delete-2">
-                                    <i class="font-18 icon-comment-empty"></i>Odpowiedz
-                                </button>
-                                {{ include('post/answer/answer_post.html.twig', {postId: post.id}) }}
-                            {% else %}
-                                {{ include('components/ajax_add_answer_post_com.html.twig') }}
-                                <button class="btn font-13 font-weight-bold text-white bg-secondary"
-                                  data-toggle="modal" data-target="#confirm-delete-2">
-                                    <i class="mr-1 font-18 icon-comment-empty"></i>Odpowiedz
-                                </button>
+                                {% endfor %}
                             {% endif %}
                         </div>
                     </div>
-                    <div class="float-left text-center ml-4">
+                    <div class="mt-2">
                         {% if app.user %}
-                            {% if app.user.username == post.user.username %}
-                                <a href="{{ path('profile',{'userId': post.user.id, 'userTab':'profile'}) }}">
-                                    <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
-                                </a>
-                            {% else %}
-                                <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
-                                    <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
-                                </a>
-                            {% endif %}
+                            <button id="bt" class="btn font-13 font-weight-bold text-white bg-secondary"
+                                    data-toggle="modal" data-target="#confirm-delete-2">
+                                <i class="font-18 icon-comment-empty"></i>Odpowiedz
+                            </button>
+                            {{ include('post/answer/answer_post.html.twig', {postId: post.id}) }}
                         {% else %}
-                            <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
-                                <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
-                            </a>
-                        {% endif%}
+                            {{ include('components/ajax_add_answer_post_com.html.twig') }}
+                            <button class="btn font-13 font-weight-bold text-white bg-secondary"
+                              data-toggle="modal" data-target="#confirm-delete-2">
+                                <i class="mr-1 font-18 icon-comment-empty"></i>Odpowiedz
+                            </button>
+                        {% endif %}
                     </div>
-                    <div style="clear: both"></div>
                 </div>
-            </div>
-            <div class="mt-1 pl-3 p-2 mb-1 bg-dark brad mr-2">
-                <h4 class="pl-2 text-color-3">Odpowiedzi {{ numbers.answer }}</h4>
-            </div>
-            <div class="all_answers">
-                {{ include('components/view_answers_post_com.html.twig',{post:post}) }}
+                <div class="float-left text-center ml-4">
+                    {{ include('components/verification_user_with_item_photos.html.twig', {post:post}) }}
+                </div>
+                <div style="clear: both"></div>
             </div>
         </div>
-        <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
+        <div class="mt-1 pl-3 p-2 mb-1 bg-dark brad mr-2">
+            <h4 class="text-color-3">Odpowiedzi {{ numbers.answer }}</h4>
         </div>
+        <div class="all_answers">
+            {{ include('components/view_answers_post_com.html.twig',{post:post}) }}
+        </div>
+        {% if likePost %}
+        <div class="Like_posts bg-dark brad mr-2">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3">Podobne posty</h4>
+            </div>
+            <div class="pt-3 pl-3 pr-3 pb-2">
+                {{ include('post/post_list/posts.html.twig', {posts:likePost}) }}
+            </div>
+        </div>
+        {% endif %}
     </div>
-    <div style="clear: both"></div>
 {% endblock %}

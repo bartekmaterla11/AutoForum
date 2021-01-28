@@ -124,6 +124,9 @@ a:hover{
     border-bottom: 1px solid !important;
     border-bottom-color: #4e555b !important;
 }
+.width-2{
+    width: 78.44px;!important;
+}
 .max-width{
     max-width: 158px!important;
 }
@@ -139,6 +142,9 @@ a:hover{
 .max-width-4{
     max-width: 40px;
 }
+.max-width-5{
+    max-width: 32px!important;
+}
 .max-width-30{
     width: 33px;
 }
@@ -153,6 +159,9 @@ a:hover{
 }
 .max-height-4{
     max-height: 40px;
+}
+.max-height-5{
+    max-height: 32px!important;
 }
 .Comment_like:hover{
     cursor: pointer;
@@ -313,3 +322,37 @@ a:hover{
     from {opacity: 0;}
     to {opacity:1 ;}
 }
+
+ul.file_post{
+    list-style-type: none;
+}
+
+.pl-new{
+    padding-left: 30px;
+}
+
+.choices_attr{
+    width: 100%;
+    padding: 5px;
+    color: #FFFFFF;
+    background-color: #21252b;
+    border-radius: 3px;
+    border: 0;
+    border-image: none;
+}
+.choices_attr:focus{
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+#categorySelect{
+    width: 100%;
+    padding: 5px;
+    color: #FFFFFF;
+    background-color: #21252b;
+    border-radius: 3px;
+    border: 0;
+    border-image: none;
+}
+
+

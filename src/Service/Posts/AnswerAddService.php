@@ -6,7 +6,7 @@ namespace App\Service\Posts;
 
 use App\Entity\Answer;
 use App\Entity\Post;
-use App\Service\PhotoToString;
+use App\Query\Posts\AnswerQuery;
 use App\Writer\Posts\AnswerPostWriter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,29 +14,37 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class AnswerAddService implements AnswerAddInterface
 {
     /**
-     * @var PhotoToString
-     */
-    private $photoToString;
-    /**
      * @var AnswerPostWriter
      */
-    private $postWriter;
+    private $answerWriter;
+    /**
+     * @var AnswerQuery
+     */
+    private $answerQuery;
 
-    public function __construct(PhotoToString $photoToString, AnswerPostWriter $postWriter)
+    public function __construct(AnswerPostWriter $answerWriter, AnswerQuery $answerQuery)
     {
-        $this->photoToString = $photoToString;
-        $this->postWriter = $postWriter;
+        $this->answerWriter = $answerWriter;
+        $this->answerQuery = $answerQuery;
     }
 
     public function addAnswerPost(FormInterface $form, Answer $add_answer, UserInterface $user, Post $post): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $this->postWriter->addAnswerToDataBase($form, $add_answer, $user, $post);
+                $this->answerWriter->addAnswerToDataBase($form, $add_answer, $user, $post);
 
             } catch (\Exception $exception) {
                 return false;
             }
+        }
+        return false;
+    }
+
+    public function removeAnswer(Answer $answer): bool
+    {
+        if ($this->answerQuery->removeAnswerInDataBase($answer)) {
+            return true;
         }
         return false;
     }

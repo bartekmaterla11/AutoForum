@@ -15,7 +15,7 @@ class UsersController extends AbstractController
     public function viewAllUsers(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->findAll();
+        $users = $em->getRepository(User::class)->findByUsers();
 
         return $this->render('users_list/users.html.twig',[
             'users' => $users

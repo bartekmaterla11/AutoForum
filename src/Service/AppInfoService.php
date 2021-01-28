@@ -15,7 +15,6 @@ class AppInfoService implements AppInfoInterface
 
     public function __construct(DownloadAppInfoQuery $downloadAppInfoQuery)
     {
-
         $this->downloadAppInfoQuery = $downloadAppInfoQuery;
     }
 

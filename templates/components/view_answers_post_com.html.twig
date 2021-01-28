@@ -4,7 +4,17 @@
             {{ message }}
         </div>
     {% endfor %}
+    {% for message in app.flashes('success_remove_answer') %}
+        <div class="mr-2 mb-1 bg-success brad text-center p-1">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="bg-dark brad p-3 mb-1 mr-2">
+        {% for message in app.flashes('error_remove_answer') %}
+            <div class="mr-2 mb-3 bg-danger brad text-center p-1">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="float-left">
             <div class="p-2 bgcolor3 brad mr-1">
                 {% if app.user %}
@@ -26,53 +36,48 @@
             <p class="{% if item.likeUp > 0 %}ml-3{% else %}ml-2{% endif%} mt-2 font-13">Polub</p>
         </div>
         <div class="float-left ml-3 w-80">
-            <div class="border-bottom border-primary font-color font-15 font-weight-bold">
-                {% if app.user %}
-                    {% if app.user.username == item.user.username %}
-                    <span class="text-white font-weight-normal">Dodałeś</span>
-                    odpowiedź w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
-                    {% else %}
-                        <span class="text-white font-weight-normal">Odpowiedź</span> dodana przez
-                        <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
-                            {{ item.user.username }}
-                        </a>
-                        w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
-                    {% endif %}
-                {% else %}
-                <span class="text-white font-weight-normal">Odpowiedź</span> dodana przez
-                <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
-                    {{ item.user.username }}
-                </a>
-                w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
-                {% endif %}
+            <div class="border-bottom border-primary font-15 text-color-3">
+                {{ include('components/verification_user_with_item_answers.html.twig',{item:item}) }}
             </div>
             <div class="mt-3 pb-4 border-bottom border-primary ">
                 <div class="">
                     {{ item.content }}
                 </div>
-                <div class="">
+                <div class="imageGallery1">
                     {% if item.file %}
-                        <img class="mt-4 max-height-1 max-width" src="/images/post/answer/{{ item.file }} " alt="Zdjęcie">
+                        <a href="/images/post/answer/{{ item.file }}">
+                            <img class="mt-4 max-height-1 max-width" src="/images/post/answer/{{ item.file }}" alt="Zdjęcie">
+                        </a>
                     {% endif %}
                 </div>
             </div>
-            <div class="mt-2">
+            <div class="mt-2 ">
                 {% if app.user %}
-                    <button class="comment btn font-13 font-weight-bold text-white bg-secondary">
-                        <i class="font-18 icon-comment-empty"></i>Skomentuj
+                    <button class="float-left comment btn font-13 font-weight-bold text-white bg-secondary"
+                            data-username1="{{ app.user.username }}" data-username2="{{ item.user.username }}">
+                        <i class="font-17 icon-comment-empty"></i>Skomentuj
                     </button>
+                        {% if app.user.username == item.user.username %}
+                            <a class="float-left" href="{{ path('remove_answer',{'categorySlug': catSlug,'slug': item.post.slug ,'answerId': item.id}) }}" >
+                                <button type="button" class="btn ml-2 bg-danger text-white font-15 p-2">Usuń</button>
+                            </a>
+                        {% endif %}
+                    <div style="clear: both"></div>
                     {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id }) }}
                 {% else %}
                     {{ include('components/ajax_add_comment_answer_com.html.twig') }}
                     <button class="btn font-13 font-weight-bold text-white bg-secondary"
                             data-toggle="modal" data-target="#confirm-delete-3">
-                        <i class="mr-1 font-18 icon-comment-empty"></i>Skomentuj
+                        <i class="mr-1 font-17 icon-comment-empty"></i>Skomentuj
                     </button>
                 {% endif %}
             </div>
             <div class="all_comments">
                 {{ include('components/view_comments_answer_com.html.twig',{comments: item.commentanswers }) }}
             </div>
+        </div>
+        <div class="float-left text-center pl-new">
+            {{ include('components/verification_user_with_item_photos.html.twig',{post:item}) }}
         </div>
         <div style="clear: both"></div>
     </div>

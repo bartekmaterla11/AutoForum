@@ -37,13 +37,21 @@ class ProfileService implements ProfileInterface
         $this->userRepository = $userRepository;
     }
 
-
+    public function answeredIntUserPost($userId): int
+    {
+        return $this->profileQuery->queryForAnsweredPostInt($userId);
+    }
 
     public function answeredUserPost($user): array
     {
         $posts = $this->profileQuery->queryForAnsweredUserPosts($user);
 
         return $this->postRepository->findByUserPosts($posts);
+    }
+
+    public function commentedIntUserAnswer($userId): int
+    {
+        return $this->profileQuery->queryForCommentedAnswerInt($userId);
     }
 
     public function commentedUserAnswer($user): array

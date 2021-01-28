@@ -35,8 +35,15 @@ class RegistrationWriter
 
     public function addUserToDataBase(FormInterface $form, User $user): bool
     {
+        $username = $form->get('username')->getData();
+        $len = strlen($username);
+        if($len < 5){
+            $this->error = 'Nazwa użytkownika musi zawierać co najmniej 6 znaków';
+            return false;
+        }
         $user->setUsername($form->get('username')->getData());
         $user->setEmail($form->get('email')->getData());
+        $user->setUploadedAt(new \DateTime);
 
         /** @var UploadedFile $pictureFileName */
         if ($form->get('filename')->getData()) {
@@ -45,32 +52,51 @@ class RegistrationWriter
             $pictureFileName->move('images/user', $newFileName);
             $user->setFilename($newFileName);
         } else {
-            $picture = 'user.jpg';
+            $picture = 'user.png';
             $user->setFilename($picture);
         }
         $plainPassword = $form->get('plainPassword')->getData();
         $secondPassword = $form->get('second_password')->getData();
+        
+//        \Symfony\Component\VarDumper\VarDumper::dump($plainPassword);
+//        \Symfony\Component\VarDumper\VarDumper::dump($secondPassword);
+//        \Symfony\Component\VarDumper\VarDumper::dump($form);
+//        die('end');
+//        die('end');
+//        die('end');
+        if ($plainPassword === $secondPassword) {
 
-        $user->setPassword(
-            $this->passwordEncoder->encodePassword(
-                $user,
-                $plainPassword
-            )
-        );
-        $user->setSecondPassword($this->passwordEncoder->encodePassword(
-            $user,
-            $secondPassword
-            )
-        );
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    $plainPassword
+                )
+            );
+            $user->setSecondPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    $secondPassword
+                )
+            );
 
-        if ($plainPassword == $secondPassword) {
             $em = $this->entityManager;
             $em->persist($user);
             $em->flush();
 
             return true;
         } else {
+            $this->error = 'Hasła muszą być takie same';
             return false;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    private $error;
+
+    public function getError()
+    {
+        return $this->error;
     }
 }

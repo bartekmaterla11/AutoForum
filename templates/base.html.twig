@@ -7,6 +7,7 @@
             <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" >
             <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" >
             <link rel="stylesheet" href="{{ asset('assets/css/fontello.css') }}" >
+            <link rel="stylesheet" href="{{ asset('assets/css/simpleLightbox.min.css') }}" >
         {% endblock %}
     </head>
     <body>
@@ -20,14 +21,14 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav mr-5 mt-2 mt-lg-0 ">
                     <li class="nav-item" {% if app.request.get('_route')=='index'%} class="active" {% endif%} >
-                        <a  class="nav-link text-white" href="{{ path('index') }}">Forum</a>
+                        <a  class="nav-link text-white" href="{{ path('forum') }}">Forum</a>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link text-white" href="{{ path('announcement') }}">Ogłoszenia</a>
                     </li>
                 </ul>
-                <form id="mainSearchForm" class="form-inline my-2 my-lg-0 mr-4 w-50">
-                    <input id="mainSearch" class="form-control mr-sm-2 w-75" type="search" placeholder="Szukaj na forum..." aria-label="Search">
+                <form id="mainSearchForm" class="form-inline my-2 my-lg-0 mr-4 w-50 ">
+                    <input id="mainSearch" class="form-control mr-sm-2 w-75 " type="search" placeholder="Szukaj na forum..." aria-label="Search">
                     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class=" icon-search"></i></button>
                 </form>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -59,7 +60,13 @@
         </div>
     </div>
 
-    {% block body %}{% endblock %}
+    <div class="container">
+        {% block body %}{% endblock %}
+        <div class="color mb-4 mt-3 w-25 float-left">
+            {{ include('side_menu/side_menu.html.twig') }}
+        </div>
+        <div style="clear: both"></div>
+    </div>
 
     <div class="container">
         <div class="row mt-5 mb-5 text-white"  style="padding-top: 80px; padding-bottom: 80px;">
@@ -86,7 +93,6 @@
                         wpisów. Każda twoja aktywność ma znaczenie.</p>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -95,7 +101,6 @@
             <h3 class="text-center text-white h1 font-weight-lighter" style="padding-top: 120px;">Dane w chmurze</h3>
             <p class="pt-5 pb-5 font-weight-lighter text-center">Twoje zdjęcia będą dostępne w chmurze dopóki ich nie usuniesz. Pamiętaj, że masz do nich dostęp z każdego miejsca na ziemi. Po zalogowaniu się masz pełny dostęp do swoich danych oraz zdjęć.</p>
             <div class="row pt-5" style="padding-bottom: 120px;">
-
                 <div class="col-lg-3 col-md-6">
                     <div class="member">
                         <div class="member-info">
@@ -106,7 +111,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6">
                     <div class="member">
                         <div class="member-info">
@@ -117,7 +121,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6">
                     <div class="member">
                         <div class="member-info">
@@ -128,7 +131,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6">
                     <div class="member">
                         <div class="member-info">
@@ -141,11 +143,10 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 
-    <footer class="bg-dark text-center text-white p-3 ">
+    <footer class="bgcolor text-center text-white p-3 ">
         <div class="container">
             Copyright 2020 | www.autoforum.pl
         </div>
@@ -175,6 +176,10 @@
         <script src="{{ asset('assets/js/post/popup_like_up_answer.js') }}"></script>
         <script src="{{ asset('assets/js/post/view_file_answer.js') }}"></script>
         <script src="{{ asset('assets/js/post/view_file_post.js') }}"></script>
+        <script src="{{ asset('assets/js/post/simpleLightbox.min.js') }}"></script>
+        <script src="{{ asset('assets/js/post/scripts.js') }}"></script>
+        <script src="{{ asset('assets/js/post/sort_by_category.js') }}"></script>
+{#        <script src="{{ asset('assets/js/popper.min.js') }}"></script>#}
     {% endblock %}
     </body>
 </html>

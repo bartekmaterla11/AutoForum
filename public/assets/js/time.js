@@ -3,7 +3,7 @@ function zegar() {
     var godzina = data.getHours();
     var min = data.getMinutes();
     var sek = data.getSeconds();
-    var terazjest = ""+godzina+
+    var terazjest = ((godzina<10)?"0":" ")+godzina+
         ((min<10)?":0":":")+min+
         ((sek<10)?":0":":")+sek;
     document.getElementById("watch").innerHTML = terazjest;

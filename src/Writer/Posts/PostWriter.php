@@ -7,9 +7,9 @@ namespace App\Writer\Posts;
 use App\Entity\Post;
 use App\Service\ConvertStringToSlug;
 use App\Service\PhotoToString;
+use App\Service\UploadFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostWriter
@@ -26,38 +26,45 @@ class PostWriter
      * @var PhotoToString
      */
     private $photoToString;
+    /**
+     * @var UploadFileService
+     */
+    private $uploadFileService;
 
-    public function __construct(EntityManagerInterface $entityManager,PhotoToString $photoToString, ConvertStringToSlug $stringToSlug)
+    public function __construct(EntityManagerInterface $entityManager,PhotoToString $photoToString, ConvertStringToSlug $stringToSlug, UploadFileService $uploadFileService)
     {
         $this->entityManager = $entityManager;
         $this->stringToSlug = $stringToSlug;
         $this->photoToString = $photoToString;
+        $this->uploadFileService = $uploadFileService;
     }
 
     public function addToDataBase(Post $post, FormInterface $form, UserInterface $user): bool
     {
-        /** @var UploadedFile $pictureFileName */
-        $pictureFileName = $form->get('filename')->getData();
-        if ($form->get('filename')->getData()) {
-            $newFileName = $this->photoToString->PhotoPostToString($pictureFileName);
-            $pictureFileName->move('images/post', $newFileName);
-            $post->setFilename($newFileName);
+        $filesPost = $form->getData()->getPhotoFilesForPosts();
+        if ($filesPost) {
+            foreach ($filesPost as $file) {
+                $newFileName = $this->uploadFileService->UploadFile($file->getFilename(), 'Name', 'images/post');
+                $file->setPost($post);
+                $file->setFilename($newFileName);
+                $post->addPhotoFilesForPost($file);
+            }
         }
+
         $slug = $form->get('title')->getData();
         $newSlug = $this->stringToSlug->ConversionToSlug($slug);
         $post->setSlug($newSlug);
         $post->setUser($user);
         $post->setTitle($form->get('title')->getData());
-        $post->setUploadedAt(new\DateTime());
+        $post->setUploadedAt(new \DateTime());
         $post->setContent($form->get('content')->getData());
         $post->setLikeUp(0);
-        $post->setLikeDown(0);
 
-        $em = $this->entityManager;
-        $em->persist($post);
-        $em->flush();
+        $post->setCategory($form->get('category')->getData());
+
+        $this->entityManager->persist($post);
+        $this->entityManager->flush();
 
         return true;
     }
-
 }

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Forum{% endblock %}
+
+{% block body %}
+    <div class="text-white mt-3 w-75 float-left mb-3 ">
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('index') }}">Strona główna</a> / Forum
+        </div>
+        {% for message in app.flashes('success_post') %}
+            <div class="mr-2 mt-1 bg-success brad text-center p-1">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="float-left w-40 text-color-3">Forum motoryzacyjne</h4>
+                <div class="float-left w-60 text-right">
+                    <span class="text-color-4">Kategoria</span>
+                    <select id="categorySelect" class="w-50 ml-2" >
+                        <option class="categoryOption" value="1" selected >Wszystkie posty</option>
+                        {% for item in categories %}
+                            <option class="categoryOption" value="{{ item.id }}"
+                                {% if slug is defined %}
+                                    {% if slug == item.slug %} selected {% endif %}
+                                {% endif %}
+                                >{{ item.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="p-3 pb-1">
+                {% if posts is defined %}
+                    {{ include('post/post_list/posts.html.twig', {posts:posts}) }}
+                {% else %}
+                   <div class="mt-2">
+                       {% for message in app.flashes('faults') %}
+                           <div class="mr-2 mt-1  brad text-center p-1">
+                               {{ message }}
+                           </div>
+                       {% endfor %}
+                   </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

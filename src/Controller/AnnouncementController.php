@@ -12,14 +12,7 @@ class AnnouncementController extends AbstractController
      */
     public function index()
     {
-        return $this->render('index/announcement_index/announcement_index.html.twig');
-    }
 
-    /**
-     * @Route("/dodaj-ogloszenie", name="add_announcement")
-     */
-    public function addAnnouncement()
-    {
-        $announcement = ds;
+        return $this->render('announcement/index/index_announcements.html.twig');
     }
 }

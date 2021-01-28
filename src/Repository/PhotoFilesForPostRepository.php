@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method PhotoFilesForPosts[]    findAll()
  * @method PhotoFilesForPosts[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PhotoFilesForPostsRepository extends ServiceEntityRepository
+class PhotoFilesForPostRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

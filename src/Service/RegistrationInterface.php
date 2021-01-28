@@ -10,4 +10,6 @@ use Symfony\Component\Form\FormInterface;
 interface RegistrationInterface
 {
     public function registerUser(FormInterface $form, User $user): bool;
+
+    public function RegisterError(): string;
 }

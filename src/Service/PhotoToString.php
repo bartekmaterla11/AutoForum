@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PhotoToString
 {
-    /** @var UploadedFile $pictureFileName */
-    public function PhotoPostToString($pictureFileName): string
+    /** @var UploadedFile $picture */
+    public function PhotoPostToString(UploadedFile $picture): string
     {
-        $originalfileName = pathinfo($pictureFileName->getClientOriginalName(), PATHINFO_FILENAME);
+        $originalfileName = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFileName = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()',
             $originalfileName);
-        $newFileName = $safeFileName . '-' . uniqid() . '.' . $pictureFileName->guessExtension();
+        $newFileName = $safeFileName . '-' . uniqid() . '.' . $picture->guessExtension();
 
         return $newFileName;
     }

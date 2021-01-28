@@ -13,18 +13,18 @@ class UserFixtures extends Fixture
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
-        $this->passwordEncoder=$passwordEncoder;
+        $this->passwordEncoder = $passwordEncoder;
     }
+
     public function load(ObjectManager $manager)
     {
         $user = new User();
         $user->setUsername('admin');
         $user->setEmail('admin@wp.pl');
         $user->setRoles(['Role_user']);
-        $user->setPassword($this->passwordEncoder->encodePassword($user,'bartekcoco11'));
-        $user->setSecondPassword($this->passwordEncoder->encodePassword($user,'bartekcoco11'));
+        $user->setPassword($this->passwordEncoder->encodePassword($user, 'bartekcoco11'));
+        $user->setSecondPassword($this->passwordEncoder->encodePassword($user, 'bartekcoco11'));
         $manager->persist($user);
-
         $manager->flush();
     }
 }

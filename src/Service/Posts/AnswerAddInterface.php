@@ -12,4 +12,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 interface AnswerAddInterface
 {
     public function addAnswerPost(FormInterface $form, Answer $add_answer, UserInterface $user, Post $post): bool;
+
+    public function removeAnswer(Answer $answer): bool;
 }

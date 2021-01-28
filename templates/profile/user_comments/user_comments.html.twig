@@ -1,21 +1,18 @@
 <div class="border-bottom border-color-1">
-    <h4 class="mb-3 ml-1 mt-3 pb-2">{% if app.user %}Moje{% endif%} Komentarze</h4>
+    <h4 class="mb-3 ml-1 mt-3 pb-2">Moje Komentarze</h4>
 </div>
 {% if item.commentAnswers.count > 0 %}
     {% for item in userComments %}
         <div class= "border-bottom border-secondary mt-4 p-1 pb-4 mb-4 ">
-            <div class="float-left w-18">
-                <div class="float-left bgcolor4 font-11 pl-2 pr-2 text-center">
-                    <h5 class="mb-1">{{ item.commentAnswers.count }}</h5> Twoich <br> Komentarzy
+            <div class="float-left mr-1">
+                <div class=" pt-1 pb-2 {% if item.commentAnswers.count > 0%} bg-success {% else %}bgcolor4 {% endif%} font-11 pl-2 pr-2 text-center">
+                    <h5 class="mb-2">{{ item.commentAnswers.count }}</h5> <span>Komentarzy</span>
                 </div>
-                <div class="float-left pt-2 h-60 bgcolor3 ml-2 pl-3 pr-3 ">
-                    <h6 class="mb-2 text-color-1"><i class=" icon-thumbs-up-alt"></i></h6>
-                    <h6 class="font-15 text-center" >{{ item.likeUp }}</h6>
-                </div>
-                <div style="clear: both"></div>
             </div>
             <div class="float-left w-64">
-                <h4 data-id="{{ item.id }}" class="pl-2" > <a href="{{ path('view_post',{'slug':item.slug }) }}" class="text-white ">{{ item.title }}</a></h4>
+                <h4 data-id="{{ item.id }}" class="pl-2" >
+                    <a href="{{ path('view_post',{'categorySlug': item.post.category.slug,'slug': item.post.slug }) }}" class="text-white ">{{ item.post.title }}</a>
+                </h4>
                 <div class="pl-2">
                     {% if app.user %}
                         {% if app.user.username == item.user.username %}

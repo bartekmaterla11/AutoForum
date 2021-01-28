@@ -21,19 +21,31 @@ class PostQuery
         $this->connection = $connection;
     }
 
-    public function removePostInDataBase(Post $post, $userId)
+    public function removePostInDataBase(Post $post)
     {
-        if ($post->getFilename()) {
-            $file = new Filesystem();
-            $file->remove('images/post/' . $post->getFilename());
+        if ($post->getPhotoFilesForPosts()) {
+            $array = $post->getPhotoFilesForPosts();
+            foreach ($array as $item){
+                $file = new Filesystem();
+                $file->remove('images/post/' . $item->getFilename());
+            }
         }
 
         $sql = 'DELETE FROM post WHERE id = :Id';
         $posts = $this->connection->prepare($sql);
-//        $posts->bindValue(':userId', $userId, ParameterType::INTEGER);
         $posts->bindValue(':Id', $post->getId(), ParameterType::INTEGER);
         $posts->execute();
 
         return true;
+    }
+
+    public function PostsLikePost(string  $title): array
+    {
+        $sql = 'SELECT * FROM post WHERE `title` LIKE :title ORDER BY uploaded_at DESC LIMIT 3';
+        $posts = $this->connection->prepare($sql);
+        $posts->bindValue(':title', $title);
+        $posts->execute();
+
+        return $posts;
     }
 }

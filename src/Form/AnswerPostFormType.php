@@ -33,5 +33,4 @@ class AnswerPostFormType extends AbstractType
             'data_class'=>Answer::class
         ]);
     }
-
 }

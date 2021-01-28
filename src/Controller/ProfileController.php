@@ -42,6 +42,8 @@ class ProfileController extends AbstractController
 
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
+        $intAnswers = $this->profile->answeredIntUserPost($userId);
+        $intComments = $this->profile->commentedIntUserAnswer($userId);
 
         return $this->render('profile/main_profile/main_profile.html.twig', [
             'users' => $users,
@@ -49,7 +51,9 @@ class ProfileController extends AbstractController
             'userTab' => $userTab,
             'editProfile' => null,
             'userAnswers' => $userAnswers,
-            'userComments' => $userComments
+            'userComments' => $userComments,
+            'intAnswers' => $intAnswers,
+            'intComments' => $intComments
         ]);
     }
 
@@ -65,6 +69,8 @@ class ProfileController extends AbstractController
         $users = $em->getRepository(User::class)->findBy(['username' => $username]);
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
+        $intAnswers = $this->profile->answeredIntUserPost($userId);
+        $intComments = $this->profile->commentedIntUserAnswer($userId);
 
         if ($this->getUser()) {
             $user = $this->getUser()->getUsername();
@@ -72,15 +78,20 @@ class ProfileController extends AbstractController
                 'users' => $users,
                 'user' => $user,
                 'userTab' => $userTab,
+                'editProfile' => null,
                 'userAnswers' => $userAnswers,
-                'userComments' => $userComments
+                'userComments' => $userComments,
+                'intAnswers' => $intAnswers,
+                'intComments' => $intComments
             ]);
         } else {
             return $this->render('profile/main_profile/main_profile.html.twig', [
                 'users' => $users,
                 'userTab' => $userTab,
                 'userAnswers' => $userAnswers,
-                'userComments' => $userComments
+                'userComments' => $userComments,
+                'intAnswers' => $intAnswers,
+                'intComments' => $intComments
             ]);
         }
     }

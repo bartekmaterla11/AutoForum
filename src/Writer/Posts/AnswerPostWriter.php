@@ -48,4 +48,9 @@ class AnswerPostWriter
         return true;
     }
 
+    public function removeAnswerInDatBase(Answer $answer, $userId): bool
+    {
+
+    }
+
 }

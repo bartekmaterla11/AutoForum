@@ -41,16 +41,6 @@ class Post
     private $content;
 
     /**
-     * @ORM\OneToMany(targetEntity=Categories::class, mappedBy="post")
-     */
-    private $categories;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $filename;
-
-    /**
      * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="post")
      */
     private $answers;
@@ -66,14 +56,16 @@ class Post
     private $likeUp;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $likeDown;
-
-    /**
-     * @ORM\OneToMany(targetEntity=PhotoFilesForPosts::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=PhotoFilesForPosts::class, mappedBy="post", cascade={"persist"})
+     * @ORM\JoinColumn (nullable=true)
      */
     private $photoFilesForPosts;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CategoryPost::class, inversedBy="post")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
 
     public function __construct()
     {
@@ -136,49 +128,6 @@ class Post
     }
 
     /**
-     * @return Collection|Categories[]
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): self
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
-            $category->setPost($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): self
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getPost() === $this) {
-                $category->setPost(null);
-            }
-        }
-
-        return $this;
-    }
-
-
-    public function getFilename(): ?string
-    {
-        return $this->filename;
-    }
-
-    public function setFilename(?string $filename): self
-    {
-        $this->filename = $filename;
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Answer[]
      */
     public function getAnswers(): Collection
@@ -232,18 +181,6 @@ class Post
         return $this;
     }
 
-    public function getLikeDown(): ?int
-    {
-        return $this->likeDown;
-    }
-
-    public function setLikeDown(int $likeDown): self
-    {
-        $this->likeDown = $likeDown;
-
-        return $this;
-    }
-
     /**
      * @return Collection|PhotoFilesForPosts[]
      */
@@ -270,6 +207,18 @@ class Post
                 $photoFilesForPost->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?CategoryPost
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?CategoryPost $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

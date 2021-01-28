@@ -15,24 +15,23 @@ class EditDataUserForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username',TextType::class,[
+            ->add('username', TextType::class, [
                 'label' => ' ',
                 'attr' => [
                     'class' => 'input-username'
                 ]
             ])
-            ->add('email', EmailType::class,[
+            ->add('email', EmailType::class, [
                 'label' => ' ',
                 'attr' => [
                     'class' => 'input-email'
                 ]
             ])
-            ->add('filename', FileType::class,[
+            ->add('filename', FileType::class, [
                 'required' => false,
                 'data_class' => null,
                 'attr' => ['class' => 'fileUser']
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

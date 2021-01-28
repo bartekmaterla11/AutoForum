@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Service\PhotoToString;
 use App\Service\ProfileService;
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\ParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormInterface;
@@ -46,22 +47,42 @@ class ProfileQuery
 
     public function queryForAnsweredUserPosts($userId)
     {
-        $sql = 'SELECT DISTINCT post_id FROM answer WHERE user_id = :userId ORDER BY post_id DESC ';
+        $sql = 'SELECT DISTINCT post_id FROM answer WHERE user_id = :userId ';
         $users = $this->connection->prepare($sql);
-        $users->bindValue(':userId', $userId);
+        $users->bindValue(':userId', $userId, ParameterType::INTEGER);
         $users->execute();
 
         return array_values($users->fetchAll(\PDO::FETCH_COLUMN));
+    }
+
+    public function queryForAnsweredPostInt($userId)
+    {
+        $sql = 'SELECT count(user_id) FROM answer WHERE user_id = :userId ';
+        $users = $this->connection->prepare($sql);
+        $users->bindValue(':userId', $userId, ParameterType::INTEGER);
+        $users->execute();
+
+        return (int) $users->fetchOne();
     }
 
     public function queryForCommentedUserAnswer($userId)
     {
         $sql = 'SELECT DISTINCT answer_id FROM comment_answer WHERE user_id = :userId ORDER BY answer_id DESC';
         $users = $this->connection->prepare($sql);
-        $users->bindValue(':userId', $userId);
+        $users->bindValue(':userId', $userId, ParameterType::INTEGER);
         $users->execute();
 
         return array_values($users->fetchAll(\PDO::FETCH_COLUMN));
+    }
+
+    public function queryForCommentedAnswerInt($userId)
+    {
+        $sql = 'SELECT count(user_id) FROM comment_answer WHERE user_id = :userId ';
+        $users = $this->connection->prepare($sql);
+        $users->bindValue(':userId', $userId, ParameterType::INTEGER);
+        $users->execute();
+
+        return (int) $users->fetchOne();
     }
 
     public function editProfile(FormInterface $form, $user1, $photo): bool

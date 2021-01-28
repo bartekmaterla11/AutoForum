@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\CategoryPost;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ParameterType;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,28 +26,58 @@ class PostRepository extends ServiceEntityRepository
     // /**
     //  * @return Post[] Returns an array of Post objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByAllPosts(): array
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByCategoryPosts(string $slug): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin(CategoryPost::class, 'cp', Join::WITH,'cp.id = p.category')
+            ->where('cp.slug = :slug')
+            ->setParameter('slug', $slug, ParameterType::STRING)
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByPostsForIndex(): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-
-    public function findByUserPosts($posts): array
+    public function findByPostsLikePost(int $id, int $postId): ?array
     {
+        return $this->createQueryBuilder('p')
+            ->where('p.category = :id')
+            ->andWhere('p.id != :postId')
+            ->setParameter('id', $id, ParameterType::INTEGER)
+            ->setParameter('postId', $postId, ParameterType::INTEGER)
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
+    public function findByUserPosts(array $posts): array
+    {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id IN (:posts)')
             ->setParameter('posts', $posts, Connection::PARAM_INT_ARRAY)
-            ->orderBy('p.uploaded_at', 'ASC')
+            ->orderBy('p.uploaded_at', 'DESC')
             ->getQuery()
             ->getResult()
         ;

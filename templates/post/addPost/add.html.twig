@@ -1,31 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}{% endblock %}
+{% block title %}{{ parent() }} - Dodawanie posta{% endblock %}
 
 {% block body %}
-    <div class="container" >
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>
-                / Dodawanie posta
+    <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('index') }}">Strona główna</a>
+            / <a href="{{ path('forum') }}" class="text-white font-weight-normal">Forum </a>
+            / Dodawanie posta
+        </div>
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3"><i class="icon-edit mr-1"></i>Zadaj pytanie</h4>
             </div>
-            <div class="mr-2 bg-dark mt-1 brad ">
-                <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4><i class="icon-edit mr-1"></i>"Kto pyta, nie błądzi"</h4>
+            <div class="p-3 mt-2 pb-1">
+                <div class="w-85 mr-auto ml-auto p-3">
+                    <h6 class="text-color-3">Przed zadaniem pytania przeczytaj uważnie poniższe wskazówki.
+                        Jest to ważne, abyśmy mogli Ci pomóc :)</h6>
+                    <p class="pl-5 mt-3">Upewnij się, że Twój problem nie został już rozwiązany lub podobne pytanie nie zostało już
+                        zadane - użyj wyszukiwarki</p>
+                    <p class="pl-5 mt-3">Nie używaj wulgarnych i niestosownych słów w swoich postach </p>
                 </div>
-                <div class="p-3 mt-2 pb-1">
+                <div class="pl-3 pr-3">
                     {% for message in app.flashes('error_post') %}
-                        <div class="brad border-danger text-danger border text-center" >
+                        <div class="brad w-85 ml-auto mr-auto bg-danger text-white text-center p-1 " >
                             {{ message }}
                         </div>
                     {% endfor %}
-                    {% if app.user %}{{ include('components/add_post_com.html.twig') }}{% endif %}
                 </div>
+                {% if app.user %}{{ include('components/add_post_com.html.twig') }}{% endif %}
             </div>
         </div>
-        <div class="color mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
-        </div>
     </div>
-    <div style="clear: both"></div>
 {% endblock %}

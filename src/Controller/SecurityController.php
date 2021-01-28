@@ -42,13 +42,4 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
-
-//    /**
-//     *
-//     *@Route("/login/ajax", name="ajax_login")
-//     */
-//    public function ajaxLogin()
-//    {
-//        return $this->render('components/login_com.html.twig');
-//    }
 }

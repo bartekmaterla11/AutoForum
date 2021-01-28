@@ -3,23 +3,18 @@
 {% block title %}{{ parent() }} - Użytkownicy{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na / Użytkownicy
-            </div>
-            <div class="mr-2 bg-dark mt-1 brad ">
-                <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4><i class="icon-user-1"></i>Użytkownicy</h4>
-                </div>
-                <div class="p-3 mt-2 pb-1">
-                    {{ include('users_list/users_list.html.twig', {users: users}) }}
-                </div>
-            </div>
+    <div class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na /
+            <a class="text-white" href="{{ path('index') }}">Strona główna</a> / Użytkownicy
         </div>
-        <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3"><i class="icon-user-1"></i>Użytkownicy</h4>
+            </div>
+            <div class="p-3 mt-2 pb-1">
+                {{ include('users_list/users_list.html.twig', {users: users}) }}
+            </div>
         </div>
     </div>
-    <div style="clear: both"></div>
 {% endblock %}

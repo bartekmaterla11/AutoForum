@@ -34,10 +34,9 @@ class DownloadAppInfoQuery
         $posts->execute();
 
         return (int) $posts->fetchOne();
-
     }
 
-    public function downloadAppInfoAnswer()
+    public function downloadAppInfoAnswer(): int
     {
         $sql = 'SELECT count(id) as answer_count FROM answer ';
         $answers = $this->connection->prepare($sql);
@@ -50,6 +49,4 @@ class DownloadAppInfoQuery
     {
 
     }
-
-
 }

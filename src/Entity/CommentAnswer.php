@@ -34,11 +34,6 @@ class CommentAnswer
     private $uploaded_at;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $like_up;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $content_com;
@@ -80,18 +75,6 @@ class CommentAnswer
     public function setUploadedAt(\DateTimeInterface $uploaded_at): self
     {
         $this->uploaded_at = $uploaded_at;
-
-        return $this;
-    }
-
-    public function getLikeUp(): ?int
-    {
-        return $this->like_up;
-    }
-
-    public function setLikeUp(int $like_up): self
-    {
-        $this->like_up = $like_up;
 
         return $this;
     }

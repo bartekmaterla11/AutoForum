@@ -10,18 +10,14 @@ class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="index")
-     *
      */
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        /**
-         * @var $post Post
-         */
-        $posts = $em->getRepository(Post::class)->findAll();
+        $posts = $em->getRepository(Post::class)->findByPostsForIndex();
 
         return $this->render('index/index.html.twig', [
-            'posts' => $posts]
-        );
+            'posts' => $posts
+        ]);
     }
 }

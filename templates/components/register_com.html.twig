@@ -4,7 +4,7 @@
 </div>
 <div class="mr-2 bg-dark mt-1 brad ">
     <div class="p-2 pl-3 border-bottom border-primary">
-        <h4 class=""><i class="icon-edit mr-1"></i>Rejestracja</h4>
+        <h4 class="text-color-3"><i class="icon-edit mr-1"></i>Rejestracja</h4>
     </div>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -15,29 +15,29 @@
     </div>
     <div class="w-85 ml-auto mr-auto p-3">
         {{ form_start(registrationForm) }}
-        <div class="mb-4">
-            <h6 class="font-weight-normal ">Nazwa użytkownika</h6>{{ form_row(registrationForm.username) }}
-        </div>
-        <div class="mb-4" >
-            <h6>Adres e-mail</h6> {{ form_row(registrationForm.email) }}
-        </div>
         {% for message in app.flashes('error_register') %}
-            <div class="alert border-danger text-danger text-center"> {{ message }}</div>
+            <div class="bg-danger p-1 brad text-center mb-3"> {{ message }}</div>
         {% endfor %}
         <div class="mb-4">
-            <h6>Hasło</h6>{{ form_row(registrationForm.plainPassword) }}
+            <h6 class="font-weight-light ">Nazwa użytkownika</h6>{{ form_row(registrationForm.username) }}
+        </div>
+        <div class="mb-4" >
+            <h6 class="font-weight-light ">Adres e-mail</h6> {{ form_row(registrationForm.email) }}
         </div>
         <div class="mb-4">
-            <h6>Powtórz hasło</h6>{{ form_row(registrationForm.second_password) }}
+            <h6 class="font-weight-light ">Hasło</h6>{{ form_row(registrationForm.plainPassword) }}
+        </div>
+        <div class="mb-4">
+            <h6 class="font-weight-light ">Powtórz hasło</h6>{{ form_row(registrationForm.second_password) }}
         </div>
         <div class="mb-3">
-            <h6>zdjęcie *</h6>{{ form_widget(registrationForm.filename) }}
+            <h6 class="font-weight-light ">zdjęcie *</h6>{{ form_widget(registrationForm.filename) }}
         </div>
         <p class="font-15 mt-4">* Jeśli nie wybierzesz pliku, algorytm automatycznie
             przypisze Tobie domyślne zdjęcie profilowe</p>
         {#                {{ form_row(registrationForm.agreeTerms) }}#}
 
-        <button type="submit" class=" btn btn-lg mt-3 btn-outline-info mb-3">Załóż konto</button>
+        <button type="submit" class=" btn btn-lg mt-3 btn-outline-primary mb-3">Załóż konto</button>
         {{ form_end(registrationForm) }}
     </div>
 </div>

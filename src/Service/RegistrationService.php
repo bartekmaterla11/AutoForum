@@ -22,11 +22,14 @@ class RegistrationService implements RegistrationInterface
 
     public function registerUser(FormInterface $form, User $user): bool
     {
-        try {
-            $this->registrationWriter->addUserToDataBase($form,$user);
+        if ($this->registrationWriter->addUserToDataBase($form,$user)){
             return true;
-        }catch (\Exception $exception){
-            return false;
         }
+        return false;
+    }
+
+    public function RegisterError(): string
+    {
+        return $this->registrationWriter->getError();
     }
 }

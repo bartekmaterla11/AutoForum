@@ -3,51 +3,39 @@
 {% block title %}{{ parent() }} - Strona główna{% endblock %}
 
 {% block body %}
-    <div class="container " >
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                <i class="icon-home"></i> Jesteś na / Forum
-            </div>
-            {% for message in app.flashes('success_post') %}
+    <div class="text-white mt-3 w-75 float-left mb-4 ">
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na / Strona główna
+        </div>
+        {% if app.user %}
+            {% for message in app.flashes('success_login') %}
                 <div class="mr-2 mt-1 bg-success brad text-center p-1">
-                    {{ message }}
+                    {{ message }}{{ app.user.username }} !
                 </div>
             {% endfor %}
-            {% if app.user %}
-                {% for message in app.flashes('success_login') %}
-                    <div class="mr-2 mt-1 bg-success brad text-center p-1">
-                        {{ message }}{{ app.user.username }} !
-                    </div>
-                {% endfor %}
-            {% endif %}
-            <div class="mr-2 bg-dark mt-1 brad ">
-                <div class="p-2 pl-3 border-bottom border-primary">
-                    <h4 class="float-left w-50">Forum motoryzacyjne</h4>
-                    <div class="float-left w-50 text-right">
-
-                        <select id="select_post" class="text-white">
-                            <optgroup label="Data">
-                                <option type="submit" id="latest_new">Najnowsze</option>
-                                <option id="latest_alt">Najstarsze</option>
-                            </optgroup>
-                            <optgroup label="Polubione">
-                                <option id="like_up_more">Najwięcej</option>
-                                <option id="like_up_little">Najmniej</option>
-                            </optgroup>
-                        </select>
-
-                    </div>
-                    <div style="clear: both"></div>
-                </div>
-                <div class="p-3 mt-2 pb-1">
-                    {{ include('index/post-index/post_index.html.twig', {posts:posts}) }}
-                </div>
+        {% endif %}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <a href="{{ path('forum') }}"><h4 class="float-left w-50 text-color-3">Forum motoryzacyjne</h4></a>
+                <div style="clear: both"></div>
+            </div>
+            <div class="pt-3 pl-3 pr-3 pb-0">
+                {{ include('post/post_list/posts.html.twig', {posts:posts}) }}
+            </div>
+            <div class="text-center pb-4">
+                <a href="{{ path('forum') }}"><button type="button" class="btn btn-outline-primary">Przejdź na Forum</button> </a>
             </div>
         </div>
-        <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="w-50 text-color-3">Ogłoszenia motoryzacyjne</h4>
+            </div>
+            <div class="pt-3 pl-3 pr-3 mt-2 pb-0">
+
+            </div>
+            <div class="text-center pb-4">
+                <a href=""><button type="button" class="btn btn-outline-primary">Przejdź do Ogłoszenia</button> </a>
+            </div>
         </div>
     </div>
-    <div style="clear: both"></div>
-
 {% endblock %}

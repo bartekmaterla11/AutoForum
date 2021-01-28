@@ -8,6 +8,10 @@ use Symfony\Component\Form\FormInterface;
 
 interface ProfileInterface
 {
+    public function answeredIntUserPost($userId): int;
+
+    public function commentedIntUserAnswer($userId): int;
+
     public function answeredUserPost($user): array;
 
     public function commentedUserAnswer($user): array;

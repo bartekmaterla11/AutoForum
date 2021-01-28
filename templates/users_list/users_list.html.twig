@@ -2,15 +2,15 @@
 {% for item in users %}
     <div class= "border-bottom border-secondary p-1 pb-4 mb-4 ">
         <div class="float-left w-15">
-            <div class="">
+            <div class="width-2 text-center">
                 <a href="{{ path('other_profile',{'userId': item.id, 'username': item.username, 'userTab': 'profile'}) }}">
                     <img src="images/user/{{ item.filename }} " class="max-width-2 max-height-2">
                 </a>
             </div>
         </div>
-        <div class="float-left w-85 pl-3">
-            <h4><a class="text-white" href="{{ path('other_profile', {'userId': item.id, 'username': item.username, 'userTab': 'profile'}) }}">{{ item.username }} </a></h4>
-            <p><span class="text-color-3">Zarejestrowany</span> w dniu <span class="text-color-3">{{ item.uploadedAt|date('d-m-Y') }}</span></p>
+        <div class="float-left w-85 pl-3 text-color-3">
+            <h4><a class="text-color-3" href="{{ path('other_profile', {'userId': item.id, 'username': item.username, 'userTab': 'profile'}) }}">{{ item.username }} </a></h4>
+            <p><span class="text-white">Zarejestrowany</span> w dniu <span class="text-white">{{ item.uploadedAt|date('d.m.Y') }}</span></p>
         </div>
         <div style="clear: both"></div>
     </div>

@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\PhotoFilesForPostsRepository;
+use App\Repository\PhotoFilesForPostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PhotoFilesForPostsRepository::class)
+ * @ORM\Entity(repositoryClass=PhotoFilesForPostRepository::class)
  */
 class PhotoFilesForPosts
 {
@@ -18,7 +18,7 @@ class PhotoFilesForPosts
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="photoFilesForPosts")
+     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="photoFilesForPosts",  cascade={"persist"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
@@ -50,7 +50,7 @@ class PhotoFilesForPosts
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
 

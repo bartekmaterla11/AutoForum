@@ -29,9 +29,9 @@ class AnswerRepository extends ServiceEntityRepository
     public function findByUserComments($answers): array
     {
         return $this->createQueryBuilder('a')
+            ->orderBy('a.uploadedAt', 'DESC')
             ->andWhere('a.id IN (:answers)')
             ->setParameter('answers', $answers, Connection::PARAM_INT_ARRAY)
-            ->orderBy('a.uploadedAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;

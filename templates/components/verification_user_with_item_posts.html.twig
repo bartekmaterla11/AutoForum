@@ -1,0 +1,26 @@
+{% if app.user %}
+    {% if app.user.username == post.user.username %}
+        <span class="text-white ">zadałeś</span>
+        pytanie w dniu <span class="text-white ">{{ post.uploadedAt|date('d.m.Y') }}</span>
+        | <span class="text-white">{{ post.uploadedAt|date('H:i:s') }}</span>
+        | <span class=""> {{ post.category.name }} </span>
+    {% else %}
+        <span class="text-white">pytanie</span> zadane przez
+        <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
+           class=" text-white">
+            {{ post.user.username }}
+        </a>
+        w dniu <span class="text-white ">{{ post.uploadedAt|date('d.m.Y') }}</span>
+        | <span class="text-white">{{ post.uploadedAt|date('H:i:s') }}</span>
+        | <span class=""> {{ post.category.name }} </span>
+    {% endif %}
+{% else %}
+    <span class="text-white ">pytanie</span> zadane przez
+    <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
+       class=" text-white">
+        {{ post.user.username }}
+    </a>
+    w dniu <span class="text-white ">{{ post.uploadedAt|date('d.m.Y') }}</span>
+    | <span class="text-white">{{ post.uploadedAt|date('H:i:s') }}</span>
+    | <span class=""> {{ post.category.name }} </span>
+{% endif%}

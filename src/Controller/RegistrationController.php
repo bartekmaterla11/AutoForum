@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use App\Service\RegistrationInterface;
+use App\Writer\RegistrationWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
-        if($this->getUser()){
+        if ($this->getUser()) {
             return $this->redirectToRoute('index');
         }
         $user = new User();
@@ -37,7 +38,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($this->registration->registerUser($form, $user)){
+            if ($this->registration->registerUser($form, $user)) {
 
                 return $guardHandler->authenticateUserAndHandleSuccess(
                     $user,
@@ -45,9 +46,10 @@ class RegistrationController extends AbstractController
                     $authenticator,
                     'main' // firewall name in security.yaml
                 );
+
                 return $this->redirectToRoute('index');
             }
-            $this->addFlash('error_register', 'Hasła muszą się zgadzać !');
+            $this->addFlash('error_register', $this->registration->RegisterError());
             $this->redirectToRoute('app_register');
         }
 
@@ -56,18 +58,3 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
-
-
-//    /**
-//     * @Route("/forum/register/ajax", name="ajax_register")
-//     */
-//    public function ajaxRegister()
-//    {
-//        $user = new User();
-//        $form = $this->createForm(RegistrationFormType::class, $user);
-//
-//        return $this->render('components/register_com.html.twig', [
-//            'registrationForm' => $form->createView(),
-//        ]);
-//    }
-

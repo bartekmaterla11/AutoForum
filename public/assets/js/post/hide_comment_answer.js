@@ -6,9 +6,17 @@ $(document).ready(function () {
             var comment = answer.parent("div:first");
             var a = comment.parent("div:first");
             var b = a.parent("div:first");
-            var div = b.children()[1];
-            var divhide = div.style.display="none";
 
+            var user1 = answer.data("username1");
+            var user2 = answer.data("username2");
+
+            if(user1 === user2){
+                var div = b.children()[3];
+                div.style.display="none";
+            }else {
+                var div1 = b.children()[2];
+                div1.style.display="none";
+            }
         });
     });
 });

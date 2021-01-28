@@ -3,13 +3,7 @@
 {% block title %}Rejestracja - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container" >
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-            {{ include('components/register_com.html.twig') }}
-        </div>
-        <div class="color mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
-        </div>
+    <div class="text-white mt-3 w-75 float-left mb-4 " >
+        {{ include('components/register_com.html.twig') }}
     </div>
-    <div style="clear: both"></div>
 {% endblock %}
