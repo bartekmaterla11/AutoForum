@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Posts;
 
-use App\Entity\PhotoFilesForPosts;
+use App\Entity\Posts\PhotoFilesForPosts;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;

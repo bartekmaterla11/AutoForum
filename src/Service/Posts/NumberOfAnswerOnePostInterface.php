@@ -2,9 +2,9 @@
 
 namespace App\Service\Posts;
 
-use App\Entity\Post;
+use App\Entity\Posts\Post;
 
 interface NumberOfAnswerOnePostInterface
 {
-    public function getNumberOfAnswers($postId): array;
+    public function getNumberOfAnswers(Post $postId): array;
 }

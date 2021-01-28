@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\Posts;
 
-use App\Entity\Answer;
-use App\Entity\CommentAnswer;
+use App\Entity\Posts\Answer;
+use App\Entity\Posts\CommentAnswer;
 use App\Writer\Posts\CommentAnswerWriter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,11 +22,11 @@ class CommentAnswerService implements CommentAnswerInterface
         $this->commentAnswerWriter = $commentAnswerWriter;
     }
 
-    public function addCommentForAnswer(FormInterface $commentForm,UserInterface $user, Answer $answerId,CommentAnswer $add_comment): bool
+    public function addCommentForAnswer(FormInterface $commentForm,UserInterface $user, $answerId,  $addComment): bool
     {
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             try {
-                $this->commentAnswerWriter->addCommentForAnswer($commentForm, $user, $answerId, $add_comment);
+                $this->commentAnswerWriter->addCommentForAnswer($commentForm, $user, $answerId, $addComment);
 
             } catch (\Exception $exception) {
                 return false;

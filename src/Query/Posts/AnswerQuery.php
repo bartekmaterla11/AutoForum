@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Query\Posts;
 
-use App\Entity\Answer;
+use App\Entity\Posts\Answer;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\ParameterType;
 use Symfony\Component\Filesystem\Filesystem;

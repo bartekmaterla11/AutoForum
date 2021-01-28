@@ -9,21 +9,25 @@
         </div>
         <div class="mr-2 bg-dark mt-1 brad ">
             <div class="p-2 pl-3 border-bottom border-primary">
-                <h4 class="float-left w-40 text-color-3">Ogłoszenia motoryzacyjne</h4>
-                <div class="float-left w-60 text-right">
-                    <span class="text-color-4">Kategoria</span>
-                    <select id="categorySelect" class="w-64 ml-2" >
-                        <option class="categoryOption" value="1" selected >Wszystkie ogłoszenia</option>
-                        <optgroup class="font-weight-normal " label="Dostawcze i cięzarowe">
-                            <option >Dostawcze</option>
-                            <option >Dostawcze</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <div style="clear: both"></div>
+                <h4 class=" text-color-3">Ogłoszenia motoryzacyjne</h4>
             </div>
             <div class="p-3">
+                <div class="w-100">
+                    <h4 class="text-color-4 text-center mt-1 mb-3">Kategoria</h4>
+                </div>
+                <div id="categoryAnnouncementsSelect" class="pl-2">
+                    {% for item in cat %}
+                    <div class="float-left w-33 mt-3" >
+                        <a value="{{ item.id }}" class="ml-4 text-white" href="{{ path('announcement_sorted', {'categorySlug': item.slug }) }}" >
+                            <span class="font-18 pt-1" >> </span>{{ item.name }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <div style="clear: both"></div>
+                </div>
+                <div class="">
 
+                </div>
             </div>
         </div>
     </div>

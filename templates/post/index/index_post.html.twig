@@ -17,7 +17,7 @@
                 <h4 class="float-left w-40 text-color-3">Forum motoryzacyjne</h4>
                 <div class="float-left w-60 text-right">
                     <span class="text-color-4">Kategoria</span>
-                    <select id="categorySelect" class="w-50 ml-2" >
+                    <select id="categoryPostSelect" class="w-50 ml-2 categorySelect" >
                         <option class="categoryOption" value="1" selected >Wszystkie posty</option>
                         {% for item in categories %}
                             <option class="categoryOption" value="{{ item.id }}"

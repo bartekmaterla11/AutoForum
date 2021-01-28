@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\Posts;
 
-use App\Entity\Answer;
-use App\Entity\CommentAnswer;
-use Symfony\Component\Form\FormInterface;
+use App\Entity\Posts\Answer;
+use App\Entity\Posts\CommentAnswer;
+use Symfony\Component\Form\Test\FormInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 interface CommentAnswerInterface

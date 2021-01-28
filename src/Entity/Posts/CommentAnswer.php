@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Posts;
 
-use App\Repository\CommentAnswerRepository;
+use App\Entity\User;
+use App\Repository\Posts\CommentAnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,7 +19,7 @@ class CommentAnswer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentAnswers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="commentAnswers")
      */
     private $user;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Posts;
 
-use App\Entity\CategoryPost;
-use App\Repository\CategoryPostRepository;
+use App\Entity\Posts\CategoryPost;
+use App\Repository\Posts\CategoryPostRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

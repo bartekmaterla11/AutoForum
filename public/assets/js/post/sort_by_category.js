@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#categorySelect').on('change', function () {
+    $('#categoryPostSelect').on('change', function () {
         var value = $(this).val();
 
         console.log($(this).find('option:active').attr('selected'));

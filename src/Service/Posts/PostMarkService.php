@@ -7,7 +7,6 @@ namespace App\Service\Posts;
 use App\Enum\PostMarkEnum;
 use App\Query\Posts\PostMarkQuery;
 use App\Writer\Posts\PostMarkWriter;
-use http\Client\Curl\User;
 
 class PostMarkService implements PostMarkInterface
 {

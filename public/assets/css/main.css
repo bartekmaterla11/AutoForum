@@ -89,6 +89,9 @@ a:hover{
 .w-15{
     width: 10%!important;
 }
+.w-33{
+    width: 33%!important;
+}
 .h-60{
     height: 60px;
 }
@@ -345,7 +348,7 @@ ul.file_post{
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-#categorySelect{
+.categorySelect{
     width: 100%;
     padding: 5px;
     color: #FFFFFF;

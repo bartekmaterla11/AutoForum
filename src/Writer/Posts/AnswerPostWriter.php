@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Writer\Posts;
 
-use App\Entity\Answer;
+use App\Entity\Posts\Answer;
 use App\Service\PhotoToString;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

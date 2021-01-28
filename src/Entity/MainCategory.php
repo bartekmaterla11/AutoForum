@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryPostRepository;
+use App\Repository\MainCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategoryPostRepository::class)
+ * @ORM\Entity(repositoryClass=MainCategoryRepository::class)
  */
-class CategoryPost
+class MainCategory
 {
     /**
      * @ORM\Id
@@ -30,18 +30,13 @@ class CategoryPost
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ChildrenCategory::class, mappedBy="parentCategory")
      */
-    private $post;
-
-    public function __toString(): string
-    {
-        return $this->getName();
-    }
+    private $childrenCategories;
 
     public function __construct()
     {
-        $this->post = new ArrayCollection();
+        $this->childrenCategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,29 +69,29 @@ class CategoryPost
     }
 
     /**
-     * @return Collection|Post[]
+     * @return Collection|ChildrenCategory[]
      */
-    public function getPost(): Collection
+    public function getChildrenCategories(): Collection
     {
-        return $this->post;
+        return $this->childrenCategories;
     }
 
-    public function addPost(Post $post): self
+    public function addChildrenCategory(ChildrenCategory $childrenCategory): self
     {
-        if (!$this->post->contains($post)) {
-            $this->post[] = $post;
-            $post->setCategory($this);
+        if (!$this->childrenCategories->contains($childrenCategory)) {
+            $this->childrenCategories[] = $childrenCategory;
+            $childrenCategory->setParentCategory($this);
         }
 
         return $this;
     }
 
-    public function removePost(Post $post): self
+    public function removeChildrenCategory(ChildrenCategory $childrenCategory): self
     {
-        if ($this->post->removeElement($post)) {
+        if ($this->childrenCategories->removeElement($childrenCategory)) {
             // set the owning side to null (unless already changed)
-            if ($post->getCategory() === $this) {
-                $post->setCategory(null);
+            if ($childrenCategory->getParentCategory() === $this) {
+                $childrenCategory->setParentCategory(null);
             }
         }
 

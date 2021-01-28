@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\CommentAnswer;
+use App\Entity\ChildrenCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method CommentAnswer|null find($id, $lockMode = null, $lockVersion = null)
- * @method CommentAnswer|null findOneBy(array $criteria, array $orderBy = null)
- * @method CommentAnswer[]    findAll()
- * @method CommentAnswer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ChildrenCategory|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ChildrenCategory|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ChildrenCategory[]    findAll()
+ * @method ChildrenCategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CommentAnswerRepository extends ServiceEntityRepository
+class ChildrenCategoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CommentAnswer::class);
+        parent::__construct($registry, ChildrenCategory::class);
     }
 
     // /**
-    //  * @return CommentAnswer[] Returns an array of CommentAnswer objects
+    //  * @return ChildrenCategory[] Returns an array of ChildrenCategory objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CommentAnswerRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?CommentAnswer
+    public function findOneBySomeField($value): ?ChildrenCategory
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

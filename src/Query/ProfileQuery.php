@@ -6,7 +6,6 @@ namespace App\Query;
 
 use App\Entity\User;
 use App\Service\PhotoToString;
-use App\Service\ProfileService;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\ORM\EntityManagerInterface;

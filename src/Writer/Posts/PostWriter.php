@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Writer\Posts;
 
-use App\Entity\Post;
+use App\Entity\Posts\Post;
 use App\Service\ConvertStringToSlug;
 use App\Service\PhotoToString;
 use App\Service\UploadFileService;

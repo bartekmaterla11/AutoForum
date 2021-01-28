@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Posts;
 
-use App\Entity\CategoryPost;
-use App\Entity\Post;
+use App\Entity\Posts\CategoryPost;
+use App\Entity\Posts\Post;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

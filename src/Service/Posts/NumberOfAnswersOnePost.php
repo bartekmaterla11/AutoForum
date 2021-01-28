@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Posts;
 
-use App\Entity\Post;
+use App\Entity\Posts\Post;
 use App\Query\Posts\NumberOfAnswersOnePostQuery;
 
 class NumberOfAnswersOnePost implements NumberOfAnswerOnePostInterface

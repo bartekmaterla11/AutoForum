@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\Posts\Answer;
+use App\Entity\Posts\CommentAnswer;
+use App\Entity\Posts\Post;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,17 +52,17 @@ class User implements UserInterface
     private $second_password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posts\Post", mappedBy="user")
      */
     private $posts;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posts\Answer", mappedBy="user")
      */
     private $answers;
 
     /**
-     * @ORM\OneToMany(targetEntity=CommentAnswer::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posts\CommentAnswer", mappedBy="user")
      */
     private $commentAnswers;
 

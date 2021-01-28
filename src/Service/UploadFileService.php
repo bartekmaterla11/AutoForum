@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class UploadFileService
 {
     /**
-     * @var PhotoToString
+     *@var  PhotoToString
      */
     private $photoToString;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Posts;
 
-use App\Entity\PhotoFilesForPosts;
+use App\Entity\Posts\PhotoFilesForPosts;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

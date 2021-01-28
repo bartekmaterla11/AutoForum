@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Posts;
 
-use App\Entity\CategoryPost;
-use App\Entity\CommentAnswer;
-use App\Entity\Post;
-use App\Entity\Answer;
-use App\Form\AnswerPostFormType;
-use App\Form\CommentAnswerFormType;
-use App\Form\PostFormType;
+use App\Entity\Posts\CategoryPost;
+use App\Entity\Posts\CommentAnswer;
+use App\Entity\Posts\Post;
+use App\Entity\Posts\Answer;
+use App\Form\Posts\AnswerPostFormType;
+use App\Form\Posts\CommentAnswerFormType;
+use App\Form\Posts\PostFormType;
 use App\Query\Posts\PostQuery;
-use App\Repository\CategoryPostRepository;
 use App\Service\Posts\AnswerAddInterface;
 use App\Service\Posts\CommentAnswerInterface;
 use App\Service\Posts\NumberOfAnswerOnePostInterface;
@@ -161,7 +160,7 @@ class PostController extends AbstractController
         $post = $postRep->findOneBy(['slug' => $slug]);
 
         if ($post) {
-            $numbers = $this->numberOfAnswerOnePost->getNumberOfAnswers($post->getId());
+            $numbers = $this->numberOfAnswerOnePost->getNumberOfAnswers($post);
             $likePosts = $postRep->findByPostsLikePost($post->getCategory()->getId(), $post->getId());
 
             if ($this->getUser()) {

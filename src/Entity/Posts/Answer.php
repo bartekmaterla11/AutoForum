@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Posts;
 
-use App\Repository\AnswerRepository;
+use App\Repository\Posts\AnswerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +20,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="answers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="answers")
      */
     private $user;
 

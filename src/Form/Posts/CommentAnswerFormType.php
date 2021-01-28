@@ -1,36 +1,31 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Posts;
 
-use App\Entity\Answer;
+use App\Entity\Posts\CommentAnswer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AnswerPostFormType extends AbstractType
+class CommentAnswerFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class,[
-                'label'=>' ',
+            ->add('contentCom', TextareaType::class, [
+                'label' => ' ',
                 'attr' => [
-                    'class' => 'textarea'
+                    'class' => 'textarea',
                 ]
-            ])
-            ->add('file', FileType::class,[
-                'label'=>' ',
-                'required'=>false
-            ])
-        ;
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'=>Answer::class
+            'data_class' => CommentAnswer::class
         ]);
     }
 }

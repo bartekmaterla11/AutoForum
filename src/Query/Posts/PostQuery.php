@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Query\Posts;
 
-use App\Entity\Post;
+use App\Entity\Posts\Post;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\ParameterType;
 use Symfony\Component\Filesystem\Filesystem;
@@ -37,15 +37,5 @@ class PostQuery
         $posts->execute();
 
         return true;
-    }
-
-    public function PostsLikePost(string  $title): array
-    {
-        $sql = 'SELECT * FROM post WHERE `title` LIKE :title ORDER BY uploaded_at DESC LIMIT 3';
-        $posts = $this->connection->prepare($sql);
-        $posts->bindValue(':title', $title);
-        $posts->execute();
-
-        return $posts;
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Posts;
 
-use App\Repository\CheckMarkPostRepository;
+use App\Repository\Posts\CheckMarkPostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

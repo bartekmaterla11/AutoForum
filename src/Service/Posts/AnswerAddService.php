@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\Posts;
 
-use App\Entity\Answer;
-use App\Entity\Post;
+use App\Entity\Posts\Answer;
+use App\Entity\Posts\Post;
 use App\Query\Posts\AnswerQuery;
 use App\Writer\Posts\AnswerPostWriter;
 use Symfony\Component\Form\FormInterface;
@@ -28,11 +28,11 @@ class AnswerAddService implements AnswerAddInterface
         $this->answerQuery = $answerQuery;
     }
 
-    public function addAnswerPost(FormInterface $form, Answer $add_answer, UserInterface $user, Post $post): bool
+    public function addAnswerPost(FormInterface $form, Answer $addAnswer, UserInterface $user, Post $post): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $this->answerWriter->addAnswerToDataBase($form, $add_answer, $user, $post);
+                $this->answerWriter->addAnswerToDataBase($form, $addAnswer, $user, $post);
 
             } catch (\Exception $exception) {
                 return false;

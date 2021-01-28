@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Posts;
 
-use App\Repository\PhotoFilesForPostRepository;
+use App\Repository\Posts\PhotoFilesForPostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

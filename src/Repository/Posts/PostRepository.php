@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\Posts;
 
-use App\Entity\CategoryPost;
-use App\Entity\Post;
+use App\Entity\Posts\CategoryPost;
+use App\Entity\Posts\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ParameterType;

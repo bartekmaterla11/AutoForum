@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Query\ProfileQuery;
-use App\Repository\AnswerRepository;
-use App\Repository\PostRepository;
+use App\Repository\Posts\AnswerRepository;
+use App\Repository\Posts\PostRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\FormInterface;
 

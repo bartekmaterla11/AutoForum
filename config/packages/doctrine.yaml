@@ -10,6 +10,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
+            App\Announcements:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity/Announcements'
+                prefix: 'App\Entity\Announcements'
+                alias: App\Announcements
+            App\Posts:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity/Posts'
+                prefix: 'App\Entity\Posts'
+                alias: App\Posts
             App:
                 is_bundle: false
                 type: annotation
