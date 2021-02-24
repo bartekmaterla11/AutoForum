@@ -76,10 +76,16 @@ class User implements UserInterface
      */
     private $filename;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="user")
+     */
+    private $offers;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
         $this->commentAnswers = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -288,6 +294,36 @@ class User implements UserInterface
     public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            // set the owning side to null (unless already changed)
+            if ($offer->getUser() === $this) {
+                $offer->setUser(null);
+            }
+        }
 
         return $this;
     }

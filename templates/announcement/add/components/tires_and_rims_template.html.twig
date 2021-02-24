@@ -1,0 +1,90 @@
+<div id="template6">
+    <div class="border border-primary p-4 mt-3 brad" style="display: none">
+        <div class="mb-3 ">
+            <h6 class="font-weight-light mb-2">Wybierz podkategorię<span style="color: red">*</span></h6>
+            <select id="tires_and_rims_form_name" class="categorySelect1">
+                <option value="0" selected>-</option>
+                {% for item in cat %}
+                    {% if item.id == 6 %}
+                        {% for it in item.childrenCategories %}
+                            <option value="{{ it.id }}">{{ it.name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="border border-primary p-4 mt-3 brad" style="display: none">
+        <div class="price_of_tires_name mb-3 w-33 ">
+            <h6 class="font-weight-light mb-2">Cena<span style="color: red">*</span></h6>
+            <input class=" float-left price " placeholder="000 000" type="text">
+            <span class="float-left ml-2 pt-1 mt-1 price-ite">zł</span>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="template6 border border-primary p-4 mt-3 brad" style="display: none">
+        <div class="mb-3 ">
+            <h6 class="font-weight-light mb-2">Pojazd<span style="color: red">*</span></h6>
+            <select id="vehicle_tires_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for it in vehicle %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" style="display: block">
+            <h6 class="font-weight-light mb-2">Typ<span style="color: red">*</span></h6>
+            <select id="type_tires_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for it in typeTires %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" style="display: block">
+            <h6 class="font-weight-light mb-2">Felgi<span style="color: red">*</span></h6>
+            <select id="rims_tires_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for it in typeRims %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" style="display: block">
+            <h6 class="font-weight-light mb-2">Cale<span style="color: red">*</span></h6>
+            <select id="inch_tires_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for it in inch %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" style="display: block">
+            <h6 class="font-weight-light mb-2">Szerokość<span style="color: red">*</span></h6>
+            <select id="width_tires_form_name" class="categorySelect4">
+                <option value="0">-</option>
+                {% for it in widthTires %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3" style="display: block">
+            <h6 class="font-weight-light mb-2">Profil<span style="color: red">*</span></h6>
+            <select id="profil_tires_form_name" class="categorySelect4">
+                <option value="0">-</option>
+                {% for it in profilTires %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3 ">
+            <h6 class="font-weight-light mb-2">Stan<span style="color: red">*</span></h6>
+            <select id="state_tires_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for it in state %}
+                    <option value="{{ it.id }}">{{ it.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>

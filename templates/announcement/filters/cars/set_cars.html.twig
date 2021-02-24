@@ -1,0 +1,170 @@
+<form name="set-cars-form" action="{{ path('announcement_filters',{'categorySlug': cat.slug}) }}" method="get">
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Producent</label>
+        <div class="mark-block ">
+            <select id="markAnnounSelect" class="w-100 categorySelect">
+                <option class="categoryOption"  value="0" selected >Wszystkie</option>
+                {% for item in mark %}
+                    <option class="categoryOption" value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Model</label>
+        <div class="modelsAnnounSelect">
+            <select id="modelAnnounSelect" disabled class="w-100 categorySelect">
+                <option class="categoryOption"  value="0" selected >Wszystkie</option>
+                {% for item in mark %}
+                    {% for item in item.modelOfCars %}
+                        <option class="categoryOption" value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Cena (zł)</label>
+        <div class="price-cars-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Rok produkcji</label>
+        <div class="year-cars-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Poj. silnika</label>
+        <div class="capacity-cars-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Przebieg</label>
+        <div class="mileage-cars-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Moc silnika</label>
+        <div class="power-cars-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Paliwo</label>
+        <div class="fuel-block ">
+            <select id="fuel-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in fuel %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Skrzynia biegów</label>
+        <div class="gearbox-block ">
+            <select id="gearbox-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in gearbox %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Typ nadwozia</label>
+        <div class="fuel-block ">
+            <select class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in body %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Kraj pochodzenia</label>
+        <div class="country-block ">
+            <select id="country-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in country %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Kierownica</label>
+        <div class="handlebar-block ">
+            <select id="handlebar-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in handlebar %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Kolor</label>
+        <div class="color-block ">
+            <select id="color-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in color %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Stan techniczny</label>
+        <div class="condition-block ">
+            <select id="condition-cars-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in condition %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="mt-3 w-100 text-right pr-2">
+        <button type="submit" class="btn btn-outline-primary p-1 pl-3 pr-3 ">Filtruj</button>
+    </div>
+</form>

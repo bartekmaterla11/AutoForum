@@ -17,7 +17,7 @@
                 <h4 class="float-left w-40 text-color-3">Forum motoryzacyjne</h4>
                 <div class="float-left w-60 text-right">
                     <span class="text-color-4">Kategoria</span>
-                    <select id="categoryPostSelect" class="w-50 ml-2 categorySelect" >
+                    <select id="categoryPostSelect" class="w-50 ml-2 categorySelect3" >
                         <option class="categoryOption" value="1" selected >Wszystkie posty</option>
                         {% for item in categories %}
                             <option class="categoryOption" value="{{ item.id }}"
@@ -32,15 +32,26 @@
                 <div style="clear: both"></div>
             </div>
             <div class="p-3 pb-1">
+                <form id="postsSearchForm">
+                    <div class="pb-4 mb-3 border-bottom border-color-1 ">
+                        <input id="itemsSearchPosts" class="float-left form-control" type="search" placeholder="Szukaj na forum..." aria-label="Search">
+                        <div class="float-left w-11 search">
+                            <button id="search_posts" class="form-control" type="submit"><i class="icon-search"></i></button>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                </form>
                 {% if posts is defined %}
                     {{ include('post/post_list/posts.html.twig', {posts:posts}) }}
-                {% else %}
+                    <div class="text-center w-100 p-1 pagination">
+                        {{ knp_pagination_render(posts) }}
+                    </div>
+                {% endif %}
+                {% if posts.count == 0 %}
                    <div class="mt-2">
-                       {% for message in app.flashes('faults') %}
-                           <div class="mr-2 mt-1  brad text-center p-1">
-                               {{ message }}
-                           </div>
-                       {% endfor %}
+                       <div class="mr-2 mt-1 brad text-center p-1">
+                           Nie znaleziono postów z tej kategorii
+                       </div>
                    </div>
                 {% endif %}
             </div>

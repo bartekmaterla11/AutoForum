@@ -39,7 +39,8 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->registration->registerUser($form, $user)) {
-
+                $name = $form->get('username')->getData();
+                $this->addFlash('success_register', 'Witaj '.$name);
                 return $guardHandler->authenticateUserAndHandleSuccess(
                     $user,
                     $request,

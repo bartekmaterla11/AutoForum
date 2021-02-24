@@ -7,17 +7,22 @@
         <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
             <i class="icon-home"></i> Jesteś na /
             <a class="text-white" href="{{ path('index') }}">Strona główna</a> /
-            <a class="text-white" href="{{ path('forum') }}"> Forum </a>
+            <a class="text-white" href="{{ path('forum',{'page': 1}) }}"> Forum </a>
             / <span class="text-white"> {{ post.title }} </span>
         </div>
-        {% for message1 in app.flashes('success_add_answer') %}
-            <div class="mr-2 bg-success brad text-center p-1">
-                {{ message1 }}
+        {% for message in app.flashes('success_add_answer') %}
+            <div class="mr-2 bg-success mt-1 brad text-center p-1">
+                {{ message }}
             </div>
         {% endfor %}
         {% for message2 in app.flashes('success_add_comment') %}
-            <div class="mr-2 bg-success brad text-center p-1">
+            <div class="mr-2 bg-success mt-1 brad text-center p-1">
                 {{ message2 }}
+            </div>
+        {% endfor %}
+        {% for message3 in app.flashes('success_remove_comment') %}
+            <div class="mr-2 bg-success mt-1 brad text-center p-1">
+                {{ message3 }}
             </div>
         {% endfor %}
         <div class="mr-2 bg-dark mt-1 brad ">
@@ -88,8 +93,13 @@
         <div class="mt-1 pl-3 p-2 mb-1 bg-dark brad mr-2">
             <h4 class="text-color-3">Odpowiedzi {{ numbers.answer }}</h4>
         </div>
+        {% for message in app.flashes('success_remove_answer') %}
+            <div class="mr-2 mb-1 bg-success brad text-center p-1">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="all_answers">
-            {{ include('components/view_answers_post_com.html.twig',{post:post}) }}
+            {{ include('components/view_answers_post_com.html.twig',{post:post, catSlug:catSlug}) }}
         </div>
         {% if likePost %}
         <div class="Like_posts bg-dark brad mr-2">

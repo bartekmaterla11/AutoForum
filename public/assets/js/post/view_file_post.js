@@ -21,14 +21,23 @@ jQuery(document).ready(function() {
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionHolder1.data('index', $collectionHolder1.find('input').length);
-
+    var x = 1;
     $addTagButton1.on('click', function(e) {
         // add a new tag form (see next code block)
-        addTagForm1($collectionHolder1, $newLinkLi1);
+        addTagForm1($collectionHolder1, $newLinkLi1, x);
+
     });
+
+    $($collectionHolder1).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault();
+        $(this).parent().remove();
+        x--;
+    })
+
 });
 
-function addTagForm1($collectionHolder1, $newLinkLi1) {
+
+function addTagForm1($collectionHolder1, $newLinkLi1, x) {
     // Get the data-prototype explained earlier
     var prototype = $collectionHolder1.data('prototype');
     // get the new index
@@ -42,13 +51,14 @@ function addTagForm1($collectionHolder1, $newLinkLi1) {
 
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
-    newForm1 = newForm1.replace(/__name__/g, index);
-
+    var newForm1 = newForm1.replace(/__name__/g, index);
+    // newForm.setAttribute('class', 'float');
     // increase the index with one for the next item
     $collectionHolder1.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newForm1Li = $('<li class="mb-2"><b class="float-left mr-3 font-weight-light">Zdjęcie '+  (+index +1 ) +' </b></li>').append(newForm1);
-
+    var $newForm1Li = $('<div class="mb-2 "><button type="button" class="remove_field mb-2 font-13 text-white p-1 btn bg-danger">Usuń</button><b class="float-left mr-3 pt-1 font-weight-light">Zdjęcie</b></div>').append(newForm1);
+    // $newForm1Li.append('<button type="button" class="remove_field font-13 text-white p-1 btn bg-danger">Usuń</button>');
+    x++;
     $newLinkLi1.before($newForm1Li);
 }

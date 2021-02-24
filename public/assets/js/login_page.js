@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#login').on('click', function (event) {
+    $('#a').on('click', function (event) {
         event.stopPropagation();
         that = $(this);
 

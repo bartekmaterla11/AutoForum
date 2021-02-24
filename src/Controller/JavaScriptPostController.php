@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class JavaScriptController extends AbstractController
+class JavaScriptPostController extends AbstractController
 {
     /**
      * @var PostMarkInterface
@@ -45,14 +45,5 @@ class JavaScriptController extends AbstractController
         }else{
             return $this->json(['Error' => 'true']);
         }
-    }
-
-    /**
-     * @Route()
-     * @param Request $request
-     */
-    public function searchPost(Request $request)
-    {
-        
     }
 }

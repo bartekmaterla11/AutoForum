@@ -1,17 +1,16 @@
 <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-    <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>
-    / Zarejestruj się
+    <i class="icon-home"></i> Jesteś na / Rejestracja
 </div>
 <div class="mr-2 bg-dark mt-1 brad ">
     <div class="p-2 pl-3 border-bottom border-primary">
-        <h4 class="text-color-3"><i class="icon-edit mr-1"></i>Rejestracja</h4>
+        <h4 class="text-color-3"><i class="icon-edit-1 mr-1"></i>Zarejestruj się</h4>
     </div>
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-    <div class="p-3 pl-5 mr-5 text-center text-color-3">
-        <p>Musisz wprowadzić poprawny adres e-mail, ponieważ na podany adres otrzymasz wiadomość
-            zawierającą link aktywujący konto.</p>
+    <div class="p-3 pl-5 mr-5 text-center">
+{#        <p>Musisz wprowadzić poprawny adres e-mail, ponieważ na podany adres otrzymasz wiadomość#}
+{#            zawierającą link aktywujący konto.</p>#}
     </div>
     <div class="w-85 ml-auto mr-auto p-3">
         {{ form_start(registrationForm) }}

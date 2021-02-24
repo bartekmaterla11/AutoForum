@@ -1,0 +1,22 @@
+<div class="w-90 mr-auto ml-auto p-3 pb-4">
+    <form name="announcements_add_form" method="post" action="{{ path('add_offer') }}">
+        <div class="border border-primary p-4 brad">
+            <h4 class="mb-4">Wpisz tytuł</h4>
+            <div class="mb-3 " id="announcements_title">
+                <h6 class="font-weight-light mb-0"><label for="announcements_add_form_title" class="required">Wpisz tytuł</label> <span style="color: red">*</span></h6>
+                <input type="text" id="announcements_add_form_title" name="announcements_add_form[title]" required="required" class="textType">
+            </div>
+            <div class="mb-3 ">
+                <h6 class="font-weight-light mb-0 "><label for="announcements_add_form_category" class="required">Wybierz kategorię</label> <span style="color: red">*</span></h6>
+                <select id="announcements_add_form_category" name="announcements_add_form[category]" required="required" class="choices_attr_1">
+                    <option value="10" selected="selected">-</option>
+                    {% for item in categories %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {{ include('announcement/menager_template/menager_category_templates.html.twig', {templates:templates, categories:categories}) }}
+        <input type="hidden" id="announcements_add_form__token" name="announcements_add_form[_token]" value="AmfPH0zhaeFkkDDOcLi4VXn0rzMxG5128DI6xJVY7qc">
+    </form>
+</div>

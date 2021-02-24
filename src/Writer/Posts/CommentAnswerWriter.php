@@ -7,7 +7,6 @@ namespace App\Writer\Posts;
 use App\Entity\Posts\Answer;
 use App\Entity\Posts\CommentAnswer;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class CommentAnswerWriter
@@ -22,13 +21,12 @@ class CommentAnswerWriter
         $this->entityManager = $entityManager;
     }
 
-    public function addCommentForAnswer(FormInterface $commentForm,UserInterface $user, Answer $answerId, CommentAnswer $add_comment): bool
+    public function addCommentForAnswer(string $content,UserInterface $user, Answer $answer, CommentAnswer $add_comment): bool
     {
         $add_comment->setUser($user);
-        $add_comment->setAnswer($answerId);
-        $add_comment->setContentCom($commentForm->get('content_com')->getData());
+        $add_comment->setAnswer($answer);
+        $add_comment->setContentCom($content);
         $add_comment->setUploadedAt(new \DateTime());
-        $add_comment->setLikeUp(0);
 
         $em = $this->entityManager;
         $em->persist($add_comment);

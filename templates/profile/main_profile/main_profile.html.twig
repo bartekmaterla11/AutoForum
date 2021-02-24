@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Mój Profil{% endblock %}
+{% block title %}Profil {{ name }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     {% for item in users %}
@@ -46,7 +46,7 @@
                 {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_DATA')  %}
                     {{ include('profile/user_data/user_datas.html.twig',{item:item,}) }}
                 {% elseif userTab == constant('App\\Enum\\ProfileEnum::USER_QUESTIONS')%}
-                    {{ include('profile/user_post/user_posts_prof.html.twig',{item:item}) }}
+                    {{ include('profile/user_post/user_posts_prof.html.twig',{item:item, posts:posts}) }}
                 {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_ANSWERS')%}
                     {{ include('profile/user_answers/user_answers.html.twig',{item:item}) }}
                 {% elseif userTab is constant('App\\Enum\\ProfileEnum::USER_COMMENTS')%}

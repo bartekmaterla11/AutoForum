@@ -1,0 +1,21 @@
+{% if app.user %}
+    {% if app.user.username == item.user.username %}
+        <span class="text-white font-weight-normal">Dodałeś</span>
+        komentarz w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+        | <span class="text-white ">{{ item.uploadedAt|date('H:i:s') }}</span>
+    {% else %}
+        <span class="text-white font-weight-normal">Komentarz</span> dodany przez
+        <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
+            {{ item.user.username }}
+        </a>
+        w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+        | <span class="text-white ">{{ item.uploadedAt|date('H:i:s') }}</span>
+    {% endif %}
+{% else %}
+    <span class="text-white font-weight-normal">Komentarz</span> dodany przez
+    <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}" class="font-weight-normal text-white">
+        {{ item.user.username }}
+    </a>
+    w dniu <span class="text-white font-weight-normal">{{ item.uploadedAt|date('d.m.Y') }}</span>
+    | <span class="text-white ">{{ item.uploadedAt|date('H:i:s') }}</span>
+{% endif %}

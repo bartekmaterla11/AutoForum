@@ -1,0 +1,208 @@
+{% for it in offer.attributeValues %}
+    {% if it.attribute.id == 1 %}
+    {% elseif it.attribute.id == 2 %}
+    {% elseif it.attribute.id == 3 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for cat in offer.template.markOfCars %}
+                {% if cat.id == it.value %}
+                    {{ cat.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 27 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for cat in offer.template.markOfMotors %}
+                {% if cat.id == it.value %}
+                    {{ cat.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 25 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for cat in offer.category.childrenCategories %}
+                {% if cat.id == it.value %}
+                    {{ cat.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 26 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for cat in type %}
+                {% if cat.id == it.value %}
+                    {{ cat.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 24 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for cat in offer.template.markOfVansAndTrucks %}
+                {% if cat.id == it.value %}
+                    {{ cat.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 4 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in models %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 10 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in color %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 11 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in body %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 12 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in condition %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 13 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in gearbox %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 14 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in country %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 15 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in handlebar %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 16 %}
+    {% elseif it.attribute.id == 17 %}
+    {% elseif it.attribute.id == 18 %}
+    {% elseif it.attribute.id == 19 %}
+    {% elseif it.attribute.id == 20 %}
+    {% elseif it.attribute.id == 21 %}
+    {% elseif it.attribute.id == 28 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in state %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 29 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in vehicleTires %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 30 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in typeTires %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 31 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in typeRims %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 32 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in inch %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 33 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in widthTires %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 34 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in profilTires %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% elseif it.attribute.id == 6 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <div class="float-left"><span class="text-color-3">{{ it.attribute.originalName }}: </span> {{ it.value }}</div>
+            <div class="ml-1 float-left">cm</div>
+            <span class="font-11 float-left">3</span>
+            <div style="clear: both"></div>
+        </span>
+    {% elseif it.attribute.id == 7 %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+            <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+            {% for item in fuel %}
+                {% if item.id == it.value %}
+                    {{ item.name }}
+                {% endif %}
+            {% endfor %}
+        </span>
+    {% else %}
+        <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
+             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+             {{ it.value }}
+            {% if it.attribute.id == 8 %} KM
+            {% elseif it.attribute.id == 9 %} km
+            {% elseif it.attribute.id == 22 %} kg
+            {% endif %}
+        </span>
+    {% endif %}
+{% endfor %}
+<div style="clear: both"></div>

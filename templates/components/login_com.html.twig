@@ -1,9 +1,9 @@
 <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-    <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>/ Zaloguj się
+    <i class="icon-home"></i> Jesteś na / Logowanie
 </div>
 <div class="mr-2 bg-dark mt-1 brad ">
     <div class="p-2 pl-3 border-bottom border-primary mb-3">
-        <h4 class="text-color-3"><i class="icon-edit mr-1"></i>Zaloguj się</h4>
+        <h4 class="text-color-3"><i class="icon-edit-1 mr-1"></i>Zaloguj się</h4>
     </div>
 
     <form method="post" class="w-50 ml-auto mr-auto pb-5" action="{{ path('app_login') }}">
@@ -20,15 +20,16 @@
                 <input class="mr-2" type="checkbox" name="_remember_me">Pamiętaj mnie na tym komputerze
             </label>
         </div>
+
 {#        {% for error1 in app.flashes('error_login') %}#}
 {#            <div class="ml-auto mr-auto w-100 bg-danger brad text-center p-1 mb-4">#}
 {#                {{ error1 }}#}
 {#            </div>#}
 {#        {% endfor %}#}
         {% if error %}
-            <div class="alert border-danger text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert bg-danger text-white">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <button class="btn btn-lg btn-outline-primary mt-2" type="submit">
+        <button id="login" class="btn btn-lg btn-outline-primary mt-2" type="submit">
             Zaloguj się
         </button>
     </form>

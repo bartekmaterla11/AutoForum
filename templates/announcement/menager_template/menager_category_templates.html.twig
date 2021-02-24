@@ -1,0 +1,55 @@
+<div id="all_templates">
+    {% for item in templates %}
+        {% if item.id == 1 %}
+            {{ include('announcement/add/components/cars_template.html.twig',{item:item}) }}
+        {% elseif item.id == 2 %}
+            {{ include('announcement/add/components/motors_and_scooters_template.html.twig',{item:item,cat:categories}) }}
+        {% elseif item.id == 3 %}
+            {{ include('announcement/add/components/vans_and_trucks_template.html.twig',{item:item, cat:categories}) }}
+        {% elseif item.id == 4 %}
+            {{ include('announcement/add/components/cars_parts_template.html.twig',{item:item, cat:categories}) }}
+        {% elseif item.id == 5 %}
+            {{ include('announcement/add/components/motors_parts_template.html.twig') }}
+        {% elseif item.id == 6 %}
+            {{ include('announcement/add/components/tires_and_rims_template.html.twig',{item:item, cat:categories}) }}
+        {% elseif item.id == 7 %}
+            {{ include('announcement/add/components/trailer_and_other_vehicles_template.html.twig',{cat:categories}) }}
+        {% elseif item.id == 8 %}
+            {{ include('announcement/add/components/electronic_equpments_template.html.twig') }}
+        {% elseif item.id == 9 %}
+            {{ include('announcement/add/components/other_automotive_template.html.twig') }}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="others-datas">
+    {{ include('announcement/add/components/description.html.twig') }}
+    {{ include('announcement/add/components/photos_offer.html.twig') }}
+    {{ include('announcement/add/components/contact_details.html.twig') }}
+</div>
+<div id="all_buttons">
+    {% for item in templates %}
+        {% if item.id == 1 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 2 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 3 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+            {{ include('announcement/add/components/others_button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 4 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 5 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 6 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 7 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 8 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% elseif item.id == 9 %}
+            {{ include('announcement/add/components/button_add_offer.html.twig',{id:item.id}) }}
+        {% endif %}
+    {% endfor %}
+    <div id="Error">
+        <div class="bg-danger text-center text-white p-2 brad mt-3" style="display: none"></div>
+    </div>
+</div>

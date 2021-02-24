@@ -36,6 +36,17 @@ class PostRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByAllPostsUser(int $userId): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->where('p.user = :id')
+            ->setParameter('id', $userId, ParameterType::INTEGER)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function findByCategoryPosts(string $slug): ?array
     {
         return $this->createQueryBuilder('p')

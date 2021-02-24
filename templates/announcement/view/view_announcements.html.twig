@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ offer.title }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div  class="text-white mt-3 w-75 float-left mb-4 " >
+        <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+            <i class="icon-home"></i> Jesteś na /
+            <a class="text-white" href="{{ path('index') }}">Strona główna</a> /
+            <a class="text-white" href="{{ path('announcement',{'page': 1}) }}"> Ogłoszenia </a>
+            / <a href="{{ path('announcement_filters',{'categorySlug': catSlug}) }}" class="text-white"> {{ cat }} </a>
+        </div>
+        <div class="mr-2 bg-dark mt-1 brad ">
+            <div class="p-2 pl-3 border-bottom border-primary">
+                <h4 class="text-color-3">{{ offer.title }}</h4>
+            </div>
+            <div class="p-3 pb-4 mt-2 pb-1 ">
+                <div class="w-75 float-left">
+                    <div class="">
+                        <img class="max-height-7 max-width-7" src="{{ asset('assets/img/audi.jpg') }}">
+                    </div>
+                    <div class="mt-3 font-15">
+                        <h2 class="font-weight-normal mb-2">{{ offer.title }}</h2>
+                        <div class="font-30 mb-4 text-color-3 font-weight-bold">
+                            {% for it in offer.attributeValues %}
+                                {% if it.attribute.id == 2 %}
+                                    {{ it.value }} zł
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {{ include('announcement/view/components/view_offer_datas.html.twig',{offer:offer}) }}
+                        <div class="mt-2 font-15">
+                            <h3 class="">Opis</h3>
+                            <div class="brad bgcolor p-3 mt-3">
+                                <div class="border-bottom border-secondary pb-3">
+                                {% for it in offer.attributeValues %}
+                                    {% if it.attribute.id == 16 %}
+                                        {{ it.value }}
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+                                <div class="pt-2 font-13">
+                                    <span class="text-color-3">Dodano: </span> {{ offer.uploadedAt|date('d-m-Y H:i') }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-25 float-left" >
+                    <div class="bgcolor p-2 brad">
+                        <h6 class="text-color-3">Użytkownik</h6>
+                        <div class="float-left mt-1">
+                            {{ include('components/verification_user_with_item_photos.html.twig',{post:offer}) }}
+                        </div>
+                        <div class="float-left mt-2 ml-2" >
+                            {{ include('components/verification_user_with_username.html.twig',{user:offer.user}) }}
+                        </div>
+                        <div style="clear: both"></div>
+                        <div class="mt-2">
+                            <span class="font-13 text-color-3">Numer telefonu: </span><span class="font-15">
+                                {% for it in offer.attributeValues %}
+                                    {% if it.attribute.id == 20 %}
+                                        {{ it.value }}
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bgcolor mt-2 p-2 brad">
+                        <h6 class="text-color-3">Lokalizacja</h6>
+                        <div class="mt-2">
+                            <span class="font-13">
+                                {% for it in offer.attributeValues %}
+                                    {% if it.attribute.id == 17 %}
+                                        <span class="text-color-3">{{ it.attribute.originalName }}: </span>
+                                        {% for item in location %}
+                                            {% if item.id == it.value %}
+                                                {{ item.name }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if it.attribute.id == 18 %}
+                                        <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
+                                    {% endif %}
+                                    {% if it.attribute.id == 19 %}
+                                        <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+            <div class="p-3 pb-4 mt-2 ">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

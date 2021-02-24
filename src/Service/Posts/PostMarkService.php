@@ -50,9 +50,6 @@ class PostMarkService implements PostMarkInterface
                 return true;
             }
         }
+        return false;
     }
-//    public function checkAddMarkPost()
-//    {
-//
-//    }
 }

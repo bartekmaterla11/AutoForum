@@ -34,9 +34,25 @@ class MainCategory
      */
     private $childrenCategories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Offer::class, mappedBy="category")
+     */
+    private $offers;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Template::class, mappedBy="category", cascade={"persist", "remove"})
+     */
+    private $template;
+
     public function __construct()
     {
         $this->childrenCategories = new ArrayCollection();
+        $this->offers = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -93,6 +109,54 @@ class MainCategory
             if ($childrenCategory->getParentCategory() === $this) {
                 $childrenCategory->setParentCategory(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            // set the owning side to null (unless already changed)
+            if ($offer->getCategory() === $this) {
+                $offer->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTemplate(): ?Template
+    {
+        return $this->template;
+    }
+
+    public function setTemplate(?Template $template): self
+    {
+        $this->template = $template;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newCategory = null === $template ? null : $this;
+        if ($template->getCategory() !== $newCategory) {
+            $template->setCategory($newCategory);
         }
 
         return $this;

@@ -119,19 +119,20 @@ class ProfileQuery
     {
         $em = $this->entityManager;
         $user1 = $em->getRepository(User::class)->find($user);
-
+        $newPass = $form->get('plainPassword')->getData();
+        $secNewPass = $form->get('second_password')->getData();
         $altPass = $form->get('Password')->getData();
 
         if (password_verify($altPass, $passDb)) {
-            if ($form->get('plainPassword')->getData() == $form->get('second_password')->getData()) {
+            if ($newPass == $secNewPass) {
 
                 $user1->setPassword($this->passwordEncoder->encodePassword(
                     $user1,
-                    $form->get('plainPassword')->getData()
+                    $newPass
                 ));
                 $user1->setSecondPassword($this->passwordEncoder->encodePassword(
                     $user1,
-                    $form->get('second_password')->getData()
+                    $secNewPass
                 ));
 
                 $em->persist($user1);

@@ -4,11 +4,7 @@
             {{ message }}
         </div>
     {% endfor %}
-    {% for message in app.flashes('success_remove_answer') %}
-        <div class="mr-2 mb-1 bg-success brad text-center p-1">
-            {{ message }}
-        </div>
-    {% endfor %}
+
     <div class="bg-dark brad p-3 mb-1 mr-2">
         {% for message in app.flashes('error_remove_answer') %}
             <div class="mr-2 mb-3 bg-danger brad text-center p-1">
@@ -63,7 +59,7 @@
                             </a>
                         {% endif %}
                     <div style="clear: both"></div>
-                    {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id }) }}
+                    {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id, catslug:catSlug, slug:item.post.slug }) }}
                 {% else %}
                     {{ include('components/ajax_add_comment_answer_com.html.twig') }}
                     <button class="btn font-13 font-weight-bold text-white bg-secondary"
@@ -73,7 +69,7 @@
                 {% endif %}
             </div>
             <div class="all_comments">
-                {{ include('components/view_comments_answer_com.html.twig',{comments: item.commentanswers }) }}
+                {{ include('components/view_comments_answer_com.html.twig',{comments: item.commentanswers, catSlug:catSlug }) }}
             </div>
         </div>
         <div class="float-left text-center pl-new">

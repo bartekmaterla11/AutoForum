@@ -1,0 +1,25 @@
+<div class="border border-primary p-4 brad mt-3">
+    <h4 class="">Twoje dane kontaktowe</h4>
+    <div class="mt-1">
+        <label class="font-13">Zapiszemy te dane dla Twojej wygody.</label>
+        <div id="contact_details" class="mt-3">
+            <div class="mb-3">
+                <h6 class="font-weight-light mb-2">Wybierz województwo<span style="color: red">*</span></h6>
+                <select id="location_country_form_name" class="categorySelect1">
+                    <option value="0" selected>-</option>
+                    {% for it in location %}
+                        <option value="{{ it.id }}">{{ it.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3" id="location_form_name">
+                <h6 class="font-weight-light mb-2">Podaj miejscowość<span style="color: red">*</span></h6>
+                <input type="text" class="textType1">
+            </div>
+            <div class="mb-3" id="number_form_name">
+                <h6 class="font-weight-light mb-2">Podaj numer telefonu<span style="color: red">*</span></h6>
+                <input type="text" class="textType1">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,501 @@
+<form id="set-vans-trucks-form" action="" method="get">
+    <div class="w-25 float-left p-1">
+        <label class="text-color-4">Rodzaj</label>
+        <div class="divCategorySelect">
+            <select id="category-vans-trucks-block" class="w-100 categorySelect">
+                <option class="categoryOption" value="0" selected >Wszystkie</option>
+                {% for item in cat.childrenCategories %}
+                    <option class="categoryOption" value="{{ item.id }}"
+                        {% if slug is defined %}
+                            {% if slug == item.slug %} selected {% endif %}
+                        {% endif %}
+                    >{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form1" style="display: block">
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Cena (zł)</label>
+            <div class="price-cars-block1 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Rok produkcji</label>
+            <div class="year-cars-block1 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Poj. silnika</label>
+            <div class="capacity-cars-block1 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Przebieg</label>
+            <div class="mileage-cars-block1 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Moc silnika</label>
+            <div class="power-cars-block1 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Paliwo</label>
+            <div class="fuel-block ">
+                <select id="fuel-cars-block1" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in fuel %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Skrzynia biegów</label>
+            <div class="gearbox-block ">
+                <select id="gearbox-cars-block1" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in gearbox %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Kraj pochodzenia</label>
+            <div class="country-block ">
+                <select id="country-cars-block1" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in country %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Stan techniczny</label>
+            <div class="condition-block ">
+                <select id="condition-cars-block1" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in condition %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form2" style="display: none">
+        <div class="w-25 float-left p-1">
+            <label class="text-color-4">Producent</label>
+            <div id="lolo" class="mark_vans_trucks_block">
+                <select id="mark-vans-trucks-block2" disabled="disabled" class="w-100 categorySelect">
+                    <option class="categoryOption" value="0" selected >Wszystkie</option>
+                    {% for item in cat.childrenCategories %}
+                        {% for it in item.markOfVansAndTrucks %}
+                            <option value="{{ it.id }}">{{ it.name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Cena (zł)</label>
+            <div class="price-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Rok produkcji</label>
+            <div class="year-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Poj. silnika</label>
+            <div class="capacity-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Przebieg</label>
+            <div class="mileage-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Moc silnika</label>
+            <div class="power-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Paliwo</label>
+            <div class="fuel-block ">
+                <select id="fuel-cars-block2" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in fuel %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Ładowność</label>
+            <div class="power-cars-block2 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="text" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Skrzynia biegów</label>
+            <div class="gearbox-block ">
+                <select id="gearbox-cars-block2" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in gearbox %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Kraj pochodzenia</label>
+            <div class="country-block ">
+                <select id="country-cars-block2" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in country %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Stan techniczny</label>
+            <div class="condition-block ">
+                <select id="condition-cars-block2" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in condition %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form3" style="display: none">
+        <div class="w-25 float-left p-1">
+            <label class="text-color-4">Producent</label>
+            <div id="lolo1" class="mark_vans_trucks_block">
+                <select id="mark-vans-trucks-block3" disabled="disabled" class="w-100 categorySelect">
+                    <option class="categoryOption" value="0" selected >Wszystkie</option>
+                    {% for item in cat.childrenCategories %}
+                        {% for it in item.markOfVansAndTrucks %}
+                            <option value="{{ it.id }}">{{ it.name }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Cena (zł)</label>
+            <div class="price-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Rok produkcji</label>
+            <div class="year-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Poj. silnika</label>
+            <div class="capacity-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Przebieg</label>
+            <div class="mileage-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Moc silnika</label>
+            <div class="power-cars-block3">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Paliwo</label>
+            <div class="fuel-block ">
+                <select id="fuel-cars-block3" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in fuel %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Ładowność</label>
+            <div class="power-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="text" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Liczba osi</label>
+            <div class="power-cars-block3 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="text" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Skrzynia biegów</label>
+            <div class="gearbox-block ">
+                <select id="gearbox-cars-block3" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in gearbox %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Kraj pochodzenia</label>
+            <div class="country-block ">
+                <select id="country-cars-block3" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in country %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Stan techniczny</label>
+            <div class="condition-block ">
+                <select id="condition-cars-block3" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in condition %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form4" style="display: none">
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Cena (zł)</label>
+            <div class="price-cars-block4 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Rok produkcji</label>
+            <div class="year-cars-block4 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Stan techniczny</label>
+            <div class="condition-block ">
+                <select id="condition-cars-block4" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in condition %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Przebieg</label>
+            <div class="mileage-cars-block4 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="text" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="form5" style="display: none">
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Cena (zł)</label>
+            <div class="price-cars-block5 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Rok produkcji</label>
+            <div class="year-cars-block5 ">
+                <div class="float-left w-48">
+                    <input placeholder="od" type="search" class="textType">
+                </div>
+                <div class="float-left w-48 ml-1">
+                    <input placeholder="do" type="text" class="textType">
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="w-25 mb-2 float-left p-1">
+            <label class="text-color-4">Stan techniczny</label>
+            <div class="condition-block ">
+                <select id="condition-cars-block5" class="categorySelect">
+                    <option value="0" selected >Wszystkie</option>
+                    {% for item in condition %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="mt-3 w-100 text-right pr-2">
+        <button type="submit" class="btn btn-outline-primary p-1 pl-3 pr-3 ">Filtruj</button>
+    </div>
+</form>

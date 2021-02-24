@@ -19,7 +19,7 @@ class PostFormType extends AbstractType
         $builder
             ->add('category', EntityType::class,[
                 'class' => CategoryPost::class,
-                'placeholder' => ' ',
+                'placeholder' => '-',
                 'label' => 'Kategoria',
                 'attr'=>['class'=>'choices_attr']
             ])

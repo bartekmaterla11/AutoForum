@@ -23,25 +23,21 @@ class PostWriter
      */
     private $stringToSlug;
     /**
-     * @var PhotoToString
-     */
-    private $photoToString;
-    /**
      * @var UploadFileService
      */
     private $uploadFileService;
 
-    public function __construct(EntityManagerInterface $entityManager,PhotoToString $photoToString, ConvertStringToSlug $stringToSlug, UploadFileService $uploadFileService)
+    public function __construct(EntityManagerInterface $entityManager, ConvertStringToSlug $stringToSlug, UploadFileService $uploadFileService)
     {
         $this->entityManager = $entityManager;
         $this->stringToSlug = $stringToSlug;
-        $this->photoToString = $photoToString;
         $this->uploadFileService = $uploadFileService;
     }
 
     public function addToDataBase(Post $post, FormInterface $form, UserInterface $user): bool
     {
         $filesPost = $form->getData()->getPhotoFilesForPosts();
+
         if ($filesPost) {
             foreach ($filesPost as $file) {
                 $newFileName = $this->uploadFileService->UploadFile($file->getFilename(), 'Name', 'images/post');

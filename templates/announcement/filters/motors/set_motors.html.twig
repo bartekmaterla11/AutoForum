@@ -1,0 +1,91 @@
+<form id="set-motors-form" action="" method="get">
+    <div class="w-25 float-left p-1">
+        <label class="text-color-4">Rodzaj</label>
+        <div class="divCategorySelect">
+            <select id="category-motors-block" class="w-100 categorySelect">
+                <option class="categoryOption" value="0" selected >Wszystkie</option>
+                {% for item in cat.childrenCategories %}
+                    <option class="categoryOption" value="{{ item.id }}"
+                            {% if slug is defined %}
+                                {% if slug == item.slug %} selected {% endif %}
+                            {% endif %}
+                    >{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 float-left p-1">
+        <label class="text-color-4">Producent</label>
+        <div id="motors_mark" class="mark_vans_trucks_block">
+            <select id="mark-motors-block" class="w-100 categorySelect">
+                <option class="categoryOption" value="0" selected >Wszystkie</option>
+                {% for item in markMotors %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Cena (zł)</label>
+        <div class="price-motors-block ">
+            <div class="float-left w-48">
+                <input placeholder="od" type="text" list="items-price" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Rok produkcji</label>
+        <div class="year-motors-block">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Poj. silnika</label>
+        <div class="capacity-motors-block">
+            <div class="float-left w-48">
+                <input placeholder="od" type="search" class="textType">
+            </div>
+            <div class="float-left w-48 ml-1">
+                <input placeholder="do" type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Kraj pochodzenia</label>
+        <div class="country-block ">
+            <select id="country-motors-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in country %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Stan techniczny</label>
+        <div class="condition-block ">
+            <select id="condition-motors-block" class="categorySelect">
+                <option value="0" selected >Wszystkie</option>
+                {% for item in condition %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="mt-3 w-100 text-right pr-2">
+        <button type="submit" class="btn btn-outline-primary p-1 pl-3 pr-3 ">Filtruj</button>
+    </div>
+</form>

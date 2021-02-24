@@ -1,0 +1,30 @@
+<div id="template5">
+    <div class="border border-primary p-4 mt-3 brad" style="display: none">
+        <div class="price_of_motors_parts_form_name mb-3 w-33 ">
+            <h6 class="font-weight-light mb-2">Cena<span style="color: red">*</span></h6>
+            <input class=" float-left price " placeholder="000 000" type="text">
+            <span class="float-left ml-2 pt-1 mt-1 price-ite">zł</span>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="border border-primary p-4 mt-3 brad" style="display: none">
+        <div class="mb-3">
+            <h6 class="font-weight-light mb-2">Rodzaj<span style="color: red">*</span></h6>
+            <select id="type_of_motors_parts_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for item in type %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <h6 class="font-weight-light mb-2">Stan<span style="color: red">*</span></h6>
+            <select id="state_of_motors_parts_form_name" class="categorySelect1">
+                <option value="0">-</option>
+                {% for item in state %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>

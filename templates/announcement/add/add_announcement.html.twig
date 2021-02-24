@@ -1,36 +1,26 @@
-{% if app.user %}
-    {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-    {% block title %}{{ parent() }}{% endblock %}
-    
-    {% block body %}
-        <div class="container" >
-            <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
-                <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
-                    <i class="icon-home"></i> Jesteś na / <a href="{{ path('index') }}" class="text-white font-weight-normal">Forum </a>
-                    / Dodawanie ogłoszenia
-                </div>
-                <div class="mr-2 bg-dark mt-1 brad ">
-                    <div class="p-2 pl-3 border-bottom border-primary">
-                        <h4><i class="icon-edit mr-1"></i>Jeśli czegoś nie potrzebujesz, wystaw to tutaj</h4>
-                    </div>
-                    <div class="p-3 mt-2 pb-1">
-                        {% for message in app.flashes('error1') %}
-                            <div class="brad border-danger text-danger border text-center" >
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-    {#                    {% if app.user %}{{ include('components/add_post_com.html.twig') }}{% endif %}#}
-                    </div>
-                </div>
+{% block title %}{{ parent() }} - dodaj oferte{% endblock %}
+
+{% block body %}
+        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+            <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
+                <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('index') }}">Strona główna</a>
+                / <a class="text-white" href="{{ path('announcement',{'page':1}) }}" >Ogłoszenia</a>
+                / Dodawanie oferty
             </div>
-            <div class="color mt-3 w-25 float-left">
-                {{ include('components/info_datetime_com.html.twig') }}
-                {{ include('components/button_add_post_ad_com.html.twig') }}
-                {{ include('components/info_data_com.html.twig') }}
-                {{ include('components/social_media_com.html.twig') }}
+            <div class="mr-2 bg-dark mt-1 brad ">
+                <div class="p-2 pl-3 border-bottom border-primary">
+                    <h4 class="text-color-3"><i class="icon-edit-1 mr-1"></i>Dodaj ofertę</h4>
+                </div>
+                <div class="ml-5 pl-2 mt-4">
+                    <h3 class="float-left w-50 mb-0">Zaczynamy !</h3>
+                    <div class="float-left w-40 ml-3 text-right mt-2" >
+                        <button id="return_change" type="button" class="add_offer text-white font-15 btn bg-info">Cofnij zmiany</button>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+                {{ include('announcement/add/add_offer_com.html.twig') }}
             </div>
         </div>
-        <div style="clear: both"></div>
-    {% endblock %}
-{% endif %}
+{% endblock %}

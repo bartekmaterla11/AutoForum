@@ -44,6 +44,7 @@ class RegistrationWriter
         $user->setUsername($form->get('username')->getData());
         $user->setEmail($form->get('email')->getData());
         $user->setUploadedAt(new \DateTime);
+        $user->setRoles(["Role_user"]);
 
         /** @var UploadedFile $pictureFileName */
         if ($form->get('filename')->getData()) {
@@ -57,13 +58,7 @@ class RegistrationWriter
         }
         $plainPassword = $form->get('plainPassword')->getData();
         $secondPassword = $form->get('second_password')->getData();
-        
-//        \Symfony\Component\VarDumper\VarDumper::dump($plainPassword);
-//        \Symfony\Component\VarDumper\VarDumper::dump($secondPassword);
-//        \Symfony\Component\VarDumper\VarDumper::dump($form);
-//        die('end');
-//        die('end');
-//        die('end');
+
         if ($plainPassword === $secondPassword) {
 
             $user->setPassword(

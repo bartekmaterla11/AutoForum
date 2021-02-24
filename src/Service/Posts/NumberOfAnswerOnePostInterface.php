@@ -6,5 +6,5 @@ use App\Entity\Posts\Post;
 
 interface NumberOfAnswerOnePostInterface
 {
-    public function getNumberOfAnswers(Post $postId): array;
+    public function getNumberOfAnswers(Post $post): array;
 }

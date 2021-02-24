@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\EditDataUserForm;
 use App\Form\EditPasswordUserForm;
 use App\Query\ProfileQuery;
+use App\Repository\Posts\PostRepository;
 use App\Service\ProfileInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +22,17 @@ class ProfileController extends AbstractController
      * @var ProfileQuery
      */
     private $profileQuery;
+    /**
+     * @var PostRepository
+     */
+    private $postRepository;
 
 
-    public function __construct(ProfileInterface $profile, ProfileQuery $profileQuery)
+    public function __construct(ProfileInterface $profile, ProfileQuery $profileQuery, PostRepository $postRepository)
     {
         $this->profile = $profile;
         $this->profileQuery = $profileQuery;
+        $this->postRepository = $postRepository;
     }
 
     /**
@@ -40,6 +46,7 @@ class ProfileController extends AbstractController
         $user = $this->getUser()->getUsername();
         $users = $em->getRepository(User::class)->findBy(['username' => $user]);
 
+        $posts = $this->postRepository->findByAllPostsUser($userId);
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
         $intAnswers = $this->profile->answeredIntUserPost($userId);
@@ -48,12 +55,14 @@ class ProfileController extends AbstractController
         return $this->render('profile/main_profile/main_profile.html.twig', [
             'users' => $users,
             'user' => $user,
+            'name' =>$user,
             'userTab' => $userTab,
             'editProfile' => null,
+            'posts' => $posts,
             'userAnswers' => $userAnswers,
             'userComments' => $userComments,
             'intAnswers' => $intAnswers,
-            'intComments' => $intComments
+            'intComments' => $intComments,
         ]);
     }
 
@@ -67,31 +76,39 @@ class ProfileController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(User::class)->findBy(['username' => $username]);
+
+        $posts = $this->postRepository->findByAllPostsUser($userId);
         $userAnswers = $this->profile->answeredUserPost($userId);
         $userComments = $this->profile->commentedUserAnswer($userId);
         $intAnswers = $this->profile->answeredIntUserPost($userId);
         $intComments = $this->profile->commentedIntUserAnswer($userId);
+
 
         if ($this->getUser()) {
             $user = $this->getUser()->getUsername();
             return $this->render('profile/main_profile/main_profile.html.twig', [
                 'users' => $users,
                 'user' => $user,
+                'name' =>$username,
                 'userTab' => $userTab,
                 'editProfile' => null,
+                'posts' => $posts,
                 'userAnswers' => $userAnswers,
                 'userComments' => $userComments,
                 'intAnswers' => $intAnswers,
                 'intComments' => $intComments
             ]);
         } else {
+
             return $this->render('profile/main_profile/main_profile.html.twig', [
                 'users' => $users,
                 'userTab' => $userTab,
+                'posts' => $posts,
                 'userAnswers' => $userAnswers,
                 'userComments' => $userComments,
                 'intAnswers' => $intAnswers,
-                'intComments' => $intComments
+                'intComments' => $intComments,
+                'name' => $username,
             ]);
         }
     }
@@ -135,6 +152,7 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/main_profile/main_profile.html.twig', [
             'users' => $user,
+            'name' => $this->getUser()->getUsername(),
             'userTab' => $userTab,
             'editProfile' => $form->createView(),
             'editPassword' => $form1->createView()
