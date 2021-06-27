@@ -25,7 +25,7 @@ $(document).ready(function() {
                     var child = parent.children()[2];
                     var int = parseInt(child.innerText);
                     var like = int + 1;
-                    child.innerHTML ='+' + like;
+                    child.innerHTML = like
                 }
             }
         });

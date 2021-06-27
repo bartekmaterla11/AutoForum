@@ -8,11 +8,13 @@ use App\Entity\Attribute;
 use App\Entity\AttributeValue;
 use App\Entity\MainCategory;
 use App\Entity\Offer;
+use App\Entity\PhotoFilesForOffer;
 use App\Entity\Template;
 use App\Service\ConvertStringToSlug;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class DataCarsService
+class DatasOfferService
 {
 
     /**
@@ -23,14 +25,19 @@ class DataCarsService
      * @var ConvertStringToSlug
      */
     private $stringToSlug;
+    /**
+     * @var PhotosOfferService
+     */
+    private PhotosOfferService $offerService;
 
-    public function __construct(EntityManagerInterface $entityManager, ConvertStringToSlug $stringToSlug)
+    public function __construct(EntityManagerInterface $entityManager, ConvertStringToSlug $stringToSlug, PhotosOfferService $offerService)
     {
         $this->entityManager = $entityManager;
         $this->stringToSlug = $stringToSlug;
+        $this->offerService = $offerService;
     }
 
-    public function addDatasCars(array $datas, $user): bool
+    public function addDatasOffer(array $datas, $user): bool
     {
         $em = $this->entityManager;
         $categoryId = $datas['category'];
@@ -49,6 +56,10 @@ class DataCarsService
         $newOffer->setSlug($this->stringToSlug->ConversionToSlug($datas['title']));
         $newOffer->setUser($user);
         $newOffer->setUploadedAt(new \DateTime());
+        
+//        $photos = $this->offerService->takePhotos();
+//        \Symfony\Component\VarDumper\VarDumper::dump($photos);
+//        die('end');
 
         foreach ($datas as $key => $data) {
             if (isset($attrbyName[$key])) {

@@ -47,6 +47,10 @@ class DownloadAppInfoQuery
 
     public function downloadAppInfoAnnouncement()
     {
+        $sql = 'SELECT count(id) as offer_count FROM offer ';
+        $offers = $this->connection->prepare($sql);
+        $offers->execute();
 
+        return (int) $offers->fetchOne();
     }
 }

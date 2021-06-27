@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - dodaj oferte{% endblock %}
+{% block title %}Dodawanie ogłoszenia - {{ parent() }}{% endblock %}
 
 {% block body %}
-        <div id="main" class="text-white mt-3 w-75 float-left mb-4 " >
+        <div id="main1" class="text-white mt-3 w-75 float-left mb-4 " >
             <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
                 <i class="icon-home"></i> Jesteś na / <a class="text-white" href="{{ path('index') }}">Strona główna</a>
                 / <a class="text-white" href="{{ path('announcement',{'page':1}) }}" >Ogłoszenia</a>
@@ -13,9 +13,9 @@
                 <div class="p-2 pl-3 border-bottom border-primary">
                     <h4 class="text-color-3"><i class="icon-edit-1 mr-1"></i>Dodaj ofertę</h4>
                 </div>
-                <div class="ml-5 pl-2 mt-4">
-                    <h3 class="float-left w-50 mb-0">Zaczynamy !</h3>
-                    <div class="float-left w-40 ml-3 text-right mt-2" >
+                <div class="ml-4 pl-3 mt-4">
+                    <h3 class="float-left w-64 mb-0">Zaczynamy !</h3>
+                    <div class="float-left w-33 pr-3 text-right mt-2" >
                         <button id="return_change" type="button" class="add_offer text-white font-15 btn bg-info">Cofnij zmiany</button>
                     </div>
                     <div style="clear: both"></div>

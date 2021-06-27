@@ -1,15 +1,15 @@
 {% if app.user %}
     {% if app.user.username == user.username %}
-        <a class="text-white" href="{{ path('profile',{'userId': user.id, 'userTab':'profile'}) }}">
+        <a class="text-white" href="{{ path('profile',{'page':1,'userId': user.id, 'userTab':'profile'}) }}">
             {{ user.username }}
         </a>
     {% else %}
-        <a href="{{ path('other_profile',{'userId': user.id ,'username':user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+        <a href="{{ path('other_profile',{'page':1,'userId': user.id ,'username':user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
             {{ user.username }}
         </a>
     {% endif %}
 {% else %}
-    <a href="{{ path('other_profile',{'userId': user.id ,'username':user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+    <a href="{{ path('other_profile',{'page':1,'userId': user.id ,'username':user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
         {{ user.username }}
     </a>
 {% endif%}

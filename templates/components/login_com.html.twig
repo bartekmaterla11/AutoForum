@@ -5,32 +5,43 @@
     <div class="p-2 pl-3 border-bottom border-primary mb-3">
         <h4 class="text-color-3"><i class="icon-edit-1 mr-1"></i>Zaloguj się</h4>
     </div>
+    <div class="w-75 mr-auto ml-auto ">
+        <form method="post" class=" p-4" action="{{ path('app_login') }}">
+            <div class="border border-primary brad p-4">
+                <label class="font-weight-light" for="inputUsername">Nazwa użytkownika</label>
+                <input type="text" name="username" id="inputUsername" class="mb-3 input-register " required
+                       autofocus>
+                <label class="font-weight-light" for="inputPassword">Hasło</label>
+                <input type="password" name="password" id="inputPassword" class="input-register" required>
 
-    <form method="post" class="w-50 ml-auto mr-auto pb-5" action="{{ path('app_login') }}">
-        <label for="inputUsername">E-mail lub nazwa użytkownika</label>
-        <input type="text" value="" name="username" id="inputUsername" class="mb-3 text-white bg-dark border-primary form-control" required autofocus>
-        <label for="inputPassword">Hasło</label>
-        <input type="password" name="password" id="inputPassword" class="form-control bg-dark text-white border-primary" required>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="checkbox mb-1 mt-3">
+                    <label>
+                        <input class="mr-2" type="checkbox" name="_remember_me">Pamiętaj mnie na tym komputerze
+                    </label>
+                </div>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-        <div class="checkbox mb-1 mt-2">
-            <label>
-                <input class="mr-2" type="checkbox" name="_remember_me">Pamiętaj mnie na tym komputerze
-            </label>
-        </div>
-
-{#        {% for error1 in app.flashes('error_login') %}#}
-{#            <div class="ml-auto mr-auto w-100 bg-danger brad text-center p-1 mb-4">#}
-{#                {{ error1 }}#}
-{#            </div>#}
-{#        {% endfor %}#}
-        {% if error %}
-            <div class="alert bg-danger text-white">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <button id="login" class="btn btn-lg btn-outline-primary mt-2" type="submit">
-            Zaloguj się
-        </button>
-    </form>
+                {# {% for error1 in app.flashes('error_login') %} #}
+                {# <div class="ml-auto mr-auto w-100 bg-danger brad text-center p-1 mb-4"> #}
+                {# {{ error1 }} #}
+                {# </div> #}
+                {# {% endfor %} #}
+                {% if error %}
+                    <div class="alert bg-danger text-white">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            </div>
+            <div class="border border-primary p-4 brad mt-3 text-right">
+                <div class="float-left w-75 text-left mt-2">
+                    <span class="">Podaj poprawne dane logowania.</span>
+                </div>
+                <div class="float-left w-25">
+                    <button type="submit" class="font-18 btn btn-lg btn-outline-primary ">Zaloguj się</button>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </form>
+        </form>
+    </div>
 </div>

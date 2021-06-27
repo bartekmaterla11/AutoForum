@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\AttributeValue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\ParameterType;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,19 +23,19 @@ class AttributeValueRepository extends ServiceEntityRepository
     // /**
     //  * @return AttributeValue[] Returns an array of AttributeValue objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByAttributeLocation(int $value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->Where('a.offer = :val')
+            ->setParameter('val', $value, ParameterType::INTEGER)
+            ->andWhere('a.attribute = :id')
+            ->setParameter('id', 17, ParameterType::INTEGER)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?AttributeValue

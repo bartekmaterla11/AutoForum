@@ -1,0 +1,49 @@
+2.1 (2012.05.15)
+dodano funkcje:
+* jQuery.rvnGalleryNext();
+* jQuery.rvnGalleryPrev();
+* jQuery.rvnGalleryGoTo(n);
+
+dodano efekty:
+* snake
+* gridLeftTop
+* gridRightTop
+* gridLeftBottom
+* gridRightBottom
+* chessboard
+
+zmieniono parametry przekazywane do animacji (w celu stworzenia animacji 'pude³kowych')
+
+---
+
+2.2 (2012.05.20)
+poprawiono efekty (b³¹d wyst¹pi³ przez poprawki w wersji 2.1):
+* newTiersRightBottom
+* newTiersRightTop
+* newTiersLeftBottom
+* newTiersLeftTop
+
+dodano efekty:
+* randomBoxes
+* tilesLeftTop
+* tilesRightTop
+* tilesLeftBottom
+* tilesRightBottom
+
+dodano grupy efektów:
+* alternately
+* blinds
+* tiers
+* alphaRect
+* teeth
+* newTiers
+* grid
+* tiles
+
+zmieniono sposób animacji - nieaktywne paski maj¹ 'display: none'
+
+---
+
+2.3 (2013.03.25)
+
+Dodano wsparcie dla skryptu lighbox.

@@ -1,12 +1,12 @@
 {% if app.user %}
     {% if app.user.username == post.user.username %}
-        <span class="text-white ">zadałeś</span>
+        <span class="text-white ">zadałeś/aś</span>
         pytanie w dniu <span class="text-white ">{{ post.uploadedAt|date('d.m.Y') }}</span>
         | <span class="text-white">{{ post.uploadedAt|date('H:i:s') }}</span>
         | <span class=""> {{ post.category.name }} </span>
     {% else %}
         <span class="text-white">pytanie</span> zadane przez
-        <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
+        <a href="{{ path('other_profile',{'page':1,'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
            class=" text-white">
             {{ post.user.username }}
         </a>
@@ -16,7 +16,7 @@
     {% endif %}
 {% else %}
     <span class="text-white ">pytanie</span> zadane przez
-    <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
+    <a href="{{ path('other_profile',{'page':1,'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}"
        class=" text-white">
         {{ post.user.username }}
     </a>

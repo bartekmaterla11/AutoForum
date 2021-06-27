@@ -1,0 +1,48 @@
+{% for item in offers %}
+    <div class="bgcolor brad p-2 mb-3 ">
+        <div class="float-left w-20">
+            <div class=" ">
+                <a href="{{ path('view_announ',{'categorySlug':item.category.slug, 'slug':item.slug}) }}">
+                    <img class="max-width-6 max-height-6" src="{{ asset('assets/img/audi.jpg') }}">
+                </a>
+            </div>
+        </div>
+        <div class="float-left w-69 ">
+            <h4 class="font-weight-normal pl-1 height2 ">
+                <a href="{{ path('view_announ',{'categorySlug':item.category.slug, 'slug':item.slug}) }}"
+                   class="text-color-3 ">{{ item.title }} </a>
+            </h4>
+            <div class="font-15 ">
+                {% for it in item.attributeValues %}
+                    {% if it.attribute.id == 19 %}
+                        {{ it.value }} -
+                    {% endif %}
+                {% endfor %}
+                {{ item.uploadedAt|date('d.m') }}
+            </div>
+        </div>
+        <div class="float-left w-15 mt-1 text-right ">
+            <div class="text-right height2">
+                <span class="">{% for it in item.attributeValues %}
+                        {% if it.attribute.id == 2 %}
+                            {{ it.value }}
+                        {% endif %}
+                    {% endfor %}  </span>zł
+            </div>
+            {% if app.user %}
+                {% if app.user.username == item.user.username %}
+                    {% if userTab is defined %}
+                        {% if userTab is constant('App\\Enum\\ProfileEnum::USER_ANNOUNCEMENTS') %}
+                            <div class=" ">
+                                <a href="{{ path('remove_offer',{'offerId': item.id, 'userTab':'announcements', 'userId': item.user.id }) }}">
+                                    <button type="button" class="btn font-11 btn-outline-danger">Usuń</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div style="clear: both"></div>
+    </div>
+{% endfor %}

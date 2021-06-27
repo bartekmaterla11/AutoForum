@@ -18,13 +18,13 @@ class EditDataUserForm extends AbstractType
             ->add('username', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'input-username'
+                    'class' => 'input-register'
                 ]
             ])
             ->add('email', EmailType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'input-email'
+                    'class' => 'input-register'
                 ]
             ])
             ->add('filename', FileType::class, [

@@ -1,13 +1,13 @@
-<form id="set-tires-rims-form" action="" method="get">
+<div id="set-tires-rims-form">
     <div class="w-25 float-left p-1">
         <label class="text-color-4">Podkategoria</label>
         <div class="divCategorySelect">
-            <select id="category-tires-rims-block" class="w-100 categorySelect">
+            <select id="category-tires-rims-block" {% if filters.childCat is defined %} name="category" {% else %} name="" {% endif %} class="w-100 categorySelect">
                 <option class="categoryOption" value="0" selected>Wszystkie</option>
                 {% for item in cat.childrenCategories %}
-                    <option class="categoryOption" value="{{ item.id }}"
-                            {% if slug is defined %}
-                                {% if slug == item.slug %} selected {% endif %}
+                    <option class="categoryOption" value="{{ item.slug }}"
+                            {% if childSlug is defined %}
+                                {% if childSlug == item.slug %} selected {% endif %}
                             {% endif %}
                     >{{ item.name }}</option>
                 {% endfor %}
@@ -17,11 +17,15 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Cena (zł)</label>
         <div class="price-tires-rims-block1 ">
-            <div class="float-left w-48">
-                <input placeholder="od" type="search" class="textType">
+            <div id="tires_price_from" class="float-left w-48">
+                <input id="tires_price_from1"
+                       placeholder="od" {% if filters.priceF is defined %} name="price_from" {% if filters.priceF > 0 %} value="{{ filters.priceF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
-            <div class="float-left w-48 ml-1">
-                <input placeholder="do" type="text" class="textType">
+            <div id="tires_price_to" class="float-left w-48 ml-1">
+                <input id="tires_price_to1"
+                       placeholder="do" {% if filters.priceT is defined %} name="price_to" {% if filters.priceT != 99999999 %}  value="{{ filters.priceT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
             <div style="clear: both"></div>
         </div>
@@ -29,10 +33,10 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Stan</label>
         <div class="state-tires-rims-block ">
-            <select id="state-tires-rims-block" class="categorySelect">
+            <select id="state-tires-rims-block" {% if filters.state is defined %} name="state" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in state %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.state %}
+                    <option {% if filters.state == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -41,10 +45,10 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Pojazd</label>
         <div class="vehicle-tires-rims-block ">
-            <select id="vehicle-tires-rims-block" class="categorySelect">
+            <select id="vehicle-tires-rims-block" {% if filters.vehicleType is defined %} name="vehicle" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in vehicleTires %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.vehicleType %}
+                    <option {% if filters.vehicleType == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -53,10 +57,10 @@
     <div class="w-25 mb-2 float-left p-1" style="display: none">
         <label class="text-color-4">Typ</label>
         <div class="type-tires-rims-block ">
-            <select id="type-tires-rims-block" class="categorySelect">
+            <select id="type-tires-rims-block" {% if filters.typeTires is defined %} name="type-tires" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in typeTires %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.typeTires %}
+                    <option {% if filters.typeTires == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -64,10 +68,10 @@
     <div class="w-25 mb-2 float-left p-1" style="display: none">
         <label class="text-color-4">Cale</label>
         <div class="inch-tires-rims-block ">
-            <select id="inch-tires-rims-block" class="categorySelect">
+            <select id="inch-tires-rims-block" {% if filters.inch is defined %} name="inch" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in inch %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.inch %}
+                    <option {% if filters.inch == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -75,10 +79,10 @@
     <div class="w-25 mb-2 float-left p-1" style="display: none">
         <label class="text-color-4">Szerokość</label>
         <div class="width-tires-rims-block ">
-            <select id="width-tires-rims-block" class="categorySelect">
+            <select id="width-tires-rims-block" {% if filters.widthTires is defined %} name="width-tires" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in widthTires %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.widthTires %}
+                    <option {% if filters.widthTires == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -87,10 +91,10 @@
     <div class="w-25 mb-2 float-left p-1" style="display: none">
         <label class="text-color-4">Profil</label>
         <div class="profil-tires-rims-block ">
-            <select id="profil-tires-rims-block" class="categorySelect">
+            <select id="profil-tires-rims-block" {% if filters.profilTires is defined %} name="profil-tires" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in profilTires %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.profilTires %}
+                    <option {% if filters.profilTires == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -99,28 +103,13 @@
     <div class="w-25 mb-2 float-left p-1" style="display: none">
         <label class="text-color-4">Felgi</label>
         <div class="rims-tires-rims-block ">
-            <select id="rims-tires-rims-block" class="categorySelect">
+            <select id="rims-tires-rims-block" {% if filters.typeRims is defined %} name="type-rims" {% else %} name="" {% endif %} class="categorySelect">
                 <option value="0" selected>Wszystkie</option>
-                {% for item in typeRims %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% for item in datas.typeRims %}
+                    <option {% if filters.typeRims == item.id %} selected {% endif %} value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div style="clear: both; display: none"></div>
-    <div class="form1" style="display: none">
-
-    </div>
-    <div class="form3" style="display: none">
-
-    </div>
-    <div class="form4" style="display: none">
-
-    </div>
-    <div class="form5" style="display: none">
-
-    </div>
-    <div class="mt-3 w-100 text-right pr-2">
-        <button type="submit" class="btn btn-outline-primary p-1 pl-3 pr-3 ">Filtruj</button>
-    </div>
-</form>
+</div>

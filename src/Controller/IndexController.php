@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CheckLikeOffer;
 use App\Entity\Offer;
 use App\Entity\Posts\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +18,12 @@ class IndexController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findByPostsForIndex();
         $offers = $em->getRepository(Offer::class)->findByOfferByIndex();
+        $check = $em->getRepository(CheckLikeOffer::class)->findAll();
 
         return $this->render('index/index.html.twig', [
             'posts' => $posts,
-            'offers' => $offers
+            'offers' => $offers,
+            'check' => $check,
         ]);
     }
 }

@@ -22,7 +22,7 @@ class EditPasswordUserForm extends AbstractType
                 // this is read and encoded in the controller
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-password'
+                    'class'=>'input-register'
                 ],
                 'mapped' => false,
                 'constraints' => [
@@ -42,7 +42,7 @@ class EditPasswordUserForm extends AbstractType
                 // this is read and encoded in the controller
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-password'
+                    'class'=>'input-register'
                 ],
                 'mapped' => false,
                 'constraints' => [
@@ -62,7 +62,7 @@ class EditPasswordUserForm extends AbstractType
                 // this is read and encoded in the controller
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-second-password'
+                    'class'=>'input-register'
                 ],
                 'mapped' => false,
                 'constraints' => [

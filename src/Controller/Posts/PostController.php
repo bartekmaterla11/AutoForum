@@ -68,12 +68,12 @@ class PostController extends AbstractController
             if ($this->post->addPost($post, $form, $this->getUser())) {
                 $this->addFlash('success_post', 'Pytanie zostało dodane poprawnie');
 
-                return $this->redirectToRoute('forum');
+                return $this->redirectToRoute('forum', ['page' => 1]);
             }
             $this->addFlash('error_post', 'Wystąpił błąd. Spróbuj jeszcze raz.');
         }
 
-        return $this->render('post/addPost/add.html.twig', [
+        return $this->render('post/add/add.html.twig', [
             'postForm' => $form->createView(),
         ]);
     }
@@ -106,6 +106,7 @@ class PostController extends AbstractController
         $posts = $em->getRepository(Post::class)->findByAllPosts();
         $posts = $this->paginator->paginate($posts, $page, 6);
         $categories = $em->getRepository(CategoryPost::class)->findAll();
+
         return $this->render('post/index/index_post.html.twig', [
             'posts' => $posts,
             'categories' => $categories
@@ -118,7 +119,6 @@ class PostController extends AbstractController
     public function forum(Request $request, string $categorySlug)
     {
         $page = 1;
-
         $a = strlen($categorySlug);
         $em = $this->getDoctrine()->getManager();
 
@@ -186,7 +186,7 @@ class PostController extends AbstractController
                             }
                         }
 
-                        return $this->render('post/viewPost/view_post.html.twig', [
+                        return $this->render('post/view/view_post.html.twig', [
                             'post' => $post,
                             'likePost' => $likePosts,
                             'answerForm' => $form->createView(),
@@ -196,7 +196,7 @@ class PostController extends AbstractController
                     }
                 }
 
-                return $this->render('post/viewPost/view_post.html.twig', [
+                return $this->render('post/view/view_post.html.twig', [
                     'post' => $post,
                     'likePost' => $likePosts,
                     'answerForm' => $form->createView(),
@@ -205,14 +205,14 @@ class PostController extends AbstractController
                 ]);
             }
 
-            return $this->render('post/viewPost/view_post.html.twig', [
+            return $this->render('post/view/view_post.html.twig', [
                 'post' => $post,
                 'numbers' => $numbers,
                 'likePost' => $likePosts,
                 'catSlug' => $categorySlug
             ]);
         }
-        return $this->redirectToRoute('forum');
+        return $this->redirectToRoute('forum', ['page' => 1]);
     }
 
     /**
@@ -232,7 +232,7 @@ class PostController extends AbstractController
             $this->addFlash('error_remove_post', 'Post nie został usunięty');
         }
 
-        return $this->redirectToRoute('profile', ['userId' => $userId, 'userTab' => $userTab]);
+        return $this->redirectToRoute('profile', ['page' => 1, 'userId' => $userId, 'userTab' => $userTab]);
     }
 
     /**

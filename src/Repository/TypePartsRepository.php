@@ -22,19 +22,18 @@ class TypePartsRepository extends ServiceEntityRepository
     // /**
     //  * @return TypeParts[] Returns an array of TypeParts objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByBelong($value)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
+            ->andWhere('t.belong = :val OR t.belong = 0')
             ->setParameter('val', $value)
             ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?TypeParts

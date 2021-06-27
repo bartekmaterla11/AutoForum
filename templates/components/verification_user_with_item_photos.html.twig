@@ -1,15 +1,15 @@
 {% if app.user %}
     {% if app.user.username == post.user.username %}
-        <a href="{{ path('profile',{'userId': post.user.id, 'userTab':'profile'}) }}">
+        <a href="{{ path('profile',{'page':1,'userId': post.user.id, 'userTab':'profile'}) }}">
             <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
         </a>
     {% else %}
-        <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+        <a href="{{ path('other_profile',{'page':1,'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
             <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
         </a>
     {% endif %}
 {% else %}
-    <a href="{{ path('other_profile',{'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
+    <a href="{{ path('other_profile',{'page':1,'userId': post.user.id ,'username':post.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-white">
         <img class="max-width-4 max-height-4" src="/images/user/{{ post.user.filename }}" alt="Zdjęcie usera">
     </a>
 {% endif%}

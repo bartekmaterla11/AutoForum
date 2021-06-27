@@ -23,13 +23,13 @@ class RegistrationFormType extends AbstractType
             ->add('username',TextType::class,[
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-username'
+                    'class'=>'input-register'
                 ]
             ])
             ->add('email', EmailType::class,[
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-email'
+                    'class'=>'input-register'
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -37,7 +37,7 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-password'
+                    'class'=>'input-register'
                 ],
                 'mapped' => false,
                 'constraints' => [
@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'label'=>' ',
                 'attr'=>[
-                    'class'=>'input-second-password'
+                    'class'=>'input-register'
                 ],
                 'mapped' => false,
                 'constraints' => [

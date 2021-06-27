@@ -15,11 +15,11 @@ $(document).ready(function () {
                 var parts = url.split('/');
                 var announ = parts[parts.length - 1];
 
-                if (announ.includes('ogloszenia')) {
+                if (announ == '1') {
                     location.replace(url + '/' + data.categorySlug);
 
                 } else {
-                    var result = url.substring(0, url.lastIndexOf('/')+1);
+                    var result = 'http://127.0.0.1:8000/ogloszenia/1/';
                     location.replace(result + data.categorySlug);
                 }
             }

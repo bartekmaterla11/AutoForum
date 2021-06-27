@@ -10,69 +10,111 @@
         </div>
         <div class="mr-2 bg-dark mt-1 brad ">
             <div class="p-2 pl-3 border-bottom border-primary">
-                <h4 class=" text-color-3">{{ cat.name }}</h4>
+                <h4 class="text-color-3">{{ cat.name }}</h4>
             </div>
             <div class="mt-3 p-3">
-                <form id="announcementsSearchForm">
+                <form id="announcementsSearchForm"
+                      method="get" {% if childSlug is defined %} action="{{ path('children_category_filters', {'categorySlug': cat.slug, 'childrenSlug': childSlug}) }}" {% else %}action="{{ path('announcement_filters',{'categorySlug': cat.slug}) }}" {% endif %}>
                     <div class="float-left w-64">
                         <input id="itemsSearch" class="form-control w-100 " type="search" placeholder="Szukaj..."
                                aria-label="Search">
                     </div>
-                    <div class="float-left w-25">
-                        <select class="w-100 form-control">
-                            <option class="categoryOption" value="0" selected>Cała Polska</option>
-                            {% for item in location %}
-                                <option class="categoryOption" value="{{ item.id }}">{{ item.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
                     <div class="float-left w-11 search">
                         <button class="form-control w-100" type="submit"><i class=" icon-search"></i></button>
                     </div>
+                    <div class="float-left w-25">
+                        <select class="w-100 form-control"
+                                id="location" {% if filters.location is defined %} name="location"  {% else %} name="" {% endif %} >
+                            <option class="categoryOption" value="0" selected>Cała Polska</option>
+                            {% for item in datas.location %}
+                                <option {% if filters.location == item.id %} selected {% endif %} class="categoryOption"
+                                                                                                  value="{{ item.id }}">{{ item.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                     <div style="clear: both"></div>
-                </form>
-                <fieldset class="mt-4 border-bottom pb-4 mb-1 border-secondary">
-                    <h4 class="text-color-3">Filtry</h4>
-                    <div class="mt-3">
-                        <div class="w-25 float-left p-1">
-                            <label class="text-color-4">Kategoria</label>
-                            <div class=" ">
-                                <select id="categoryAnnounSelect" class="w-100 categorySelect">
-                                    <option class="categoryOption" value="10" selected>Wszystkie</option>
-                                    {% for item in cat1 %}
-                                        <option class="categoryOption" value="{{ item.id }}"
-                                                {% if slug is defined %}
-                                                    {% if slug == item.slug %} selected {% endif %}
-                                                {% endif %}
-                                        >{{ item.name }}</option>
-                                    {% endfor %}
-                                </select>
+                    <fieldset class="mt-4 border-bottom pb-4 mb-1 border-secondary">
+                        <h4 class="text-color-3">Filtry</h4>
+                        <div class="mt-3">
+                            <div class="w-25 float-left p-1">
+                                <label class="text-color-4">Kategoria</label>
+                                <div class="categoryAnnounSelect ">
+                                    <select id="categoryAnnounSelect" class="w-100 categorySelect">
+                                        <option class="categoryOption" value="10" selected>Wszystkie</option>
+                                        {% for item in datas.categories1 %}
+                                            <option class="categoryOption" value="{{ item.id }}"
+                                                    {% if slug is defined %}
+                                                        {% if slug == item.slug %} selected {% endif %}
+                                                    {% endif %}
+                                            >{{ item.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
+                            <div class="all_form">
+                                {% if slug is constant('App\\Enum\\AnnouncementsCategoryEnum::CARS') %}
+                                    {{ include('announcement/filters/cars/set_cars.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::MOTORS') %}
+                                    {{ include('announcement/filters/motors/set_motors.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::VANS_AND_TRUCKS') %}
+                                    {{ include('announcement/filters/vans_and_trucks/set_vans_and_trucks.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::PARTS_CARS') %}
+                                    {{ include('announcement/filters/parts_cars/set_parts_cars.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::PARTS_MOTORS') %}
+                                    {{ include('announcement/filters/parts_motors/set_parts_motors.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::TIRES_AND_RIMS') %}
+                                    {{ include('announcement/filters/tires_and_rims/set_tires_and_rims.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::SEMITRAILERS_AND_OTHERS_VEHICLES') %}
+                                    {{ include('announcement/filters/trailers_other_vehicles/set_trailer_other_vehicles.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::ELECTRONIC_EQUIPMENTS') %}
+                                    {{ include('announcement/filters/electronic_equipment/set_electronic_equipment.html.twig') }}
+                                {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::OTHERS_AUTOMOTIVE') %}
+                                    {{ include('announcement/filters/other_automotive/set_other_automotive.html.twig') }}
+                                {% endif %}
+                            </div>
+                            <div style="clear: both"></div>
                         </div>
-                        <div class="all_form">
-                            {% if slug is constant('App\\Enum\\AnnouncementsCategoryEnum::CARS') %}
-                                {{ include('announcement/filters/cars/set_cars.html.twig', {cat1:cat1}) }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::MOTORS') %}
-                                {{ include('announcement/filters/motors/set_motors.html.twig',{cat1:cat1}) }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::VANS_AND_TRUCKS') %}
-                                {{ include('announcement/filters/vans_and_trucks/set_vans_and_trucks.html.twig',{cat1:cat1}) }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::PARTS_CARS') %}
-                                {{ include('announcement/filters/parts_cars/set_parts_cars.html.twig') }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::PARTS_MOTORS') %}
-                                {{ include('announcement/filters/parts_motors/set_parts_motors.html.twig') }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::TIRES_AND_RIMS') %}
-                                {{ include('announcement/filters/tires_and_rims/set_tires_and_rims.html.twig',{cat1:cat1}) }}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::VANS_AND_TRUCKS') %}
-                            {% elseif slug is constant('App\\Enum\\AnnouncementsCategoryEnum::VANS_AND_TRUCKS') %}
-
-                            {% endif %}
+                        <div class="mt-3 w-100 text-right pr-2">
+                            <button id="check_filters" type="submit"
+                                    class="btn font-18 btn-outline-info p-1 pl-3 pr-3 ">
+                                Filtruj
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+                <div class="mt-3">
+                    <div class="border-bottom border-secondary pb-3 ">
+                        <div class="float-left w-25">
+                            <span class="pl-2">Znaleziono ogłoszeń: {{ number }}</span>
+                        </div>
+                        <div class="float-left w-60 text-right">
+                            <span class="pr-1">Sortuj:</span>
+                            <select id="sortOffers" name="sort" class="categorySelect5">
+                                <option value="0" selected>Najnowsze</option>
+                                <option value="1">Najtańsze</option>
+                                <option value="2">Najdroższe</option>
+                            </select>
+                        </div>
+                        <div class="float-left font-23">
+                            <div class="float-left ml-4">
+                                <div id="listType" class="list" data-value=""><i class=" icon-download-cloud"></i></div>
+                            </div>
+                            <div class="float-left ml-3">
+                                <div id="groupType" data-value=""><i class="icon-download-cloud"></i></div>
+                            </div>
+                            <div style="clear: both"></div>
                         </div>
                         <div style="clear: both"></div>
                     </div>
-                </fieldset>
-                <div class="mt-4">
                     {% if offers is defined %}
-                        {{ include('announcement/view/annoucements_list.html.twig',{offers:offers}) }}
+                        <div class="all_offers mt-3">
+                            <div id="listViewOffers">
+                                {{ include('announcement/view/components/annoucements_list_option_1.html.twig',{offers:offers}) }}
+                            </div>
+                            <div id="galleryViewOffers" hidden>
+                                {{ include('announcement/view/components/annoucements_list_option_2.html.twig',{offers:offers}) }}
+                            </div>
+                        </div>
                         <div class="text-center w-100 p-1 pagination">
                             {{ knp_pagination_render(offers) }}
                         </div>

@@ -31,7 +31,7 @@
     {% elseif it.attribute.id == 26 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for cat in type %}
+            {% for cat in datas.type %}
                 {% if cat.id == it.value %}
                     {{ cat.name }}
                 {% endif %}
@@ -49,7 +49,7 @@
     {% elseif it.attribute.id == 4 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in models %}
+            {% for item in datas.models %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -58,7 +58,7 @@
     {% elseif it.attribute.id == 10 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in color %}
+            {% for item in datas.color %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -67,7 +67,7 @@
     {% elseif it.attribute.id == 11 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in body %}
+            {% for item in datas.body %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -76,7 +76,7 @@
     {% elseif it.attribute.id == 12 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in condition %}
+            {% for item in datas.condition %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -85,7 +85,7 @@
     {% elseif it.attribute.id == 13 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in gearbox %}
+            {% for item in datas.gearbox %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -94,7 +94,7 @@
     {% elseif it.attribute.id == 14 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in country %}
+            {% for item in datas.country %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -103,7 +103,7 @@
     {% elseif it.attribute.id == 15 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in handlebar %}
+            {% for item in datas.handlebar %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -115,10 +115,11 @@
     {% elseif it.attribute.id == 19 %}
     {% elseif it.attribute.id == 20 %}
     {% elseif it.attribute.id == 21 %}
+    {% elseif it.attribute.id == 35 %}
     {% elseif it.attribute.id == 28 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in state %}
+            {% for item in datas.state %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -127,7 +128,7 @@
     {% elseif it.attribute.id == 29 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in vehicleTires %}
+            {% for item in datas.vehicleType %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -136,7 +137,7 @@
     {% elseif it.attribute.id == 30 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in typeTires %}
+            {% for item in datas.typeTires %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -145,7 +146,7 @@
     {% elseif it.attribute.id == 31 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in typeRims %}
+            {% for item in datas.typeRims %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -154,7 +155,7 @@
     {% elseif it.attribute.id == 32 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in inch %}
+            {% for item in datas.inch %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -163,7 +164,7 @@
     {% elseif it.attribute.id == 33 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in widthTires %}
+            {% for item in datas.widthTires %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -172,7 +173,7 @@
     {% elseif it.attribute.id == 34 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in profilTires %}
+            {% for item in datas.profilTires %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}
@@ -188,7 +189,7 @@
     {% elseif it.attribute.id == 7 %}
         <span class="float-left mr-2 bgcolor mb-3 text-center p-2 brad ">
             <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-            {% for item in fuel %}
+            {% for item in datas.fuel %}
                 {% if item.id == it.value %}
                     {{ item.name }}
                 {% endif %}

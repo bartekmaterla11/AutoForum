@@ -1,0 +1,43 @@
+{% for item in offers %}
+    <a class="w-24 height3 mb-3" href="{{ path('view_announ',{'categorySlug':item.category.slug, 'slug':item.slug}) }}">
+        <div class="w-24 mr-1 float-left bgcolor brad height3 mb-3">
+            <div class=" ">
+                <div class="images1">
+                    <img class="max-width-8 max-height-8" src="{{ asset('assets/img/audi.jpg') }}">
+                </div>
+            </div>
+            <div class="p-2 text-white ">
+                <h6 class=" font-weight-normal mr-0" >
+                   {{ item.title }}
+                </h6>
+                <div class="font-16 font-weight-bold text-color-3 ">
+                    <span class="">{% for it in item.attributeValues %}
+                            {% if it.attribute.id == 2 %}
+                                {{ it.value }}
+                            {% endif %}
+                        {% endfor %}  </span>zł
+                </div>
+            </div>
+            <div class="p-2 text-color-4 font-11">
+                <div class="">
+                    {% for it in item.attributeValues %}
+                        {% if it.attribute.id == 17 %}
+                            {% for item in datas.location %}
+                                {% if item.id == it.value %}
+                                    {{ item.name }},
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for it in item.attributeValues %}
+                        {% if it.attribute.id == 19 %}
+                            {{ it.value }}
+                        {% endif %}
+                    {% endfor %}<br>
+                    {{ item.uploadedAt|date('d.m.Y') }}
+                </div>
+            </div>
+        </div>
+    </a>
+{% endfor %}
+<div style="clear: both"></div>

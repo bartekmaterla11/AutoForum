@@ -2,9 +2,13 @@
     <div class="border border-primary p-4 mt-3 brad" style="display: none">
         <div class="price_of_motors_parts_form_name mb-3 w-33 ">
             <h6 class="font-weight-light mb-2">Cena<span style="color: red">*</span></h6>
-            <input class=" float-left price " placeholder="000 000" type="text">
+            <input class=" float-left price " type="text">
             <span class="float-left ml-2 pt-1 mt-1 price-ite">zł</span>
             <div style="clear: both"></div>
+            <div class="mt-2">
+                <input type="checkbox" id="price_arranged_parts_motors" class="mr-1 p-1 font-18">
+                <label for="price_arranged" class="">Do negocjacji</label>
+            </div>
         </div>
     </div>
     <div class="border border-primary p-4 mt-3 brad" style="display: none">
@@ -12,7 +16,7 @@
             <h6 class="font-weight-light mb-2">Rodzaj<span style="color: red">*</span></h6>
             <select id="type_of_motors_parts_form_name" class="categorySelect1">
                 <option value="0">-</option>
-                {% for item in type %}
+                {% for item in data.type %}
                     <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
@@ -21,7 +25,7 @@
             <h6 class="font-weight-light mb-2">Stan<span style="color: red">*</span></h6>
             <select id="state_of_motors_parts_form_name" class="categorySelect1">
                 <option value="0">-</option>
-                {% for item in state %}
+                {% for item in data.state %}
                     <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>

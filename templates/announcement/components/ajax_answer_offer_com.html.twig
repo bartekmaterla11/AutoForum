@@ -1,0 +1,25 @@
+<div class="modal fade" id="confirm-delete-offer{{ id }}" tabindex="-1" role="dialog ">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Upsik, nie da rady :(</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <p>Aby zadać pytanie<span class="text-primary font-weight-bold"> Zaloguj się </span>
+                    lub <span class="text-primary font-weight-bold">Zarejestruj</span> </p>
+            </div>
+
+            <div class="modal-footer">
+                <a class="text-white btn btn-primary btn-ok1" href="{{ path('app_login') }}">
+                    Zaloguj się
+                </a>
+                <a href="{{ path('app_register') }}" class="text-white btn btn-primary btn-ok1" >
+                    Zarejestruj
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

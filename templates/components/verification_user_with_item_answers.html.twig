@@ -1,11 +1,11 @@
 {% if app.user %}
     {% if app.user.username == item.user.username %}
-        <span class="text-white ">Dodałeś</span>
+        <span class="text-white ">Dodałeś/aś</span>
         odpowiedź w dniu <span class="text-white ">{{ item.uploadedAt|date('d.m.Y') }}</span>
         | <span class="text-white ">{{ item.uploadedAt|date('H:i:s') }}</span>
     {% else %}
         <span class="text-white ">Odpowiedź</span> dodana przez
-        <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}"
+        <a href="{{ path('other_profile',{'page':1,'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}"
            class=" text-white">
             {{ item.user.username }}
         </a>
@@ -14,7 +14,7 @@
     {% endif %}
 {% else %}
     <span class="text-white ">Odpowiedź</span> dodana przez
-    <a href="{{ path('other_profile',{'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}"
+    <a href="{{ path('other_profile',{'page':1,'userId':item.user.id ,'username':item.user.username, 'userTab':'profile'})}}"
        class=" text-white">
         {{ item.user.username }}
     </a>

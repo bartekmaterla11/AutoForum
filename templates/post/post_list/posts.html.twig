@@ -1,24 +1,37 @@
 {% if posts is defined %}
     {% for item in posts %}
-        <div class= "border-bottom border-secondary p-1 pb-3 mb-3 ">
-            <div class="float-left w-18">
-                <div class="float-left {% if item.answers.count > 0%} bg-success {% else %}bgcolor4 {% endif%} p-1 font-11 pl-2 pr-2 pb-2">
-                    <h5 class="text-center">{{ item.answers.count }}</h5> Odpowiedzi
+        <div class="brad bgcolor mt-3 p-3 pb-3 mb-3 ">
+            <div class="float-left w-17">
+                <div class="float-left {% if item.answers.count > 0 %} bg-success {% else %}bgcolor4 {% endif %} p-1 font-11 pl-2 pr-2 pb-2">
+                    <h5 class="text-center">{{ item.answers.count }}</h5>Odpowiedzi
                 </div>
                 <div class="float-left pt-2 h-60 bgcolor3 pl-3 pr-3 ">
-                    <h6 class="font-15 text-center" >{{ item.likeUp }}</h6>
+                    <h6 class="font-15 text-center">{{ item.likeUp }}</h6>
                     <h6 class="mb-2 text-color-1"><i class=" icon-thumbs-up-alt"></i></h6>
                 </div>
                 <div style="clear: both"></div>
             </div>
-            <div class="float-left w-80 ">
-                <h4 data-id="{{ item.id }}" class="pl-2" >
-                    <a href="{{ path('view_post',{'categorySlug': item.category.slug ,'slug':item.slug }) }}" class="text-color-3 ">{{ item.title }}</a>
-                </h4>
-                <div class="pl-2 text-color-4">
+            <div class="float-left{% if app.user %} {% if app.user.username == item.user.username %}  {% if userTab is defined %}w-73 {% endif %}{% else %} w-80 {% endif %}{% endif %}">
+                <h5 data-id="{{ item.id }}" class="pl-2 "><a
+                            href="{{ path('view_post',{'categorySlug': item.category.slug,'slug':item.slug }) }}"
+                            class="text-color-3">{{ item.title }}</a></h5>
+                <div class="pl-2 pt-2 font-13 text-color-4">
                     {{ include('components/verification_user_with_item_posts.html.twig',{post:item}) }}
                 </div>
             </div>
+            {% if app.user %}
+                {% if app.user.username == item.user.username %}
+                    {% if userTab is defined %}
+                        {% if userTab == constant('App\\Enum\\ProfileEnum::USER_QUESTIONS') %}
+                            <div class="float-left w-11 text-right ">
+                                <a href="{{ path('remove_post',{'postId': item.id, 'userTab':'questions', 'userId': item.user.id }) }}">
+                                    <button type="button" class="btn font-11 btn-outline-danger mr-1">Usuń</button>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
             <div style="clear: both"></div>
         </div>
     {% endfor %}

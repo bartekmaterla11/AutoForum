@@ -7,7 +7,7 @@
                 <h6 class="font-weight-light mb-2">Wybierz województwo<span style="color: red">*</span></h6>
                 <select id="location_country_form_name" class="categorySelect1">
                     <option value="0" selected>-</option>
-                    {% for it in location %}
+                    {% for it in data.location %}
                         <option value="{{ it.id }}">{{ it.name }}</option>
                     {% endfor %}
                 </select>

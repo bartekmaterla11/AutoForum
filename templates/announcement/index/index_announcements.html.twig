@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Ogłoszenia{% endblock %}
+{% block title %}Ogłoszenia - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="text-white mt-3 w-75 float-left mb-4 announ" >
@@ -12,21 +12,7 @@
         </div>
         <div class="mr-2 bg-dark mt-1 brad ">
             <div class="p-2 pl-3 border-bottom border-primary">
-                <h4 class="float-left w-50 text-color-3">Ogłoszenia motoryzacyjne</h4>
-                {% if app.user %}
-                    <div class="float-left w-50 text-right">
-                        <a class="text-primary" href="{{ path('add_offer') }}">
-                            <button  class="btn btn-outline-info ">Dodaj ofertę</button>
-                        </a>
-                    </div>
-                {% else %}
-                    <div class="float-left w-50 text-right">
-                        <button class="btn btn-outline-info "
-                                 data-toggle="modal" data-target="#confirm-delete-1">Dodaj ofertę
-                        </button>
-                    </div>
-                {% endif %}
-                <div style="clear: both"></div>
+                <h4 class="text-color-3">Ogłoszenia motoryzacyjne</h4>
             </div>
             <div class="p-3">
                 <div class="w-100">
@@ -43,8 +29,31 @@
                     <div style="clear: both"></div>
                 </div>
                 <div class="mt-3">
+                    <div class="border-bottom border-secondary pb-3 mb-3">
+                        <div class="float-left w-25">
+                            <span class="pl-2">Znaleziono ogłoszeń: {{ number }}</span>
+                        </div>
+                        <div class="float-left w-60 text-right">
+                            <span class="pr-1">Sortuj:</span>
+                            <select id="sortOffers" name="sort" class="categorySelect5">
+                                <option value="0" selected>Najnowsze</option>
+                                <option value="1">Najtańsze</option>
+                                <option value="2">Najdroższe</option>
+                            </select>
+                        </div>
+                        <div class="float-left font-23">
+                            <div class="float-left ml-4">
+                                <div id="listType" class="list" data-value=""><i class=" icon-download-cloud"></i></div>
+                            </div>
+                            <div class="float-left ml-3">
+                                <div id="groupType" data-value=""><i class="icon-download-cloud"></i></div>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
                     {% if offers is defined %}
-                        {{ include('announcement/view/annoucements_list.html.twig',{offers:offers}) }}
+                        {{ include('announcement/view/components/annoucements_list_option_1.html.twig',{offers:offers}) }}
                         <div class="text-center w-100 p-1 pagination">
                             {{ knp_pagination_render(offers) }}
                         </div>

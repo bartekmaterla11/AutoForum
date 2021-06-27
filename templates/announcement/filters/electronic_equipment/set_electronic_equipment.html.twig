@@ -1,0 +1,31 @@
+<div id="set-electronic-equipment-form">
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Cena (zł)</label>
+        <div class="price-electronic-equipment-block ">
+            <div id="electronic_equipment_price_from" class="float-left w-48">
+                <input id="electronic_equipment_price_from1"
+                       placeholder="od" {% if filters.priceF is defined %} name="price_from" {% if filters.priceF > 0 %} value="{{ filters.priceF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
+            </div>
+            <div id="electronic_equipment_price_to" class="float-left w-48 ml-1">
+                <input id="electronic_equipment_price_to1"
+                       placeholder="do" {% if filters.priceT is defined %} name="price_to" {% if filters.priceT != 99999999 %}  value="{{ filters.priceT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Stan</label>
+        <div class="state-block ">
+            <select id="state-electronic-equipment-block" {% if filters.state is defined %} name="state" {% else %} name="" {% endif %}
+                    class="categorySelect">
+                <option value="0" selected>Wszystkie</option>
+                {% for item in datas.state %}
+                    <option {% if filters.state == item.id %} selected {% endif %}
+                            value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>

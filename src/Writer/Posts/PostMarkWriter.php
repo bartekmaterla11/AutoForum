@@ -14,15 +14,10 @@ class PostMarkWriter
      * @var Connection
      */
     private $connection;
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
 
-    public function __construct(Connection $connection, EntityManagerInterface $entityManager)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->entityManager = $entityManager;
     }
 
 

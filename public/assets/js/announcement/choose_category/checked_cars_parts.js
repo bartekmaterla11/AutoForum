@@ -21,7 +21,7 @@ $(document).ready(function () {
                         var tab = data.array;
 
                         var myselect = $('<select>');
-                        myselect.append($('<option></option>').val(0).html('Wszystkie'));
+                        myselect.append($('<option></option>').val(0).html('-'));
                         $.each(tab, function (index, key,) {
                             myselect.append($('<option></option>').val(key.id).html(key.name));
                         });

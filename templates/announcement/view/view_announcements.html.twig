@@ -3,7 +3,7 @@
 {% block title %}{{ offer.title }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div  class="text-white mt-3 w-75 float-left mb-4 " >
+    <div class="text-white mt-3 w-75 float-left mb-4 ">
         <div class="card-body mr-2 bgcolor3 brad p-2 pl-3">
             <i class="icon-home"></i> Jesteś na /
             <a class="text-white" href="{{ path('index') }}">Strona główna</a> /
@@ -16,43 +16,71 @@
             </div>
             <div class="p-3 pb-4 mt-2 pb-1 ">
                 <div class="w-75 float-left">
-                    <div class="">
-                        <img class="max-height-7 max-width-7" src="{{ asset('assets/img/audi.jpg') }}">
+                    <div class="slider">
+                        <div id="gallery" class="images text-center imageGallery1">
+                            <div class="bg-img float-left">
+                                <a href="{{ asset('assets/img/audi.jpg') }}"><img class=""
+                                                                                  src="{{ asset('assets/img/audi.jpg') }}"></a>
+                            </div>
+                            <div class="bg-img float-left">
+                                <a href="{{ asset('assets/img/audi.jpg') }}"><img class=""
+                                                                                  src="{{ asset('assets/img/audi.jpg') }}"></a>
+                            </div>
+                            <div class="bg-img float-left ">
+                                <a href="{{ asset('assets/img/audi.jpg') }}"><img class=""
+                                                                                  src="{{ asset('assets/img/audi.jpg') }}"></a>
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
                     </div>
+                    <span class="text-info font-13">Kliknij, aby zobaczyć galerię zdjęć</span>
+                    {# <div class="slider-nav"> #}
+                    {# <a href="#" class="slider-nav-prev"><</a> #}
+                    {# <a href="#" class="slider-nav-next">></a> #}
+                    {# </div> #}
                     <div class="mt-3 font-15">
                         <h2 class="font-weight-normal mb-2">{{ offer.title }}</h2>
-                        <div class="font-30 mb-4 text-color-3 font-weight-bold">
-                            {% for it in offer.attributeValues %}
-                                {% if it.attribute.id == 2 %}
-                                    {{ it.value }} zł
-                                {% endif %}
-                            {% endfor %}
+                        <div class="w-100">
+                            <div class="float-left w-85 font-35 mb-4 mt-2 text-color-3 font-weight-bold">
+                                {% for it in offer.attributeValues %}
+                                    {% if it.attribute.id == 2 %}
+                                        {{ it.value }} zł
+                                    {% elseif it.attribute.id == 35 %}
+                                        {% if it.value == 1 %}
+                                            <span class="font-15 font-weight-normal text-color-4">Do negocjacji</span>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div style="clear: both"></div>
                         </div>
                         {{ include('announcement/view/components/view_offer_datas.html.twig',{offer:offer}) }}
                         <div class="mt-2 font-15">
                             <h3 class="">Opis</h3>
-                            <div class="brad bgcolor p-3 mt-3">
-                                <div class="border-bottom border-secondary pb-3">
-                                {% for it in offer.attributeValues %}
-                                    {% if it.attribute.id == 16 %}
-                                        {{ it.value }}
-                                    {% endif %}
-                                {% endfor %}
+                            <div class="brad bgcolor pl-3 pr-3 pb-3 mt-3">
+                                <div style="white-space: pre-line" class="border-bottom border-secondary pb-4">
+                                    {% for it in offer.attributeValues %}
+                                        {% if it.attribute.id == 16 %}
+                                            {{ it.value }}
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                                 <div class="pt-2 font-13">
-                                    <span class="text-color-3">Dodano: </span> {{ offer.uploadedAt|date('d-m-Y H:i') }}
+                                    <span class="mr-5"><span
+                                                class="text-color-3">Dodano: </span> {{ offer.uploadedAt|date('d.m.Y  H:i') }}</span>
+                                    <span class="ml-5"><span class="text-color-3">ID: </span> {{ offer.id }} </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-25 float-left" >
+                <div class="w-25 float-left">
                     <div class="bgcolor p-2 brad">
-                        <h6 class="text-color-3">Użytkownik</h6>
+                        <h6 class="text-color-3"><i class="icon-user-1"></i>Użytkownik</h6>
                         <div class="float-left mt-1">
                             {{ include('components/verification_user_with_item_photos.html.twig',{post:offer}) }}
                         </div>
-                        <div class="float-left mt-2 ml-2" >
+                        <div class="float-left mt-2 ml-2 ">
                             {{ include('components/verification_user_with_username.html.twig',{user:offer.user}) }}
                         </div>
                         <div style="clear: both"></div>
@@ -66,34 +94,95 @@
                             </span>
                         </div>
                     </div>
-                    <div class="bgcolor mt-2 p-2 brad">
-                        <h6 class="text-color-3">Lokalizacja</h6>
-                        <div class="mt-2">
+                    <div class="">
+                        <div class="bgcolor mt-2 p-2 brad">
+                            <h6 class="text-color-3"><i class="icon-location"></i>Lokalizacja</h6>
+                            <div class="mt-2">
                             <span class="font-13">
                                 {% for it in offer.attributeValues %}
                                     {% if it.attribute.id == 17 %}
+                                        <div class="min-height ">
                                         <span class="text-color-3">{{ it.attribute.originalName }}: </span>
-                                        {% for item in location %}
+                                        {% for item in datas.location %}
                                             {% if item.id == it.value %}
                                                 {{ item.name }}
                                             {% endif %}
                                         {% endfor %}
+                                        </div>
                                     {% endif %}
                                     {% if it.attribute.id == 18 %}
-                                        <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
-                                    {% endif %}
+                                    <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
+                                {% endif %}
                                     {% if it.attribute.id == 19 %}
-                                        <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
-                                    {% endif %}
+                                    <span class="text-color-3">{{ it.attribute.originalName }}: </span>{{ it.value }}
+                                {% endif %}
                                 {% endfor %}
                             </span>
+                            </div>
                         </div>
                     </div>
+                    {% if app.user %}
+                        {% if offer.user != app.user %}
+                            <div class="bgcolor mt-2 p-1 brad">
+                                <div class="mt-2 text-center ">
+                                    <div class="font-23">
+                                        {% for it in check %}
+                                            {% if it.offer == offer.id %}
+                                                {% if app.user.id == it.user %}
+                                                    <h6 class="text-color-3">Dodano do ulubionych</h6>
+                                                    <div class="">
+                                                    <span class="likeAnnoun1" data-offerid="{{ offer.id }}"
+                                                          style="color: rgb(0, 165, 255)"><i
+                                                                class="icon-heart"></i></span>
+                                                    </div>
+                                                {% endif %}
+                                            {% else %}
+                                                <h6 class="text-color-3">Dodaj do ulubionych</h6>
+                                                <span class="likeAnnoun" data-offerid="{{ offer.id }}"
+                                                      style="color: rgb(255, 255, 255)"><i
+                                                            class="icon-heart"></i></span>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if check is empty %}
+                                            <h6 class="text-color-3">Dodaj do ulubionych</h6>
+                                            <span class="likeAnnoun " data-offerid="{{ offer.id }}"
+                                                  style="color: rgb(255, 255, 255)"><i class="icon-heart"></i></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 </div>
                 <div style="clear: both"></div>
             </div>
             <div class="p-3 pb-4 mt-2 ">
-
+                <div class="mb-4">
+                    <div class="w-100 mb-3">
+                        <h4 class="float-left ">Inne posty użytownika</h4>
+                        {% if offersUser is not empty %}
+                            <a href="{{ path('other_profile',{'page':1,'userId': offer.user.id ,'username': offer.user.username ,'userTab':'announcements'}) }}"
+                               class="float-left ml-3 text-color-4 pt-1">Zobacz wszyskie</a>
+                        {% endif %}
+                        <div style="clear: both"></div>
+                    </div>
+                    <div class="">
+                        {{ include('announcement/view/components/annoucements_list_option_2.html.twig',{offers: offersUser}) }}
+                        {% if offersUser is empty %}
+                            <h6 class="pl-2 font-weight-normal text-info">Ten użytkownik nie ma innych ofert</h6>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <h4 class="mb-3">Zobacz też</h4>
+                    <div class="">
+                        {{ include('announcement/view/components/annoucements_list_option_2.html.twig',{offers: likeOffers}) }}
+                        {% if likeOffers is empty %}
+                            <h6 class="pl-2 font-weight-normal text-info">Nie znaleziono podobnych ofert w Twojej
+                                okolicy</h6>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

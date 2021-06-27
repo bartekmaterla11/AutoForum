@@ -1,214 +1,195 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Autovi{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" >
-            <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" >
-            <link rel="stylesheet" href="{{ asset('assets/css/fontello.css') }}" >
-            <link rel="stylesheet" href="{{ asset('assets/css/simpleLightbox.min.css') }}" >
-        {% endblock %}
-    </head>
-    <body>
-
-    <nav id="navik" class="navbar navbar-expand-lg navbar-dark bg-dark pt-2 pb-2">
-        <div class="container">
-            <a class="mr-4" href="{{ path('index') }}"><img class="logo" src="{{ asset('assets/img/logo.jpg') }}"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav mr-4 mt-2 mt-lg-0 ">
-                    <li class="nav-item mr-2 {% if app.request.get('_route') == 'forum' %} active {% endif%} " >
-                        <a  class="nav-link " href="{{ path('forum',{'page' : 1}) }}">Forum</a>
-                    </li>
-                    <li class="nav-item {% if app.request.get('_route') == 'announcement' %} active {% endif%}">
-                        <a  class="nav-link text-white-1" href="{{ path('announcement',{'page' : 1}) }}">Ogłoszenia</a>
-                    </li>
-                </ul>
-                <form id="mainSearchForm" class="form-inline my-2 my-lg-0 mr-4 w-50 ">
-                    <input id="mainSearch" class="form-control mr-sm-2 w-75 " type="search" placeholder="Szukaj na forum..." aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class=" icon-search"></i></button>
-                </form>
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    {% if app.user is not null %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white-1" href="{{ path('profile',{'userId': app.user.id ,'userTab': 'profile'}) }}" >Profil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white-1" href="{{ path('app_logout') }}">Wyloguj</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a  class="nav-link text-white-1" href="{{ path('app_login') }}"> Zaloguj się</a>
-                        </li>
-                        <li class="nav-item">
-                            <a  class="nav-link text-white-1" href="{{ path('app_register') }}">Rejestracja</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class=" mt-3 ml-5">
-            <div class="ml-5">
-                <a href=""><img class="ml-5" src="{{ asset('assets/img/1.jpg') }}"></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        {% block body %}{% endblock %}
-        <div class="color mb-4 mt-3 w-25 float-left">
-            {{ include('side_menu/side_menu.html.twig') }}
-        </div>
-        <div style="clear: both"></div>
-    </div>
-
-    <div class="container">
-        <div class="row mt-5 mb-5 text-white"  style="padding-top: 80px; padding-bottom: 80px;">
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/1.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Dodawaj pytania oraz ogłoszenia</div>
-                    <p class="mt-3 text-center">Gdy tylko czegoś nie wiesz, pytaj o to na forum, a gdy
-                        znasz odpowiedż na pytanie, udziel jej i pomóz innym. Możesz także ogłosić swoje przedmioty </p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/2.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Darmowe konto użytkownika</div>
-                    <p class="mt-3 text-center">Załóż darmowe konto i korzystaj z niego bez limitu.
-                        Pomagaj sobie i wielu innym użytkownikom.</p>
-                </div></div>
-            <div class="col-sm-4">
-                <div class="d-flex flex-column align-items-center">
-                    <div><img src="{{ asset('assets/img/3.png') }}" class="img-fluid"/> </div>
-                    <div style="font-size: 24px;">Wpływ na rozwój serwisu</div>
-                    <p class="mt-3 text-center">Miej duży wpływ na rozwój serwisu przez dodawanie
-                        wpisów. Każda twoja aktywność ma znaczenie.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="bg-dark" style="height: 100%">
-        <div class="container text-white">
-            <h3 class="text-center text-white h1 font-weight-lighter" style="padding-top: 120px;">Dane w chmurze</h3>
-            <p class="pt-5 pb-5 font-weight-lighter text-center">Twoje zdjęcia będą dostępne w chmurze dopóki ich nie usuniesz. Pamiętaj, że masz do nich dostęp z każdego miejsca na ziemi. Po zalogowaniu się masz pełny dostęp do swoich danych oraz zdjęć.</p>
-            <div class="row pt-5" style="padding-bottom: 120px;">
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>1. Zarejestruj się</h4>
-                                <span>Najpierw załóż konto w serwisie</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>2. Zaloguj się</h4>
-                                <span>Nastepnie zaloguj się podanymi danymi podczas rejestracji</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>3. Dodaj zdjęcie</h4>
-                                <span>Dodaj prywatne lub publiczne</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="member">
-                        <div class="member-info">
-                            <div class="member-info-content">
-                                <h4>4. Oglądaj zdjęcia</h4>
-                                <span>Oglądaj wszystkie publiczne zdjęcia lub swoje prywatne</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <footer class="bgcolor text-center text-white p-3 ">
-        <div class="container">
-            Copyright 2021 | www.autovi.pl
-        </div>
-    </footer>
-
-    {% block javascripts %}
-        <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}" ></script>
-        <script src="{{ asset('assets/js/bootstrap.min.js') }}" ></script>
-        <script src="{{ asset('assets/js/sticky.js') }}"></script>
-{#        <script src="{{ asset('assets/js/login_page.js') }}"></script>#}
-{#        <script src="{{ asset('assets/js/register_page.js') }}"></script>#}
-        <script src="{{ asset('assets/js/post/add_post.js') }}"></script>
-        <script src="{{ asset('assets/js/post/add_answer_post.js') }}"></script>
-        <script src="{{ asset('assets/js/post/hide_answer_post.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/add_announcement.js') }}"></script>
-        <script src="{{ asset('assets/js/post/like_up_post.js') }}"></script>
-        <script src="{{ asset('assets/js/post/like_up_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/time.js') }}"></script>
-        <script src="{{ asset('assets/js/post/view_form_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/app_infos.js') }}"></script>
-        <script src="{{ asset('assets/js/post/add_comment_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/post/download_content_comment.js') }}"></script>
-        <script src="{{ asset('assets/js/post/view_form_comment_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/post/hide_comment_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/post/remove_post.js') }}"></script>
-        <script src="{{ asset('assets/js/post/popup_like_up.js') }}"></script>
-        <script src="{{ asset('assets/js/post/popup_like_up_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/post/view_file_answer.js') }}"></script>
-        <script src="{{ asset('assets/js/post/view_file_post.js') }}"></script>
-        <script src="{{ asset('assets/js/post/simpleLightbox.min.js') }}"></script>
-        <script src="{{ asset('assets/js/post/scripts.js') }}"></script>
-        <script src="{{ asset('assets/js/post/sort_by_category.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/sort_by_category_announ_1.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/sort_by_category_announ_2.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/choose_category.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_cars.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_vans_and_trucks.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_cars.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/return_change.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_motors.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_motors.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_vans.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/set_filters/models_for_cars.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_cars_parts.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_cars_parts.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/set_filters/mark_for_vans_trucks.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/set_filters/parts_for_cars.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/set_filters/parts_for_motors.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_motor_parts.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_motors_parts.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_tires_and_rims.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_tires_rims.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/set_filters/tires_and_rims.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_trailer_other_vehicle.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_equipment.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/choose_category/checked_other_automotive.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_trailers.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_equipment.js') }}"></script>
-        <script src="{{ asset('assets/js/announcement/download_data/data_other_automotive.js') }}"></script>
-        <script src="{{ asset('assets/js/login.js') }}"></script>
-
-{#        <script src="{{ asset('assets/js/popper.min.js') }}"></script>#}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Autovi{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/fontello.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/simpleLightbox.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/rvn-gallery/rvn-gallery.css') }}"/>
     {% endblock %}
-    </body>
+</head>
+<body>
+
+<nav id="navik" class="navbar navbar-expand-lg navbar-dark bg-dark pt-2 pb-2">
+    <div class="container">
+        <a class="mr-4" href="{{ path('index') }}"><img class="logo" src="{{ asset('assets/img/logo.jpg') }}"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav text-center mt-2 mt-lg-0 ">
+                <li class="nav-item pl-3 ml-4 pr-3 mr-2 {% if app.request.get('_route') == 'forum' %} active {% endif %} ">
+                    <a class="nav-link " href="{{ path('forum',{'page' : 1}) }}">Forum</a>
+                </li>
+                <li class="nav-item pl-3 pr-3 mr-2 {% if app.request.get('_route') == 'announcement' %} active {% endif %}">
+                    <a class="nav-link  text-white-1" href="{{ path('announcement',{'page' : 1}) }}">Ogłoszenia</a>
+                </li>
+                {% if app.user is not null %}
+                    <li class="nav-item pl-3 pr-3 mr-2">
+                        <a class="nav-link {% if app.request.get('_route') == 'profile' %} active {% endif %} text-white-1"
+                           href="{{ path('profile',{'page':1,'userId': app.user.id ,'userTab': 'profile'}) }}">Mój
+                            Profil</a>
+                    </li>
+                    <li class="nav-item pl-3 pr-3 mr-5">
+                        <a class="nav-link text-white-1" href="{{ path('app_logout') }}">Wyloguj</a>
+                    </li>
+                    <li class="nav-item pl-5 ml-5">
+                        <div class="float-left mr-3">
+                            <a class="text-info" href="{{ path('add_post') }}">
+                                <button class="btn btn-outline-info ">Zadaj pytanie</button>
+                            </a>
+                        </div>
+                        <div class="float-left">
+                            <a class="text-info" href="{{ path('add_offer') }}">
+                                <button class="btn btn-outline-info ">Dodaj ogłoszenie</button>
+                            </a>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                {% else %}
+                    <li class="nav-item pl-3 pr-3 mr-2">
+                        <a class="nav-link {% if app.request.get('_route') == 'app_login' %} active {% endif %} text-white-1"
+                           href="{{ path('app_login') }}"> Logowanie</a>
+                    </li>
+                    <li class="nav-item pl-3 pr-3 mr-2">
+                        <a class="nav-link {% if app.request.get('_route') == 'app_register' %} active {% endif %} text-white-1"
+                           href="{{ path('app_register') }}">Rejestracja</a>
+                    </li>
+                    <li class="nav-item text-left pl-5 ml-5">
+                        {{ include('post/components/ajax_add_post_com.html.twig') }}
+                        <div class="float-left mr-3">
+                            <button class="btn btn-outline-info my-2 my-sm-0 w-100 "
+                                    data-toggle="modal" data-target="#confirm-delete">Zadaj pytanie
+                            </button>
+                        </div>
+                        {{ include('announcement/components/ajax_add_announcement_com.html.twig') }}
+                        <div class="float-left">
+                            <button class="btn btn-outline-info my-2 my-sm-0 w-100 "
+                                    data-toggle="modal" data-target="#confirm-delete-1">Dodaj ogłoszenie
+                            </button>
+                        </div>
+                        <div style="clear: both"></div>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class=" mt-3 w-75 ml-auto mr-auto">
+        <a href="#"><img src="{{ asset('assets/img/1.jpg') }}"></a>
+    </div>
+</div>
+
+<div class="w-67 mr-auto ml-auto">
+    {% block body %}{% endblock %}
+    <div class="color mb-4 mt-3 w-25 float-left">
+        {{ include('side_menu/side_menu.html.twig') }}
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+<div class="container">
+    <div class="row mt-5 mb-5 text-white" style="padding-top: 80px; padding-bottom: 80px;">
+        <div class="col-sm-4">
+            <div class="d-flex flex-column align-items-center">
+                <div><img src="{{ asset('assets/img/1.png') }}" class="img-fluid"/></div>
+                <div style="font-size: 24px;">Dodawaj pytania oraz ogłoszenia</div>
+                <p class="mt-3 text-center">Gdy tylko czegoś nie wiesz, pytaj, a gdy
+                    znasz odpowiedż, udziel jej i pomóz innym. Możesz także ogłosić swoje przedmioty </p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="d-flex flex-column align-items-center">
+                <div><img src="{{ asset('assets/img/2.png') }}" class="img-fluid"/></div>
+                <div style="font-size: 24px;">Darmowe konto użytkownika</div>
+                <p class="mt-3 text-center">Załóż darmowe konto i korzystaj z niego bez limitu.
+                    Pomagaj sobie i wielu innym użytkownikom.</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="d-flex flex-column align-items-center">
+                <div><img src="{{ asset('assets/img/3.png') }}" class="img-fluid"/></div>
+                <div style="font-size: 24px;">Wpływ na rozwój serwisu</div>
+                <p class="mt-3 text-center">Miej duży wpływ na rozwój serwisu przez dodawanie
+                    wpisów oraz ogłoszeń. Każda twoja aktywność ma znaczenie.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bgcolor text-center text-white p-3 ">
+    <div class="container">
+        Copyright 2021 | www.autovi.pl
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    {# <script src="{{ asset('assets/js/sticky.js') }}"></script> #}
+    <script src="{{ asset('assets/js/post/add_post.js') }}"></script>
+    <script src="{{ asset('assets/js/post/add_answer_post.js') }}"></script>
+    <script src="{{ asset('assets/js/post/hide_answer_post.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/add_announcement.js') }}"></script>
+    <script src="{{ asset('assets/js/post/like_up_post.js') }}"></script>
+    <script src="{{ asset('assets/js/post/like_up_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/time.js') }}"></script>
+    <script src="{{ asset('assets/js/post/view_form_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/app_infos.js') }}"></script>
+    <script src="{{ asset('assets/js/post/add_comment_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/post/download_content_comment.js') }}"></script>
+    <script src="{{ asset('assets/js/post/view_form_comment_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/post/hide_comment_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/post/remove_post.js') }}"></script>
+    <script src="{{ asset('assets/js/post/popup_like_up.js') }}"></script>
+    <script src="{{ asset('assets/js/post/popup_like_up_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/post/view_file_answer.js') }}"></script>
+    <script src="{{ asset('assets/js/post/view_file_post.js') }}"></script>
+    <script src="{{ asset('assets/js/post/simpleLightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/post/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/post/sort_by_category.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/sort_by_category_announ_1.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/sort_by_category_announ_2.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/choose_category.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_cars.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_vans_and_trucks.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_cars.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/return_change.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_motors.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_motors.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_vans.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/models_for_cars.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_cars_parts.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_cars_parts.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/mark_for_vans_trucks.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/parts_for_cars.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/trailer_other_vehicle.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_motor_parts.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_motors_parts.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_tires_and_rims.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_tires_rims.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/tires_and_rims.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_trailer_other_vehicle.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_equipment.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/choose_category/checked_other_automotive.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_trailers.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_equipment.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/download_data/data_other_automotive.js') }}"></script>
+    <script src="{{ asset('assets/js/login.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/gallery_photos_offer.js') }}"></script>
+    <script src="{{ asset('assets/rvn-gallery/rvn-gallery.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/like_announcement.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/filter_offers.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/set_filters/add_filters.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/add_photos_offer.js') }}"></script>
+    <script src="{{ asset('assets/js/announcement/view_offers.js') }}"></script>
+
+{% endblock %}
+</body>
 </html>

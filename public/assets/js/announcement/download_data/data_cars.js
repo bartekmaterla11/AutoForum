@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $('#submit_1').on('click',function () {
-        var that = $(this);
+    $('#submit_1').on('click', function () {
         var div = $('#template1');
 
         var title = $('#announcements_title').children()[1];
@@ -69,73 +68,12 @@ $(document).ready(function () {
         var number = num.children()[1];
         var numberValue = number.value;
 
-        // var parent1 = $('#photo-1');
-        // var photo1 = parent1.children()[1];
-        // var photo1Value = photo1.value;
+        var check = $('#price_arranged_cars');
+        var checkValue = 0;
 
-        // var parent2 = $('#photo-2');
-        // var photo2 = parent2.children()[1];
-        // var photo2Value = photo2.value;
-        // var parent3 = $('#photo-3');
-        // var photo3 = parent3.children()[1];
-        // var photo3Value = photo3.value;
-        // var parent4 = $('#photo-4');
-        // var photo4 = parent4.children()[1];
-        // var photo4Value = photo4.value;
-        // var parent5 = $('#photo-5');
-        // var photo5 = parent5.children()[1];
-        // var photo5Value = photo5.value;
-        // var parent6 = $('#photo-6');
-        // var photo6 = parent6.children()[1];
-        // var photo6Value = photo6.value;
-        // var parent7 = $('#photo-7');
-        // var photo7 = parent7.children()[1];
-        // var photo7Value = photo7.value;
-        // var parent8 = $('#photo-8');
-        // var photo8 = parent8.children()[1];
-        // var photo8Value = photo8.value;
-
-        // var photoTab = [];
-        // var photos = [];
-        // photos.push(photo1Value)
-        // photos.push(photo2Value)
-        // photos.push(photo3Value)
-        // photos.push(photo4Value)
-        // photos.push(photo5Value)
-        // photos.push(photo6Value)
-        // photos.push(photo7Value)
-        // photos.push(photo8Value)
-        //
-        // for (i = 0; i < photos.length; i++){
-        //
-        //     if(photos[i].length > 0){
-        //         photoTab.push(photos[i]);
-        //     }
-        // }
-
-        // console.log(photos);
-        // console.log(photoTab);
-
-        console.log(titleValue);
-        console.log(categoryValue);
-        console.log(markValue)
-        console.log(modelValue);
-        console.log(priceValue);
-        console.log(yearValue);
-        console.log(capacityValue);
-        console.log(fuelValue);
-        console.log(powerValue);
-        console.log(mileageValue);
-        console.log(colorValue);
-        console.log(overbodyValue);
-        console.log(conditionValue);
-        console.log(gearboxValue);
-        console.log(countryValue);
-        console.log(handlebarValue);
-        console.log(descriptionValue);
-        console.log(locValue);
-        console.log(locationValue)
-        console.log(numberValue)
+        if (check.is(':checked') == true) {
+            checkValue = 1;
+        }
 
         $.ajax({
             url: "/data-cars/ajax",
@@ -143,45 +81,45 @@ $(document).ready(function () {
             dataType: "json",
             async: true,
             data: {
-                'title':titleValue,
-                'category':categoryValue,
-                'mark':markValue,
-                'price':priceValue,
-                'model':modelValue,
-                'year':yearValue,
-                'capacity':capacityValue,
-                'fuel':fuelValue,
-                'power':powerValue,
-                'mileage':mileageValue,
-                'color':colorValue,
-                'body':overbodyValue,
-                'condition':conditionValue,
-                'gearbox':gearboxValue,
-                'country':countryValue,
-                'handlebar':handlebarValue,
-                'description':descriptionValue,
+                'title': titleValue,
+                'category': categoryValue,
+                'mark': markValue,
+                'price': priceValue,
+                'model': modelValue,
+                'year': yearValue,
+                'capacity': capacityValue,
+                'fuel': fuelValue,
+                'power': powerValue,
+                'mileage': mileageValue,
+                'color': colorValue,
+                'body': overbodyValue,
+                'condition': conditionValue,
+                'gearbox': gearboxValue,
+                'country': countryValue,
+                'handlebar': handlebarValue,
+                'description': descriptionValue,
                 'location': locValue,
                 'locationname': locationValue,
-                'number':numberValue,
-                // 'photos':photoTab,
+                'number': numberValue,
+                'negotiation': checkValue,
             },
             success: function (data) {
-                if(data.Error){
+                if (data.Error) {
                     var error = $('#Error');
                     var child4 = error.children()[0];
 
                     child4.style.display = "block";
                     child4.innerHTML = data.Error;
                 }
-                if (data.Message){
-
-                    // var block = div.children()[0];
-                    // console.log(div1)
-                    // block.style.display='block';
-
+                if (data.Message) {
+                    // var success = document.getElementById('success_ann');
+                    // var child = success.children()[0];
+                    // child.style.display = "block";
+                    // child.innerHTML = data.Message;
                     var url = document.URL
-                    var result = url.substring(0, url.lastIndexOf('/')+1);
+                    var result = url.substring(0, url.lastIndexOf('/') + 1);
                     location.replace(result + '1');
+
                 }
             }
         });

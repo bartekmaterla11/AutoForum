@@ -1,0 +1,18 @@
+<div id="set-other-automotive-form">
+    <div class="w-25 mb-2 float-left p-1">
+        <label class="text-color-4">Cena (zł)</label>
+        <div class="price-other-automotive-block ">
+            <div id="price_other_automotive_price_from" class="float-left w-48">
+                <input id="price_other_automotive_price_from1"
+                       placeholder="od" {% if filters.priceF is defined %} name="price_from" {% if filters.priceF > 0 %} value="{{ filters.priceF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
+            </div>
+            <div id="price_other_automotive_price_to" class="float-left w-48 ml-1">
+                <input id="price_other_automotive_price_to1"
+                       placeholder="do" {% if filters.priceT is defined %} name="price_to" {% if filters.priceT != 99999999 %}  value="{{ filters.priceT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+</div>

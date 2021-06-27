@@ -5,7 +5,6 @@ $(document).ready(function () {
 
         var dis = $('.modelsAnnounSelect').children()[0];
         dis.disabled=false
-        console.log()
 
         $.ajax({
             url: "/ajax/set-models",
@@ -19,8 +18,6 @@ $(document).ready(function () {
                 if(data.array){
                     select1.find('option').remove();
                     var tab = data.array;
-
-                    console.log(tab)
 
                     var myselect = $('<select>');
                     myselect.append($('<option></option>').val(0).html('Wszystkie'));

@@ -54,10 +54,16 @@ class Offer
      */
     private $uploadedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PhotoFilesForOffer::class, mappedBy="offer")
+     */
+    private $photoFilesForOffers;
+
     public function __construct()
     {
 //        $this->template = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
+        $this->photoFilesForOffers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,6 +193,36 @@ class Offer
     public function setUploadedAt(\DateTimeInterface $uploadedAt): self
     {
         $this->uploadedAt = $uploadedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PhotoFilesForOffer[]
+     */
+    public function getPhotoFilesForOffers(): Collection
+    {
+        return $this->photoFilesForOffers;
+    }
+
+    public function addPhotoFilesForOffer(PhotoFilesForOffer $photoFilesForOffer): self
+    {
+        if (!$this->photoFilesForOffers->contains($photoFilesForOffer)) {
+            $this->photoFilesForOffers[] = $photoFilesForOffer;
+            $photoFilesForOffer->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhotoFilesForOffer(PhotoFilesForOffer $photoFilesForOffer): self
+    {
+        if ($this->photoFilesForOffers->removeElement($photoFilesForOffer)) {
+            // set the owning side to null (unless already changed)
+            if ($photoFilesForOffer->getOffer() === $this) {
+                $photoFilesForOffer->setOffer(null);
+            }
+        }
 
         return $this;
     }

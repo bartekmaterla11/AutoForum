@@ -17,9 +17,6 @@ $(document).ready(function () {
         var type = div.find('#type_of_cars_parts_form_name');
         var typeValue = type.val();
 
-        var condition = div.find('#condition_of_cars_parts_form_name');
-        var conditionValue = condition.val();
-
         var state = div.find('#state_of_cars_parts_form_name');
         var stateValue = state.val();
 
@@ -38,13 +35,19 @@ $(document).ready(function () {
         var number = num.children()[1];
         var numberValue = number.value;
 
+        var check = $('#price_arranged_parts_cars');
+        var checkValue = 0;
+
+        if(check.is(':checked') == true) {
+            checkValue = 1;
+        }
+
 
         console.log(titleValue);
         console.log(categoryValue);
         console.log(vehicleValue)
         console.log(typeValue);
         console.log(priceValue);
-        console.log(conditionValue);
         console.log(descriptionValue);
         console.log(locValue);
         console.log(locationValue)
@@ -62,11 +65,11 @@ $(document).ready(function () {
                 'price': priceValue,
                 'type': typeValue,
                 'state': stateValue,
-                'condition': conditionValue,
                 'description': descriptionValue,
                 'location': locValue,
                 'locationname': locationValue,
                 'number': numberValue,
+                'negotiation':checkValue,
             },
             success: function (data) {
                 if (data.Error) {

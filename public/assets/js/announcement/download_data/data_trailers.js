@@ -18,8 +18,8 @@ $(document).ready(function () {
         var child = year.children()[1];
         var yearValue = child.value;
 
-        var state = div.find('#state_of_trailer_form_name');
-        var stateValue = state.val();
+        var con = div.find('#condition_of_trailer_form_name');
+        var conValue = con.val();
 
         var w = $('#description');
         var description = w.children()[1];
@@ -35,6 +35,13 @@ $(document).ready(function () {
         var num = $('#number_form_name');
         var number = num.children()[1];
         var numberValue = number.value;
+
+        var check = $('#price_arranged_trailer');
+        var checkValue = 0;
+
+        if(check.is(':checked') == true) {
+            checkValue = 1;
+        }
 
         console.log(locationValue)
         console.log(numberValue)
@@ -56,11 +63,12 @@ $(document).ready(function () {
                 'underCat': underCatValue,
                 'price': priceValue,
                 'year': yearValue,
-                'state': stateValue,
+                'condition': conValue,
                 'description': descriptionValue,
                 'location': locValue,
                 'locationname': locationValue,
                 'number': numberValue,
+                'negotiation':checkValue,
             },
             success: function (data) {
                 if (data.Error) {

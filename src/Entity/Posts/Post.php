@@ -37,7 +37,7 @@ class Post
     private $uploaded_at;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=3000)
      */
     private $content;
 

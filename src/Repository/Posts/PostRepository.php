@@ -2,7 +2,9 @@
 
 namespace App\Repository\Posts;
 
+use App\Entity\CheckLikeOffer;
 use App\Entity\Posts\CategoryPost;
+use App\Entity\Posts\CheckMarkPost;
 use App\Entity\Posts\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
@@ -27,7 +29,7 @@ class PostRepository extends ServiceEntityRepository
     //  * @return Post[] Returns an array of Post objects
     //  */
 
-    public function findByAllPosts(): array
+    public function findByAllPosts(): ?array
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.uploaded_at', 'DESC')
@@ -36,7 +38,7 @@ class PostRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findByAllPostsUser(int $userId): array
+    public function findByAllPostsUser(int $userId): ?array
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.uploaded_at', 'DESC')
@@ -83,7 +85,7 @@ class PostRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findByUserPosts(array $posts): array
+    public function findByUserPosts(array $posts): ?array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.id IN (:posts)')
@@ -92,5 +94,17 @@ class PostRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findByLikeUserPosts(int $userId): ?array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin(CheckMarkPost::class,'cp', Join::WITH, 'cp.post = p.id')
+            ->Where('cp.user IN (:user)')
+            ->setParameter('user', $userId, ParameterType::INTEGER)
+            ->orderBy('p.uploaded_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

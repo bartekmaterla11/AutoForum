@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('#tires_and_rims_form_name').on('change', function () {
         var value = $(this).val();
 
-        console.log(value)
         var a1 = $('#template6');
         var b = a1.children()[1];
         var c = a1.children()[2];

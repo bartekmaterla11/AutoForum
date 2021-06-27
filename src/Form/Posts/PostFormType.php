@@ -21,7 +21,7 @@ class PostFormType extends AbstractType
                 'class' => CategoryPost::class,
                 'placeholder' => '-',
                 'label' => 'Kategoria',
-                'attr'=>['class'=>'choices_attr']
+                'attr'=>['class'=>'categorySelect']
             ])
             ->add('title', TextType::class,[
                 'label'=>' ',

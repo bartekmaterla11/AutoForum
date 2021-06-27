@@ -1,26 +1,27 @@
-<form id="set-motors-form" action="" method="get">
+<div id="set-motors-form">
     <div class="w-25 float-left p-1">
-        <label class="text-color-4">Rodzaj</label>
+        <label class="text-color-4">Podkategoria</label>
         <div class="divCategorySelect">
-            <select id="category-motors-block" class="w-100 categorySelect">
-                <option class="categoryOption" value="0" selected >Wszystkie</option>
+            <select id="category-motors-block" {% if filters.childCat is defined %} name="category" {% else %} name="" {% endif %}
+                    class="w-100 categorySelect">
+                <option class="categoryOption" value="0" selected>Wszystkie</option>
                 {% for item in cat.childrenCategories %}
                     <option class="categoryOption" value="{{ item.id }}"
-                            {% if slug is defined %}
-                                {% if slug == item.slug %} selected {% endif %}
-                            {% endif %}
+                            {% if filters.childCat == item.id %} selected {% endif %}
                     >{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div class="w-25 float-left p-1">
-        <label class="text-color-4">Producent</label>
+        <label class="text-color-4">Marka</label>
         <div id="motors_mark" class="mark_vans_trucks_block">
-            <select id="mark-motors-block" class="w-100 categorySelect">
-                <option class="categoryOption" value="0" selected >Wszystkie</option>
-                {% for item in markMotors %}
-                        <option value="{{ item.id }}">{{ item.name }}</option>
+            <select id="mark-motors-block" {% if filters.markMotors is defined %} name="mark_motors" {% else %} name="" {% endif %}
+                    class="w-100 categorySelect">
+                <option class="categoryOption" value="0" selected>Wszystkie</option>
+                {% for item in datas.markMotors %}
+                    <option {% if filters.markMotors == item.id %} selected {% endif %}
+                            value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -28,11 +29,15 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Cena (zł)</label>
         <div class="price-motors-block ">
-            <div class="float-left w-48">
-                <input placeholder="od" type="text" list="items-price" class="textType">
+            <div id="motors_price_from" class="float-left w-48">
+                <input id="motors_price_from1"
+                       placeholder="od" {% if filters.priceF is defined %} name="price_from" {% if filters.priceF > 0 %} value="{{ filters.priceF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
-            <div class="float-left w-48 ml-1">
-                <input placeholder="do" type="text" class="textType">
+            <div id="motors_price_to" class="float-left w-48 ml-1">
+                <input id="motors_price_to1"
+                       placeholder="do" {% if filters.priceT is defined %} name="price_to" {% if filters.priceT != 99999999 %}  value="{{ filters.priceT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
             <div style="clear: both"></div>
         </div>
@@ -41,11 +46,15 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Rok produkcji</label>
         <div class="year-motors-block">
-            <div class="float-left w-48">
-                <input placeholder="od" type="search" class="textType">
+            <div id="motors_year_from" class="float-left w-48">
+                <input id="motors_year_from1"
+                       placeholder="od" {% if filters.yearF is defined %} name="year_from" {% if filters.yearF > 0 %} value="{{ filters.yearF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
-            <div class="float-left w-48 ml-1">
-                <input placeholder="do" type="text" class="textType">
+            <div id="motors_year_to" class="float-left w-48 ml-1">
+                <input id="motors_year_to1"
+                       placeholder="do" {% if filters.yearT is defined %} name="year_to" {% if filters.yearT != 9999 %} value="{{ filters.yearT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
             <div style="clear: both"></div>
         </div>
@@ -53,11 +62,15 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Poj. silnika</label>
         <div class="capacity-motors-block">
-            <div class="float-left w-48">
-                <input placeholder="od" type="search" class="textType">
+            <div id="motors_cap_from" class="float-left w-48">
+                <input id="motors_cap_from1"
+                       placeholder="od" {% if filters.capF is defined %} name="capacity_from" {% if filters.capF > 0 %} value="{{ filters.capF }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
-            <div class="float-left w-48 ml-1">
-                <input placeholder="do" type="text" class="textType">
+            <div id="motors_cap_to" class="float-left w-48 ml-1">
+                <input id="motors_cap_to1"
+                       placeholder="do" {% if filters.capT is defined %} name="capacity_to" {% if filters.capT != 999999 %} value="{{ filters.capT }}" {% endif %} {% else %} name="" {% endif %}
+                       type="text" class="textType">
             </div>
             <div style="clear: both"></div>
         </div>
@@ -65,10 +78,12 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Kraj pochodzenia</label>
         <div class="country-block ">
-            <select id="country-motors-block" class="categorySelect">
-                <option value="0" selected >Wszystkie</option>
-                {% for item in country %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+            <select id="country-motors-block" {% if filters.country is defined %} name="country" {% else %} name="" {% endif %}
+                    class="categorySelect">
+                <option value="0" selected>Wszystkie</option>
+                {% for item in datas.country %}
+                    <option {% if filters.country == item.id %} selected {% endif %}
+                            value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -76,16 +91,15 @@
     <div class="w-25 mb-2 float-left p-1">
         <label class="text-color-4">Stan techniczny</label>
         <div class="condition-block ">
-            <select id="condition-motors-block" class="categorySelect">
-                <option value="0" selected >Wszystkie</option>
-                {% for item in condition %}
-                    <option value="{{ item.id }}">{{ item.name }}</option>
+            <select id="condition-motors-block" {% if filters.condition is defined %} name="condition" {% else %} name="" {% endif %}
+                    class="categorySelect">
+                <option value="0" selected>Wszystkie</option>
+                {% for item in datas.condition %}
+                    <option {% if filters.condition == item.id %} selected {% endif %}
+                            value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
         </div>
     </div>
     <div style="clear: both"></div>
-    <div class="mt-3 w-100 text-right pr-2">
-        <button type="submit" class="btn btn-outline-primary p-1 pl-3 pr-3 ">Filtruj</button>
-    </div>
-</form>
+</div>

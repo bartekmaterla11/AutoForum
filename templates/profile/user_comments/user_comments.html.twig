@@ -3,48 +3,25 @@
 </div>
 {% if item.commentAnswers.count > 0 %}
     {% for item in userComments %}
-        <div class= "border-bottom border-secondary mt-4 p-1 pb-4 mb-4 ">
+        <div class= "bgcolor brad mt-3 p-3 pb-3 mb-4 ">
             <div class="float-left mr-1">
                 <div class=" pt-1 pb-2 {% if item.commentAnswers.count > 0%} bg-success {% else %}bgcolor4 {% endif%} font-11 pl-2 pr-2 text-center">
                     <h5 class="mb-2">{{ item.commentAnswers.count }}</h5> <span>Komentarzy</span>
                 </div>
             </div>
-            <div class="float-left w-64">
-                <h4 data-id="{{ item.id }}" class="pl-2" >
-                    <a href="{{ path('view_post',{'categorySlug': item.post.category.slug,'slug': item.post.slug }) }}" class="text-white ">{{ item.post.title }}</a>
-                </h4>
-                <div class="pl-2">
-                    {% if app.user %}
-                        {% if app.user.username == item.user.username %}
-                            <h6  class="text-color-4 font-weight-light" ><span class="text-primary">Zadałeś</span>
-                                pytanie dnia <span class="text-primary"> {{ item.uploadedAt|date('d.m.Y')}} </span>
-                            </h6>
-                        {% else %}
-                            <h6  class="text-color-4 font-weight-light" ><span class="text-primary">Pytanie</span> zadane przez
-                                <a href="{{ path('other_profile',{'userId': item.id ,'username':item.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-primary">
-                                    {{ item.user.username }}
-                                </a>
-                                dnia {{ item.uploadedAt|date('d.m.Y')}}
-                            </h6>
-                        {% endif %}
-                    {% else %}
-                        <h6  class="text-color-4 font-weight-light" ><span class="text-primary">Pytanie</span> zadane przez
-                            <a href="{{ path('other_profile',{'userId': item.id ,'username':item.user.username, 'userTab':'profile'}) }}" class="font-weight-normal text-primary">
-                                {{ item.user.username }}
-                            </a>
-                            dnia {{ item.uploadedAt|date('d.m.Y')}}
-                        </h6>
-                    {% endif %}
+            <div class="float-left w-80">
+                <h5 data-id="{{ item.id }}" class="pl-2" >
+                    <a href="{{ path('view_post',{'categorySlug': item.post.category.slug,'slug': item.post.slug }) }}" class="text-color-3 ">{{ item.post.title }}</a>
+                </h5>
+                <div class="pl-2 pt-2 font-13 text-color-4">
+                    {{ include('components/verification_user_with_item_posts.html.twig',{post:item.post}) }}
                 </div>
-            </div>
-            <div class="float-left w-18">
-
             </div>
             <div style="clear: both"></div>
         </div>
     {% endfor %}
 {% else %}
     <div class="p-2 m-2 ">
-        <h5>Brak komentarzy dla {{ item.username }} </h5>
+        <h5><span class="text-color-3">Brak komentarzy dla </span> {{ item.username }} </h5>
     </div>
 {% endif %}

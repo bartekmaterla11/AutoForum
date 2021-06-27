@@ -51,25 +51,25 @@
                 {% if app.user %}
                     <button class="float-left comment btn font-13 font-weight-bold text-white bg-secondary"
                             data-username1="{{ app.user.username }}" data-username2="{{ item.user.username }}">
-                        <i class="font-17 icon-comment-empty"></i>Skomentuj
+                        <i class="font-17 mr-1 icon-comment"></i>Skomentuj
                     </button>
                         {% if app.user.username == item.user.username %}
-                            <a class="float-left" href="{{ path('remove_answer',{'categorySlug': catSlug,'slug': item.post.slug ,'answerId': item.id}) }}" >
-                                <button type="button" class="btn ml-2 bg-danger text-white font-15 p-2">Usuń</button>
+                            <a class="float-left font-13" href="{{ path('remove_answer',{'categorySlug': catSlug,'slug': item.post.slug ,'answerId': item.id}) }}" >
+                                <button type="button" class="btn ml-2 bg-danger text-white font-13">Usuń</button>
                             </a>
                         {% endif %}
                     <div style="clear: both"></div>
                     {{ include('post/answer/comment/comment_answer.html.twig',{answer_id: item.id, catslug:catSlug, slug:item.post.slug }) }}
                 {% else %}
-                    {{ include('components/ajax_add_comment_answer_com.html.twig') }}
+                    {{ include('post/components/ajax_add_comment_answer_com.html.twig') }}
                     <button class="btn font-13 font-weight-bold text-white bg-secondary"
                             data-toggle="modal" data-target="#confirm-delete-3">
-                        <i class="mr-1 font-17 icon-comment-empty"></i>Skomentuj
+                        <i class="mr-1 font-17 icon-comment"></i>Skomentuj
                     </button>
                 {% endif %}
             </div>
             <div class="all_comments">
-                {{ include('components/view_comments_answer_com.html.twig',{comments: item.commentanswers, catSlug:catSlug }) }}
+                {{ include('post/answer/comment/view/view_comments_answer_com.html.twig',{comments: item.commentanswers, catSlug:catSlug }) }}
             </div>
         </div>
         <div class="float-left text-center pl-new">

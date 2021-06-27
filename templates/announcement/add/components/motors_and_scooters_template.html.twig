@@ -17,9 +17,13 @@
     <div class="border border-primary p-4 mt-3 brad" style="display: none">
         <div class="motors_price_form_name mb-3 w-33">
             <h6 class="font-weight-light mb-2">Cena<span style="color: red">*</span></h6>
-            <input type="text" placeholder="000 000" class="float-left price">
+            <input type="text" class="float-left price">
             <span class="float-left ml-2 pt-1 mt-1">zł</span>
             <div style="clear: both"></div>
+            <div class="mt-2">
+                <input type="checkbox" id="price_arranged_motors" class="mr-1 p-1 font-18">
+                <label for="price_arranged" class="">Do negocjacji</label>
+            </div>
         </div>
     </div>
     <div class="border border-primary p-4 mt-3 brad" style="display: none">
@@ -38,7 +42,7 @@
         </div>
         <div class="mb-3 " id="power_of_motors_form_name">
             <h6 class="font-weight-light mb-2">Poj. silnika</h6>
-            <input type="text" placeholder="000 000" class="float-left textType1">
+            <input type="text" class="float-left textType1">
             <div class="float-left ml-2 height1">
                 <div class="mt-2 float-left">Cm</div>
                 <span class="font-11 mt-2 float-left">3</span>
@@ -50,7 +54,7 @@
             <h6 class="font-weight-light mb-2">Stan techniczny<span style="color: red">*</span></h6>
             <select id="technical_condition_of_motors_form_name" class="categorySelect2">
                 <option value="0">-</option>
-                {% for item in condition %}
+                {% for item in data.condition %}
                     <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>
@@ -59,7 +63,7 @@
             <h6 class="font-weight-light mb-2">Kraj pochodzenia</h6>
             <select id="country_of_motor_form_name" class="categorySelect1">
                 <option value="null">-</option>
-                {% for item in country %}
+                {% for item in data.country %}
                     <option value="{{ item.id }}">{{ item.name }}</option>
                 {% endfor %}
             </select>

@@ -32,6 +32,13 @@ $(document).ready(function () {
         var number = num.children()[1];
         var numberValue = number.value;
 
+        var check = $('#price_arranged_parts_motors');
+        var checkValue = 0;
+
+        if(check.is(':checked') == true) {
+            checkValue = 1;
+        }
+
 
         console.log(titleValue);
         console.log(categoryValue);
@@ -58,6 +65,7 @@ $(document).ready(function () {
                 'location': locValue,
                 'locationname': locationValue,
                 'number': numberValue,
+                'negotiation':checkValue,
             },
             success: function (data) {
                 if (data.Error) {
